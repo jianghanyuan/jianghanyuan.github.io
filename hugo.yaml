@@ -20,25 +20,40 @@ markup:
 params:
   env: production
   title: "Han Yuan Jiang"
-  description: "CS PhD student"
+  description: "CS PhD student in computer science"
   author:
     name: "Han Yuan Jiang"
   defaultTheme: auto
+  disableThemeToggle: false
   ShowReadingTime: true
   ShowShareButtons: false
   ShowCodeCopyButtons: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
+  ShowToc: true
   math: false
-  homeInfoParams:
-    Title: "Han Yuan Jiang"
-    Content: "CS PhD student. I work on machine learning systems, efficient inference, and trustworthy AI."
+  mainSections:
+    - posts
+  profileMode:
+    enabled: true
+    title: "Han Yuan Jiang"
+    subtitle: "CS PhD student building efficient and trustworthy ML systems. I study LLM inference, systems optimization, and dependable AI deployment."
+    buttons:
+      - name: Profile
+        url: /profile/
+      - name: Publications
+        url: /publications/
+      - name: Blog
+        url: /posts/
+  socialIcons:
+    - name: github
+      url: "https://github.com/jianghanyuan"
 
 menu:
   main:
-    - identifier: about
-      name: About
-      url: /about/
+    - identifier: profile
+      name: Profile
+      url: /profile/
       weight: 10
     - identifier: research
       name: Research

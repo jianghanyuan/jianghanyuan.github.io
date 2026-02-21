@@ -1,0 +1,136 @@
+:root {
+  --theme: #f7f8f6;
+  --entry: #ffffff;
+  --primary: #111827;
+  --secondary: #334155;
+  --tertiary: #64748b;
+  --content: #1f2937;
+  --hljs-bg: #f2f4f8;
+  --code-bg: #eef2f7;
+  --border: #d7dde7;
+  --accent: #0f766e;
+  --accent-soft: #d7f3ef;
+}
+
+.dark {
+  --theme: #11161d;
+  --entry: #18212b;
+  --primary: #f3f6fb;
+  --secondary: #c9d3e2;
+  --tertiary: #8ea1b8;
+  --content: #dce5f2;
+  --hljs-bg: #10161d;
+  --code-bg: #10161d;
+  --border: #2c3a4b;
+  --accent: #5bc5ba;
+  --accent-soft: #16343a;
+}
+
+body {
+  font-family: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.post-title,
+.logo a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  letter-spacing: 0.01em;
+}
+
+code,
+pre,
+.katex,
+.post-content pre {
+  font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+}
+
+.main {
+  max-width: min(1040px, 94vw);
+}
+
+.first-entry,
+.post-entry,
+.post-single,
+.profile_inner,
+.terms-tags a {
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.profile_inner {
+  background: linear-gradient(140deg, var(--entry) 60%, var(--accent-soft) 100%);
+  border-radius: 20px;
+  padding: 2.2rem;
+}
+
+.profile_inner h1 {
+  font-size: clamp(2rem, 4.4vw, 3.25rem);
+  line-height: 1.08;
+}
+
+.profile_inner p {
+  max-width: 70ch;
+  color: var(--secondary);
+  font-size: 1.08rem;
+}
+
+.button {
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.button:hover {
+  background: var(--accent);
+  color: #f8fafc;
+}
+
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0 1.8rem;
+}
+
+.pub-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--entry);
+  padding: 1.1rem;
+}
+
+.pub-card h3 {
+  margin: 0.35rem 0 0.55rem;
+  font-size: 1.18rem;
+}
+
+.pub-meta {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pub-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.pub-links a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.pub-links a:hover {
+  border-color: var(--accent);
+}

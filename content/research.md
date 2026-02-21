@@ -2,12 +2,22 @@
 title: "Research"
 ---
 
-## Interests
+## Current Themes
 
-- LLM inference optimization
-- Distributed training and systems
-- Reliability and safety in deployed AI systems
+### 1. LLM Systems Efficiency
 
-## Current projects
+I study techniques that reduce latency and cost for large-model inference under real traffic constraints, including scheduler design, batching policy, and memory-aware serving.
 
-I focus on reducing latency/cost of large models while preserving quality under real traffic.
+### 2. Training-Serving Co-Design
+
+I investigate how training objectives and architecture choices affect downstream serving efficiency and reliability.
+
+### 3. Trustworthy Deployment
+
+I build evaluation and monitoring workflows for safety, robustness, and operational stability in long-running model services.
+
+## Methods
+
+- Systems benchmarking and profiling
+- Optimization under hardware and reliability constraints
+- Empirical studies on model-quality versus systems-cost tradeoffs
