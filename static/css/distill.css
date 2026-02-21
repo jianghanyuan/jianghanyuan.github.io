@@ -1,0 +1,12 @@
+/* Loaded only on Distill pages via extend_head.html. */
+.main {
+  max-width: min(1000px, 94vw);
+}
+
+article {
+  max-width: 100%;
+}
+
+dt-article {
+  font-size: 1.05rem;
+}

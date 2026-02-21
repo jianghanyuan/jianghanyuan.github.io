@@ -1,0 +1,59 @@
+baseURL: "https://jianghanyuan.github.io/"
+languageCode: "en-us"
+title: "Han Yuan Jiang"
+theme: "PaperMod"
+enableRobotsTXT: true
+
+module:
+  imports:
+    - path: github.com/adityatelange/hugo-PaperMod
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+params:
+  env: production
+  title: "Han Yuan Jiang"
+  description: "CS PhD student"
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowCodeCopyButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  math: false
+  homeInfoParams:
+    Title: "Han Yuan Jiang"
+    Content: "CS PhD student. I work on machine learning systems, efficient inference, and trustworthy AI."
+
+menu:
+  main:
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 10
+    - identifier: research
+      name: Research
+      url: /research/
+      weight: 20
+    - identifier: publications
+      name: Publications
+      url: /publications/
+      weight: 30
+    - identifier: blog
+      name: Blog
+      url: /posts/
+      weight: 40
+
+permalinks:
+  posts: /posts/:slug/
