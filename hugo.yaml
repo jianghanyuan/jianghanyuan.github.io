@@ -4,10 +4,6 @@ title: "Han Yuan Jiang"
 theme: "PaperMod"
 enableRobotsTXT: true
 
-module:
-  imports:
-    - path: github.com/adityatelange/hugo-PaperMod
-
 outputs:
   home:
     - HTML
@@ -25,6 +21,8 @@ params:
   env: production
   title: "Han Yuan Jiang"
   description: "CS PhD student"
+  author:
+    name: "Han Yuan Jiang"
   defaultTheme: auto
   ShowReadingTime: true
   ShowShareButtons: false

@@ -8,7 +8,6 @@ This repository is a Hugo site using PaperMod, with optional Distill-style post 
 2. Run:
 
 ```bash
-hugo mod get github.com/adityatelange/hugo-PaperMod
 hugo server -D
 ```
 

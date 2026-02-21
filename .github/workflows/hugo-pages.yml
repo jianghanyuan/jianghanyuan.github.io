@@ -31,14 +31,8 @@ jobs:
         with:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: "1.22"
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Install theme module
-        run: hugo mod get github.com/adityatelange/hugo-PaperMod
       - name: Build with Hugo
         run: hugo --gc --minify
       - name: Upload artifact
