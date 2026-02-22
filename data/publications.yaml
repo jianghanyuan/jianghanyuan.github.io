@@ -1,6 +1,6 @@
 selected:
   - title: "Inference-Aware Scheduling for Long-Context LLM Serving"
-    authors: "Han Yuan Jiang, Collaborator A, Collaborator B"
+    authors: "Hanyuan Jiang, Collaborator A, Collaborator B"
     venue: "Conference 2026"
     summary: "A scheduling policy that improves p99 latency while preserving throughput under bursty workloads."
     links:
@@ -12,7 +12,7 @@ selected:
         url: "#"
 
   - title: "Practical Robustness Checks for Deployed Foundation Models"
-    authors: "Han Yuan Jiang, Collaborator C"
+    authors: "Hanyuan Jiang, Collaborator C"
     venue: "Workshop 2025"
     summary: "A reproducible deployment-time stress testing pipeline for detecting regressions and risk patterns."
     links:
@@ -22,7 +22,7 @@ selected:
         url: "#"
 
   - title: "Systems-Quality Tradeoffs in Retrieval-Augmented Generation Pipelines"
-    authors: "Collaborator D, Han Yuan Jiang, Collaborator E"
+    authors: "Collaborator D, Hanyuan Jiang, Collaborator E"
     venue: "Preprint"
     summary: "An empirical study of latency, cost, and quality tradeoffs across retrieval and reranking strategies."
     links:

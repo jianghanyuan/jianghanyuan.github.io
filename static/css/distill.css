@@ -1,9 +1,9 @@
 /* =============================================================
-   Distill Page Styles — Academic Minimal (distill.pub format)
-   Matches: large title → meta table → TOC + article body
+   Distill Page Styles — Tri Dao style
+   Bold title → 3-col meta → Sticky TOC left + Article right
    ============================================================= */
 
-/* ── Hide Distill's built-in chrome ── */
+/* ── Force-hide ALL Distill chrome ── */
 dt-banner,
 dt-header,
 dt-footer,
@@ -13,16 +13,32 @@ svg.distill-logo {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
 
-/* ── Outer wrapper ── */
+/* ── Kill white rectangles: force transparent on distill containers ── */
+dt-article,
+dt-appendix,
+d-article,
+d-appendix,
+.distill-wrapper,
+.distill-body,
+.distill-content,
+dt-article>*,
+d-article>* {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* ── Wrapper ── */
 .distill-wrapper {
   max-width: 960px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 2.5rem 1.5rem 4rem;
 }
 
-/* ── Full-width header: title + meta table ── */
+/* ── Header: Title + Meta ── */
 .distill-header {
   border-bottom: 1px solid var(--border);
   margin-bottom: 2.5rem;
@@ -30,25 +46,22 @@ svg.distill-logo {
 }
 
 .distill-title {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  line-height: 1.2;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
   color: var(--primary);
   margin: 0 0 0.8rem;
 }
 
 .distill-subtitle {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--secondary);
   margin: 0 0 2rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
-/* ────────────────────────────────────────────────────────────
-   Meta table: AUTHORS | AFFILIATIONS | PUBLISHED
-   Each column is a flex column; rows auto-align horizontally
-   ──────────────────────────────────────────────────────────── */
+/* ── 3-Column Meta Table ── */
 .distill-meta-table {
   display: flex;
   gap: 3rem;
@@ -59,25 +72,23 @@ svg.distill-logo {
 .distill-meta-col {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  min-width: 0;
+  gap: 0.2rem;
 }
 
 .distill-meta-label {
-  font-size: 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--tertiary);
-  margin-bottom: 0.35rem;
-  font-family: var(--font-body);
+  margin-bottom: 0.3rem;
 }
 
 .distill-meta-name {
   font-weight: 600;
   font-size: 0.92rem;
   color: var(--primary);
-  white-space: nowrap;
 }
 
 .distill-meta-name a {
@@ -92,7 +103,6 @@ svg.distill-logo {
 .distill-meta-affil {
   font-size: 0.92rem;
   color: var(--secondary);
-  white-space: nowrap;
 }
 
 .distill-meta-published {
@@ -100,30 +110,36 @@ svg.distill-logo {
   color: var(--secondary);
 }
 
-/* ────────────────────────────────────────────────────────────
-   Two-column body: sticky TOC on left, article on right
-   ──────────────────────────────────────────────────────────── */
+/* ── Two-Column Body ── */
 .distill-body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  align-items: flex-start;
+  align-items: start;
+  overflow: visible !important;
 }
 
 @media (min-width: 860px) {
   .distill-body {
-    grid-template-columns: 190px 1fr;
+    grid-template-columns: 200px minmax(0, 1fr);
     gap: 3.5rem;
   }
 }
 
-/* ── TOC sidebar ── */
+/* ── Sticky TOC ── */
 .distill-toc {
-  position: sticky;
-  top: 80px;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 80px !important;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-width: none;
+  z-index: 10;
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
+  flex-shrink: 0;
 }
 
 .distill-toc::-webkit-scrollbar {
@@ -131,61 +147,93 @@ svg.distill-logo {
 }
 
 .distill-toc-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--tertiary);
+  color: var(--primary);
   margin-bottom: 0.8rem;
 }
 
-/* Hugo table of contents */
-.distill-toc nav ul,
+/* Hugo TOC links */
 .distill-toc #TableOfContents ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.distill-toc nav ul li,
 .distill-toc #TableOfContents li {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
 }
 
-.distill-toc nav a,
 .distill-toc #TableOfContents a {
   font-size: 0.85rem;
-  color: #1a52a8;
+  color: var(--link);
   text-decoration: none;
   line-height: 1.4;
   display: block;
-  padding: 0.1rem 0;
+  padding: 0.15rem 0;
   transition: color 0.15s;
 }
 
-.distill-toc nav a:hover,
 .distill-toc #TableOfContents a:hover {
   color: var(--primary);
-  text-decoration: underline;
 }
 
-/* nested TOC */
-.distill-toc nav ul ul,
 .distill-toc #TableOfContents ul ul {
-  margin-left: 0.8rem;
-  margin-top: 0.2rem;
+  margin-left: 0.75rem;
+  margin-top: 0.15rem;
 }
 
-.distill-toc nav ul ul a,
 .distill-toc #TableOfContents ul ul a {
   font-size: 0.8rem;
   color: var(--secondary);
 }
 
-/* ── Article body ── */
+/* ── Article Body ── */
 .distill-content {
   min-width: 0;
-  /* prevent overflow in grid */
+  max-width: 100%;
+  overflow: visible;
+  position: relative;
+}
+
+/* Reset ALL Distill.js element positioning — force standard block flow */
+dt-article,
+dt-article h1,
+dt-article h2,
+dt-article h3,
+dt-article h4,
+dt-article p,
+dt-article ul,
+dt-article ol,
+dt-article li,
+dt-article figure,
+dt-article blockquote,
+dt-article pre,
+dt-article code,
+dt-article table,
+dt-article d-math,
+dt-article d-code,
+dt-article d-figure,
+dt-article d-footnote-list,
+dt-article d-citation-list,
+dt-article dt-byline,
+dt-appendix,
+dt-appendix h3,
+dt-appendix p,
+dt-appendix ul,
+dt-appendix li {
+  width: auto !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  left: auto !important;
+  right: auto !important;
+  position: relative !important;
+  grid-column: auto !important;
+  float: none !important;
 }
 
 dt-article {
@@ -194,21 +242,31 @@ dt-article {
   font-size: 1rem;
   line-height: 1.75;
   color: var(--content);
+  background: transparent !important;
 }
 
 dt-article h2 {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-heading);
   font-size: 1.7rem;
   font-weight: 700;
   margin-top: 2.5rem;
   color: var(--primary);
+  position: relative !important;
+  width: auto !important;
+  max-width: 100% !important;
+  left: auto !important;
+  right: auto !important;
 }
 
 dt-article h3 {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-heading);
   font-size: 1.3rem;
+  font-weight: 700;
   margin-top: 1.8rem;
   color: var(--primary);
+  position: relative !important;
+  width: auto !important;
+  max-width: 100% !important;
 }
 
 dt-article p {
@@ -216,12 +274,48 @@ dt-article p {
 }
 
 dt-article a {
-  color: #1a52a8;
-  text-decoration: none;
+  color: var(--link);
 }
 
 dt-article a:hover {
-  text-decoration: underline;
+  color: var(--link-hover);
+}
+
+dt-article ul,
+dt-article ol {
+  padding-left: 1.2rem;
+  margin-bottom: 1.2em;
+}
+
+dt-article li {
+  padding: 0.15rem 0;
+}
+
+dt-article code {
+  font-size: 0.875em;
+  background: var(--code-bg);
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+}
+
+dt-article pre {
+  background: var(--code-bg) !important;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+}
+
+dt-article pre code {
+  background: none;
+  padding: 0;
+}
+
+dt-article blockquote {
+  border-left: 3px solid var(--accent-1);
+  margin: 1.5rem 0;
+  padding: 0.5rem 1rem;
+  color: var(--secondary);
+  font-style: italic;
 }
 
 dt-appendix {
@@ -229,18 +323,23 @@ dt-appendix {
   margin-top: 3rem;
   padding-top: 2rem;
   border-top: 1px solid var(--border);
+  background: transparent !important;
 }
 
-/* ── Mobile fallback: hide TOC, show title only ── */
+/* ── Mobile ── */
 @media (max-width: 860px) {
   .distill-toc {
-    position: static;
+    position: static !important;
     border-bottom: 1px solid var(--border);
     padding-bottom: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .distill-wrapper {
-    padding: 1rem 1rem 3rem;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .distill-meta-table {
+    gap: 1.5rem;
   }
 }

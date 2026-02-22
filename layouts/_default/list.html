@@ -42,7 +42,7 @@
 
 {{- if .IsHome }}
 {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
 {{- end }}
 
 {{- $paginator := .Paginate $pages }}
@@ -51,11 +51,52 @@
 {{- partial "home_info.html" . }}
 {{- end }}
 
+{{/* ══════════ HOME PAGE CUSTOM SECTIONS ══════════ */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
-<section class="home-section stagger-1">
-  <h2>Recent Updates</h2>
+
+{{/* ── Featured Cards ── */}}
+<section class="featured-grid stagger-1">
+  {{/* Research Interests card */}}
+  {{ $ri := site.GetPage "/posts/research-interests" }}
+  {{ with $ri }}
+  <a href="{{ .RelPermalink }}" class="featured-card accent-terracotta">
+    <svg class="featured-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="16" stroke="#c17f59" stroke-width="2" opacity="0.6" />
+      <circle cx="20" cy="20" r="8" stroke="#c17f59" stroke-width="2" />
+      <line x1="20" y1="4" x2="20" y2="12" stroke="#c17f59" stroke-width="2" />
+      <line x1="20" y1="28" x2="20" y2="36" stroke="#c17f59" stroke-width="2" />
+      <line x1="4" y1="20" x2="12" y2="20" stroke="#c17f59" stroke-width="2" />
+      <line x1="28" y1="20" x2="36" y2="20" stroke="#c17f59" stroke-width="2" />
+    </svg>
+    <div class="featured-card-title">Research Interests <span class="arrow">→</span></div>
+    <div class="featured-card-desc">{{ .Description }}</div>
+  </a>
+  {{ end }}
+
+  {{/* Vision card */}}
+  {{ $vi := site.GetPage "/posts/vision" }}
+  {{ with $vi }}
+  <a href="{{ .RelPermalink }}" class="featured-card accent-sage">
+    <svg class="featured-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 20C8 20 14 10 20 10C26 10 32 20 32 20C32 20 26 30 20 30C14 30 8 20 8 20Z" stroke="#7a9a7e"
+        stroke-width="2" />
+      <circle cx="20" cy="20" r="5" stroke="#7a9a7e" stroke-width="2" />
+      <circle cx="20" cy="20" r="2" fill="#7a9a7e" opacity="0.5" />
+    </svg>
+    <div class="featured-card-title">Vision <span class="arrow">→</span></div>
+    <div class="featured-card-desc">{{ .Description }}</div>
+  </a>
+  {{ end }}
+</section>
+
+{{/* ── Updates ── */}}
+<section class="home-section stagger-2">
+  <div class="section-header">
+    <h2>Updates</h2>
+    <a class="view-all" href="/posts/">All posts</a>
+  </div>
   <ul class="updates-list">
-    {{- range first 6 (where site.RegularPages "Section" "posts") -}}
+    {{- range first 5 (where site.RegularPages "Section" "posts") -}}
     <li>
       <span class="updates-date">{{ .Date.Format "Jan 02" }}</span>
       <a href="{{ .RelPermalink }}">{{ .Title }}</a>
@@ -64,29 +105,44 @@
   </ul>
 </section>
 
-<section class="home-section stagger-2">
-  <h2>Research Interests</h2>
-  <ul class="interest-list">
-    {{- range site.Params.researchInterests -}}
-    <li>{{ . }}</li>
-    {{- end -}}
-  </ul>
-</section>
-
+{{/* ── Selected Publications ── */}}
+{{ with site.Data.publications }}
+{{ with .selected }}
 <section class="home-section stagger-3">
-  <h2>Selected Publications</h2>
+  <div class="section-header">
+    <h2>Selected Research</h2>
+    <a class="view-all" href="/research/">All publications</a>
+  </div>
   <ul class="pub-inline-list">
-    {{- range first 4 site.Data.publications.selected -}}
+    {{- range first 4 . -}}
     <li>
       <a class="pub-inline-title" href="/research/#selected-publications">{{ .title }}</a>
       <span class="pub-inline-meta">{{ .authors }}. {{ .venue }}.</span>
     </li>
     {{- end -}}
   </ul>
-  <p class="home-more"><a href="/research/#selected-publications">View all publications -></a></p>
 </section>
-{{- end }}
+{{ end }}
+{{ end }}
 
+{{/* ── Research Interests (compact) ── */}}
+{{ with site.Params.researchInterests }}
+<section class="home-section stagger-4">
+  <div class="section-header">
+    <h2>Research Interests</h2>
+  </div>
+  <ul class="interest-list">
+    {{- range . -}}
+    <li>{{ . }}</li>
+    {{- end -}}
+  </ul>
+</section>
+{{ end }}
+
+{{- end }} {{/* end home sections */}}
+
+{{/* ══════════ STANDARD POST LIST (non-home or paginated) ══════════ */}}
+{{- if or (not .IsHome) (gt $paginator.PageNumber 1) }}
 {{- $term := .Data.Term }}
 {{- range $index, $page := $paginator.Pages }}
 
@@ -127,6 +183,7 @@
   {{- end }}
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>
+{{- end }}
 {{- end }}
 
 {{- if gt $paginator.TotalPages 1 }}

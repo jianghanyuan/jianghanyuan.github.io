@@ -3,10 +3,10 @@
   <h1>{{ .Title | markdownify }}</h1>
   <p>{{ .Content | markdownify }}</p>
   <div class="hero-actions">
-    <a class="hero-btn" href="/research/">Research & Publications</a>
-    <a class="hero-btn ghost" href="/posts/">Recent Posts</a>
+    <a class="pill-btn dark" href="/research/">Publication →</a>
+    <a class="pill-btn" href="/posts/">Blog →</a>
   </div>
-  <footer class="entry-footer">
+  <footer class="hero-social">
     {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
   </footer>
 </section>
