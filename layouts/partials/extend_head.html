@@ -16,11 +16,13 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var cleanupDistillChrome = function () {
-      document.querySelectorAll("dt-banner, dt-header, dt-footer").forEach(function (el) { el.remove(); });
+      document.querySelectorAll("dt-banner, dt-header, dt-footer, .logo").forEach(function (el) { el.style.display = 'none'; });
+      var distillLogo = document.querySelector('svg.distill-logo');
+      if (distillLogo) distillLogo.style.display = 'none';
     };
     cleanupDistillChrome();
     if (document.body) {
-      new MutationObserver(cleanupDistillChrome).observe(document.body, { childList: true });
+      new MutationObserver(cleanupDistillChrome).observe(document.body, { childList: true, subtree: true });
     }
   });
 </script>

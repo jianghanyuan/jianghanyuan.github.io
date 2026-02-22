@@ -1,48 +1,53 @@
 {{- define "main" -}}
 <div class="distill-layout">
-  <aside class="distill-side" aria-label="Article metadata">
-    <h2>{{ .Title }}</h2>
-    {{- if .Description }}
-    <p class="distill-side-desc">{{ .Description }}</p>
-    {{- end }}
-
-    {{- with .Params.authors }}
+  <aside class="distill-side" aria-label="Table of Contents">
     <div class="distill-side-block">
-      <div class="distill-side-label">Authors</div>
-      <ul>
-      {{- range . }}
-        <li>
-          {{- with .url }}<a href="{{ . }}">{{ end -}}
-          {{- .name -}}
-          {{- with .url }}</a>{{ end -}}
-          {{- with .affiliation }}<span class="distill-affil">, {{ . }}</span>{{ end -}}
-        </li>
-      {{- end }}
-      </ul>
+      <div class="distill-side-label">Contents</div>
+      {{ .TableOfContents }}
     </div>
-    {{- end }}
-
-    <div class="distill-side-block">
-      <div class="distill-side-label">Published</div>
-      <div>{{ .Date.Format "Jan 02, 2006" }}</div>
-    </div>
-
-    {{- with .Params.tags }}
-    <div class="distill-side-block">
-      <div class="distill-side-label">Tags</div>
-      <ul>
-      {{- range . }}
-        <li>{{ . }}</li>
-      {{- end }}
-      </ul>
-    </div>
-    {{- end }}
   </aside>
 
   <div class="distill-main">
     <dt-article>
-      <h1>{{ .Title }}</h1>
-      {{- if .Description -}}<p>{{ .Description }}</p>{{- end -}}
+      <div class="dt-article-header">
+        <h1>{{ .Title }}</h1>
+        {{- if .Description -}}<p style="font-size: 1.2rem; color: var(--secondary); margin-bottom: 2rem;">{{
+          .Description }}</p>{{- end -}}
+
+        <div class="dt-article-meta">
+          {{- with .Params.authors }}
+          <div class="dt-authors">
+            <ul>
+              {{- range . }}
+              <li>
+                <span class="dt-author-name">
+                  {{- with .url }}<a href="{{ . }}">{{ end -}}
+                    {{- .name -}}
+                    {{- with .url }}</a>{{ end -}}
+                </span>
+                {{- with .affiliation }}<span class="dt-author-affil">{{ . }}</span>{{ end -}}
+              </li>
+              {{- end }}
+            </ul>
+          </div>
+          {{- end }}
+
+          <div class="dt-meta-details">
+            <div class="dt-published">
+              {{ .Date.Format "Jan 02, 2006" }}
+            </div>
+
+            {{- with .Params.tags }}
+            <div class="dt-tags">
+              {{- range . }}
+              <span>{{ . }}</span>
+              {{- end }}
+            </div>
+            {{- end }}
+          </div>
+        </div>
+      </div>
+
       {{ .Content }}
     </dt-article>
 

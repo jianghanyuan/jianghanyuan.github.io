@@ -57,18 +57,6 @@ menu:
       name: Blog
       url: /posts/
       weight: 20
-    - identifier: archives
-      name: Archive
-      url: /archives/
-      weight: 30
-    - identifier: search
-      name: Search
-      url: /search/
-      weight: 40
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 50
 
 permalinks:
   posts: /posts/:slug/
