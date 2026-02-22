@@ -1,14 +1,13 @@
-.main {
-  max-width: 100% !important;
-  padding: 0 !important;
-}
+/* =============================================================
+   Distill Page Styles — Academic Minimal (distill.pub format)
+   Matches: large title → meta table → TOC + article body
+   ============================================================= */
 
-/* Overrides for Distill Template Customization */
-
-/* 1. AGGRESSIVELY HIDE DISTILL HEADER/FOOTER & LOGOS */
+/* ── Hide Distill's built-in chrome ── */
 dt-banner,
 dt-header,
 dt-footer,
+dt-byline,
 .logo-distill,
 svg.distill-logo {
   display: none !important;
@@ -16,197 +15,232 @@ svg.distill-logo {
   visibility: hidden !important;
 }
 
-dt-article {
-  margin-top: 0 !important;
-  padding-top: 2rem !important;
+/* ── Outer wrapper ── */
+.distill-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
 }
 
-/* 2. REFINED SIDEBAR & LAYOUT INTEGRATION */
-.distill-layout {
+/* ── Full-width header: title + meta table ── */
+.distill-header {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+}
+
+.distill-title {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--primary);
+  margin: 0 0 0.8rem;
+}
+
+.distill-subtitle {
+  font-size: 1.15rem;
+  color: var(--secondary);
+  margin: 0 0 2rem;
+  line-height: 1.5;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Meta table: AUTHORS | AFFILIATIONS | PUBLISHED
+   Each column is a flex column; rows auto-align horizontally
+   ──────────────────────────────────────────────────────────── */
+.distill-meta-table {
+  display: flex;
+  gap: 3rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.distill-meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.distill-meta-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tertiary);
+  margin-bottom: 0.35rem;
+  font-family: var(--font-body);
+}
+
+.distill-meta-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.distill-meta-name a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.distill-meta-name a:hover {
+  text-decoration: underline;
+}
+
+.distill-meta-affil {
+  font-size: 0.92rem;
+  color: var(--secondary);
+  white-space: nowrap;
+}
+
+.distill-meta-published {
+  font-size: 0.92rem;
+  color: var(--secondary);
+}
+
+/* ────────────────────────────────────────────────────────────
+   Two-column body: sticky TOC on left, article on right
+   ──────────────────────────────────────────────────────────── */
+.distill-body {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
-  max-width: var(--max-width);
-  margin: 0 auto;
+  gap: 2rem;
   align-items: flex-start;
 }
 
-@media (min-width: 1024px) {
-  .distill-layout {
-    grid-template-columns: 200px 1fr;
-    gap: 4rem;
+@media (min-width: 860px) {
+  .distill-body {
+    grid-template-columns: 190px 1fr;
+    gap: 3.5rem;
   }
 }
 
-/* Sidebar configuration (Now used for TOC) */
-.distill-side {
+/* ── TOC sidebar ── */
+.distill-toc {
   position: sticky;
-  top: 100px;
-  font-family: var(--default-font);
-  font-size: 0.9rem;
-  color: var(--secondary);
+  top: 80px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
-.distill-side h2 {
-  font-family: var(--heading-font);
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--primary);
-  border-bottom: none;
-  /* Removed border */
+.distill-toc::-webkit-scrollbar {
+  display: none;
 }
 
-.distill-side-block {
-  margin-bottom: 2rem;
-}
-
-.distill-side-label {
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
+.distill-toc-label {
+  font-size: 0.7rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--tertiary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 
-.distill-side ul {
+/* Hugo table of contents */
+.distill-toc nav ul,
+.distill-toc #TableOfContents ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.distill-side li {
-  margin-bottom: 0.6rem;
+.distill-toc nav ul li,
+.distill-toc #TableOfContents li {
+  margin-bottom: 0.35rem;
+}
+
+.distill-toc nav a,
+.distill-toc #TableOfContents a {
+  font-size: 0.85rem;
+  color: #1a52a8;
+  text-decoration: none;
   line-height: 1.4;
-}
-
-.distill-side a {
-  color: var(--secondary);
-  transition: color 0.2s ease;
-}
-
-.distill-side a:hover {
-  color: var(--primary);
-}
-
-/* 3. NEW IN-ARTICLE METADATA (Title, Authors, Date) */
-.dt-article-header {
-  margin-bottom: 3rem;
-  border-bottom: none;
-  /* Removed border */
-  padding-bottom: 1rem;
-}
-
-.dt-article-header h1 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: var(--primary);
-}
-
-.dt-article-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  color: var(--secondary);
-  font-family: var(--default-font);
-}
-
-.dt-authors {
-  font-size: 1.05rem;
-}
-
-.dt-authors ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.dt-authors li {
-  line-height: 1.4;
-}
-
-.dt-author-name {
-  font-weight: 500;
-  color: var(--primary);
-}
-
-.dt-author-affil {
-  font-size: 0.9rem;
-  color: var(--tertiary);
   display: block;
+  padding: 0.1rem 0;
+  transition: color 0.15s;
 }
 
-.dt-meta-details {
-  display: flex;
-  gap: 2rem;
-  font-size: 0.9rem;
-  color: var(--tertiary);
+.distill-toc nav a:hover,
+.distill-toc #TableOfContents a:hover {
+  color: var(--primary);
+  text-decoration: underline;
 }
 
-/* Tags in meta */
-.dt-tags {
-  display: flex;
-  gap: 0.5rem;
+/* nested TOC */
+.distill-toc nav ul ul,
+.distill-toc #TableOfContents ul ul {
+  margin-left: 0.8rem;
+  margin-top: 0.2rem;
 }
 
-.dt-tags span {
-  background: var(--accent-soft);
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
+.distill-toc nav ul ul a,
+.distill-toc #TableOfContents ul ul a {
+  font-size: 0.8rem;
   color: var(--secondary);
 }
 
-/* 4. OVERRIDING DISTILL TYPOGRAPHY & ELEMENTS */
-dt-article h1,
-dt-article h2,
-dt-article h3,
-dt-article h4,
-dt-article h5,
-dt-article h6 {
-  font-family: var(--heading-font);
-  color: var(--primary);
-  border-bottom: none !important;
-  /* Removed Distill's native border */
+/* ── Article body ── */
+.distill-content {
+  min-width: 0;
+  /* prevent overflow in grid */
 }
 
-dt-article p,
-dt-article ul,
-dt-article ol,
-dt-article dt,
-dt-article dd {
-  font-family: var(--default-font);
+dt-article {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
   color: var(--content);
-  border-bottom-color: var(--accent);
 }
 
-mjx-container[jax="CHTML"][display="true"] {
-  margin: 1.5rem 0 !important;
+dt-article h2 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  color: var(--primary);
 }
 
-@media (max-width: 1040px) {
-  .distill-layout {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-  }
+dt-article h3 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.3rem;
+  margin-top: 1.8rem;
+  color: var(--primary);
+}
 
-  .distill-side {
+dt-article p {
+  margin: 0 0 1.2em;
+}
+
+dt-article a {
+  color: #1a52a8;
+  text-decoration: none;
+}
+
+dt-article a:hover {
+  text-decoration: underline;
+}
+
+dt-appendix {
+  display: block;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Mobile fallback: hide TOC, show title only ── */
+@media (max-width: 860px) {
+  .distill-toc {
     position: static;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 1.5rem;
+    padding-bottom: 1rem;
     margin-bottom: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
   }
 
-  .distill-side-block {
-    border-top: none;
-    padding-top: 0;
-    margin-bottom: 0;
+  .distill-wrapper {
+    padding: 1rem 1rem 3rem;
   }
 }

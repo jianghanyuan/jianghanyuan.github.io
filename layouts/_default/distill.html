@@ -1,63 +1,63 @@
 {{- define "main" -}}
-<div class="distill-layout">
-  <aside class="distill-side" aria-label="Table of Contents">
-    <div class="distill-side-block">
-      <div class="distill-side-label">Contents</div>
-      {{ .TableOfContents }}
-    </div>
-  </aside>
+<div class="distill-wrapper">
 
-  <div class="distill-main">
-    <dt-article>
-      <div class="dt-article-header">
-        <h1>{{ .Title }}</h1>
-        {{- if .Description -}}<p style="font-size: 1.2rem; color: var(--secondary); margin-bottom: 2rem;">{{
-          .Description }}</p>{{- end -}}
+  {{/* ── Title area (full-width, above the two-column split) ── */}}
+  <header class="distill-header">
+    <h1 class="distill-title">{{ .Title }}</h1>
+    {{- if .Description }}
+    <p class="distill-subtitle">{{ .Description }}</p>
+    {{- end }}
 
-        <div class="dt-article-meta">
-          {{- with .Params.authors }}
-          <div class="dt-authors">
-            <ul>
-              {{- range . }}
-              <li>
-                <span class="dt-author-name">
-                  {{- with .url }}<a href="{{ . }}">{{ end -}}
-                    {{- .name -}}
-                    {{- with .url }}</a>{{ end -}}
-                </span>
-                {{- with .affiliation }}<span class="dt-author-affil">{{ . }}</span>{{ end -}}
-              </li>
-              {{- end }}
-            </ul>
-          </div>
-          {{- end }}
-
-          <div class="dt-meta-details">
-            <div class="dt-published">
-              {{ .Date.Format "Jan 02, 2006" }}
-            </div>
-
-            {{- with .Params.tags }}
-            <div class="dt-tags">
-              {{- range . }}
-              <span>{{ . }}</span>
-              {{- end }}
-            </div>
-            {{- end }}
-          </div>
+    {{/* ── Metadata table (AUTHORS | AFFILIATIONS | PUBLISHED) ── */}}
+    <div class="distill-meta-table">
+      {{- with .Params.authors }}
+      <div class="distill-meta-col distill-meta-authors">
+        <div class="distill-meta-label">Authors</div>
+        {{- range . }}
+        <div class="distill-meta-name">
+          {{- with .url }}<a href="{{ . }}">{{ end -}}
+            {{- .name -}}
+            {{- with .url }}</a>{{ end -}}
         </div>
+        {{- end }}
       </div>
+      <div class="distill-meta-col distill-meta-affiliations">
+        <div class="distill-meta-label">Affiliations</div>
+        {{- range . }}
+        <div class="distill-meta-affil">
+          {{- with .affiliation }}{{ . }}{{ else }}&nbsp;{{ end -}}
+        </div>
+        {{- end }}
+      </div>
+      {{- end }}
+      <div class="distill-meta-col distill-meta-published">
+        <div class="distill-meta-label">Published</div>
+        <div>{{ .Date.Format "January 2, 2006" }}</div>
+      </div>
+    </div>
+  </header>
 
-      {{ .Content }}
-    </dt-article>
+  {{/* ── Two-column layout: TOC sidebar + Article body ── */}}
+  <div class="distill-body">
+    <nav class="distill-toc" aria-label="Table of Contents">
+      <div class="distill-toc-label">Contents</div>
+      {{ .TableOfContents }}
+    </nav>
 
-    <dt-appendix>
-      {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
-      <script type="text/bibliography">
+    <main class="distill-content">
+      <dt-article>
+        {{ .Content }}
+      </dt-article>
+
+      <dt-appendix>
+        {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
+        <script type="text/bibliography">
 {{ .Content | safeHTML }}
-      </script>
-      {{ end }}
-    </dt-appendix>
+        </script>
+        {{ end }}
+      </dt-appendix>
+    </main>
   </div>
+
 </div>
 {{- end -}}

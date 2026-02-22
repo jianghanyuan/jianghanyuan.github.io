@@ -7,7 +7,7 @@ layout: "distill"
 distill: true
 math: true
 authors:
-  - name: "Han Yuan Jiang"
+  - name: "Hanyuan Jiang"
     url: "https://jianghanyuan.github.io"
     affiliation: "CS PhD Program"
   - name: "Collaborator B"

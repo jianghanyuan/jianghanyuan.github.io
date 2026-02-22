@@ -1,6 +1,6 @@
 baseURL: "https://jianghanyuan.github.io/"
 languageCode: "en-us"
-title: "Han Yuan Jiang"
+title: "Hanyuan Jiang"
 theme: "PaperMod"
 enableRobotsTXT: true
 
@@ -19,25 +19,25 @@ markup:
 
 params:
   env: production
-  title: "Han Yuan Jiang"
-  description: "CS PhD student in computer science"
+  title: "Hanyuan Jiang"
+  description: "CS PhD student in machine learning systems"
   author:
-    name: "Han Yuan Jiang"
+    name: "Hanyuan Jiang"
   defaultTheme: light
   disableThemeToggle: false
   ShowReadingTime: true
-  ShowShareButtons: true
+  ShowShareButtons: false
   ShowCodeCopyButtons: true
   ShowPostNavLinks: true
-  ShowBreadCrumbs: true
+  ShowBreadCrumbs: false
   ShowToc: true
-  ShowPageNums: true
-  ShowRssButtonInSectionTermList: true
+  ShowPageNums: false
+  ShowRssButtonInSectionTermList: false
   math: false
   mainSections:
     - posts
   homeInfoParams:
-    Title: "Han Yuan Jiang"
+    Title: "Hanyuan Jiang"
     Content: "CS PhD student in machine learning systems focused on efficient LLM inference, systems optimization, and reliable AI deployment."
   researchInterests:
     - "Efficient LLM serving and scheduling under real-world latency constraints"
@@ -49,6 +49,10 @@ params:
 
 menu:
   main:
+    - identifier: about
+      name: About
+      url: /
+      weight: 5
     - identifier: research
       name: Research
       url: /research/
