@@ -2,10 +2,12 @@
 <section class="home-hero fade-in">
   <h1>{{ .Title | markdownify }}</h1>
   <p>{{ .Content | markdownify }}</p>
-  <p class="hero-links">
-    <a href="/research/">Research & Publications</a>
-    <a href="/posts/">Recent Posts</a>
-    <a href="https://github.com/jianghanyuan">GitHub</a>
-  </p>
+  <div class="hero-actions">
+    <a class="hero-btn" href="/research/">Research & Publications</a>
+    <a class="hero-btn ghost" href="/posts/">Recent Posts</a>
+  </div>
+  <footer class="entry-footer">
+    {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+  </footer>
 </section>
 {{- end -}}

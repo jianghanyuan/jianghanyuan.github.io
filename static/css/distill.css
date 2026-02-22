@@ -1,15 +1,75 @@
-/* Distill pages need viewport-based layout, not PaperMod container constraints. */
+/* Distill requires full viewport layout control. */
 .main {
   max-width: 100% !important;
   padding: 0 !important;
 }
 
-/* Distill template injects a draft banner client-side; suppress it for this site. */
-dt-banner {
+/* Remove Distill's own injected chrome (banner/logo header/footer). */
+dt-banner,
+dt-header,
+dt-footer {
   display: none !important;
 }
 
-/* Keep Distill typography consistent with site baseline and avoid global theme collisions. */
+.distill-layout {
+  max-width: 1120px;
+  margin: 1.2rem auto 0;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.8rem;
+}
+
+.distill-side {
+  position: sticky;
+  top: 92px;
+  align-self: start;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.distill-side h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  color: #0f172a;
+}
+
+.distill-side-desc {
+  margin: 0.35rem 0 0.8rem;
+  line-height: 1.5;
+}
+
+.distill-side-block {
+  margin-bottom: 0.85rem;
+}
+
+.distill-side-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #0b4dbb;
+  margin-bottom: 0.25rem;
+}
+
+.distill-side ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.distill-side li {
+  margin: 0.14rem 0;
+}
+
+.distill-affil {
+  color: #64748b;
+}
+
+.distill-main {
+  min-width: 0;
+}
+
 dt-article,
 dt-article p,
 dt-article li,
@@ -19,29 +79,45 @@ dt-article h3,
 dt-article h4,
 dt-article dt-code {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #111;
+  color: #111827;
 }
 
 dt-article > h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(1.8rem, 4.3vw, 2.65rem);
   letter-spacing: -0.01em;
 }
 
 dt-article p,
 dt-article li {
-  line-height: 1.72;
-  font-size: 1.03rem;
+  line-height: 1.68;
+  font-size: 0.98rem;
 }
 
-dt-article a {
+dt-article a,
+dt-appendix a {
   color: #0b4dbb;
 }
 
-dt-article a:hover {
-  color: #08398a;
+dt-article a:hover,
+dt-appendix a:hover {
+  color: #0a3f98;
 }
 
-/* Ensure math blocks have breathing room and are centered by MathJax defaults. */
 mjx-container[jax="CHTML"][display="true"] {
-  margin: 1.2rem 0 !important;
+  margin: 1rem 0 !important;
+}
+
+@media (max-width: 1040px) {
+  .distill-layout {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .distill-side {
+    position: static;
+    border-bottom: 1px solid rgba(13, 77, 184, 0.12);
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.2rem;
+  }
 }

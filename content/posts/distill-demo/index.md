@@ -9,10 +9,15 @@ math: true
 authors:
   - name: "Han Yuan Jiang"
     url: "https://jianghanyuan.github.io"
+    affiliation: "CS PhD Program"
+  - name: "Collaborator A"
+    url: "https://example.com"
+    affiliation: "Research Lab"
 affiliations:
   - name: "CS PhD Lab"
     url: "https://example.edu"
 bibliography: "references.bib"
+tags: ["distill", "systems", "llm"]
 ---
 
 This post demonstrates **real Distill tags** inside Hugo + PaperMod.

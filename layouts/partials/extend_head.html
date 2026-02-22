@@ -15,12 +15,12 @@
 <script src="https://distill.pub/template.v1.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    var removeDraftBanner = function () {
-      document.querySelectorAll("dt-banner").forEach(function (el) { el.remove(); });
+    var cleanupDistillChrome = function () {
+      document.querySelectorAll("dt-banner, dt-header, dt-footer").forEach(function (el) { el.remove(); });
     };
-    removeDraftBanner();
+    cleanupDistillChrome();
     if (document.body) {
-      new MutationObserver(removeDraftBanner).observe(document.body, { childList: true });
+      new MutationObserver(cleanupDistillChrome).observe(document.body, { childList: true });
     }
   });
 </script>

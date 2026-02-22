@@ -1,15 +1,58 @@
 {{- define "main" -}}
-<dt-article>
-  <h1>{{ .Title }}</h1>
-  {{- if .Description -}}<p>{{ .Description }}</p>{{- end -}}
-  {{ .Content }}
-</dt-article>
+<div class="distill-layout">
+  <aside class="distill-side" aria-label="Article metadata">
+    <h2>{{ .Title }}</h2>
+    {{- if .Description }}
+    <p class="distill-side-desc">{{ .Description }}</p>
+    {{- end }}
 
-<dt-appendix>
-  {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
-  <script type="text/bibliography">
+    {{- with .Params.authors }}
+    <div class="distill-side-block">
+      <div class="distill-side-label">Authors</div>
+      <ul>
+      {{- range . }}
+        <li>
+          {{- with .url }}<a href="{{ . }}">{{ end -}}
+          {{- .name -}}
+          {{- with .url }}</a>{{ end -}}
+          {{- with .affiliation }}<span class="distill-affil">, {{ . }}</span>{{ end -}}
+        </li>
+      {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+
+    <div class="distill-side-block">
+      <div class="distill-side-label">Published</div>
+      <div>{{ .Date.Format "Jan 02, 2006" }}</div>
+    </div>
+
+    {{- with .Params.tags }}
+    <div class="distill-side-block">
+      <div class="distill-side-label">Tags</div>
+      <ul>
+      {{- range . }}
+        <li>{{ . }}</li>
+      {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+  </aside>
+
+  <div class="distill-main">
+    <dt-article>
+      <h1>{{ .Title }}</h1>
+      {{- if .Description -}}<p>{{ .Description }}</p>{{- end -}}
+      {{ .Content }}
+    </dt-article>
+
+    <dt-appendix>
+      {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
+      <script type="text/bibliography">
 {{ .Content | safeHTML }}
-  </script>
-  {{ end }}
-</dt-appendix>
+      </script>
+      {{ end }}
+    </dt-appendix>
+  </div>
+</div>
 {{- end -}}

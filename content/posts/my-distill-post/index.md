@@ -9,10 +9,12 @@ math: true
 authors:
   - name: "Han Yuan Jiang"
     url: "https://jianghanyuan.github.io"
-affiliations:
-  - name: "Your Lab"
-    url: "https://example.edu"
+    affiliation: "CS PhD Program"
+  - name: "Collaborator B"
+    url: "https://example.org"
+    affiliation: "AI Systems Group"
 bibliography: "references.bib"
+tags: ["distill", "math"]
 ---
 
 This post mixes regular Markdown with Distill components.
@@ -30,7 +32,7 @@ def greet(name):
 
 ## Math
 
-PaperMod KaTeX is enabled for this page:
+MathJax is enabled for this page:
 
 $$
 \mathrm{softmax}(x_i)=\frac{e^{x_i}}{\sum_j e^{x_j}}
