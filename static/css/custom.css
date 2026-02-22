@@ -1,35 +1,35 @@
 :root {
-  --theme: #f7f7f4;
+  --theme: #ffffff;
   --entry: #ffffff;
-  --primary: #161616;
-  --secondary: #3d3d3d;
-  --tertiary: #6b7280;
-  --content: #222222;
-  --hljs-bg: #f4f3ef;
-  --code-bg: #f4f3ef;
-  --border: #ddd8cc;
-  --accent: #235a78;
-  --accent-soft: #e9f0f4;
+  --primary: #111111;
+  --secondary: #2b2b2b;
+  --tertiary: #6a6a6a;
+  --content: #181818;
+  --hljs-bg: #f7f8fa;
+  --code-bg: #f7f8fa;
+  --border: #d9dee6;
+  --accent: #0f4fa8;
 }
 
 .dark {
-  --theme: #141414;
-  --entry: #1a1a1a;
-  --primary: #f5f5f5;
-  --secondary: #d4d4d4;
-  --tertiary: #9a9a9a;
-  --content: #e6e6e6;
-  --hljs-bg: #151515;
-  --code-bg: #151515;
-  --border: #2f2a24;
-  --accent: #7eb7d5;
-  --accent-soft: #1f2a31;
+  --theme: #ffffff;
+  --entry: #ffffff;
+  --primary: #111111;
+  --secondary: #2b2b2b;
+  --tertiary: #6a6a6a;
+  --content: #181818;
+  --hljs-bg: #f7f8fa;
+  --code-bg: #f7f8fa;
+  --border: #d9dee6;
+  --accent: #0f4fa8;
 }
 
 body {
-  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--content);
   letter-spacing: 0;
-  line-height: 1.68;
+  line-height: 1.72;
+  background: #ffffff;
 }
 
 .post-title,
@@ -40,61 +40,115 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
+  font-family: "Cormorant Garamond", Garamond, Georgia, serif;
   letter-spacing: 0;
-  line-height: 1.18;
+  line-height: 1.15;
+  color: #111111;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 5vw, 3.4rem);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
 }
 
 code,
 pre,
 .katex,
-.post-content pre {
-  font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+.post-content pre,
+.chroma,
+.post-meta {
+  font-family: "Space Mono", "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
 .main {
-  max-width: min(1040px, 94vw);
+  max-width: min(980px, 92vw);
 }
 
-.post-content {
-  font-size: 1.06rem;
+.header {
+  border-bottom: 1px solid var(--border);
+}
+
+.logo a {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+#menu a {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 500;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  color: #0b3c82;
 }
 
 .first-entry,
 .post-entry,
 .post-single,
-.profile_inner,
 .terms-tags a {
   border: 1px solid var(--border);
-  box-shadow: 0 10px 28px rgba(22, 22, 22, 0.06);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: none;
 }
 
-.profile_inner {
-  background: linear-gradient(140deg, var(--entry) 58%, var(--accent-soft) 100%);
-  border-radius: 22px;
-  padding: 2.4rem;
+.home-info {
+  margin-top: 1rem;
+  padding: 2rem;
 }
 
-.profile_inner h1 {
-  font-size: clamp(2.2rem, 4.6vw, 3.45rem);
-  line-height: 1.08;
+.home-info .entry-header h1 {
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
+  margin-bottom: 0.6rem;
 }
 
-.profile_inner p {
-  max-width: 70ch;
+.home-info .entry-content {
+  font-size: 1.05rem;
+  max-width: 62ch;
   color: var(--secondary);
-  font-size: 1.06rem;
+}
+
+.home-info .entry-footer {
+  margin-top: 1rem;
+}
+
+.home-info .social-icons a {
+  color: var(--accent);
+}
+
+.post-content {
+  font-size: 1.04rem;
+}
+
+.post-content p,
+.post-content li {
+  color: var(--content);
+}
+
+.post-meta,
+.breadcrumbs,
+.post-description,
+.entry-footer {
+  color: var(--tertiary);
 }
 
 .button {
-  border-radius: 999px;
+  border-radius: 0;
   border: 1px solid var(--accent);
   color: var(--accent);
+  background: #ffffff;
 }
 
 .button:hover {
   background: var(--accent);
-  color: #f5f5f5;
+  color: #ffffff;
 }
 
 .pub-grid {
@@ -106,23 +160,23 @@ pre,
 
 .pub-card {
   border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--entry);
-  padding: 1.2rem;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 1.15rem;
 }
 
 .pub-card h3 {
-  margin: 0.35rem 0 0.55rem;
-  font-size: 1.18rem;
+  margin: 0.4rem 0 0.55rem;
+  font-size: 1.45rem;
 }
 
 .pub-meta {
   margin: 0;
   color: var(--accent);
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 0.82rem;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
 .pub-links {
@@ -139,4 +193,14 @@ pre,
 
 .pub-links a:hover {
   border-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .home-info {
+    padding: 1.25rem;
+  }
+
+  .post-content {
+    font-size: 1rem;
+  }
 }
