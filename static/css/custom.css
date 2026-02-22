@@ -1,34 +1,35 @@
 :root {
-  --theme: #f7f8f6;
+  --theme: #f7f7f4;
   --entry: #ffffff;
-  --primary: #111827;
-  --secondary: #334155;
-  --tertiary: #64748b;
-  --content: #1f2937;
-  --hljs-bg: #f2f4f8;
-  --code-bg: #eef2f7;
-  --border: #d7dde7;
-  --accent: #0f766e;
-  --accent-soft: #d7f3ef;
+  --primary: #161616;
+  --secondary: #3d3d3d;
+  --tertiary: #6b7280;
+  --content: #222222;
+  --hljs-bg: #f4f3ef;
+  --code-bg: #f4f3ef;
+  --border: #ddd8cc;
+  --accent: #235a78;
+  --accent-soft: #e9f0f4;
 }
 
 .dark {
-  --theme: #11161d;
-  --entry: #18212b;
-  --primary: #f3f6fb;
-  --secondary: #c9d3e2;
-  --tertiary: #8ea1b8;
-  --content: #dce5f2;
-  --hljs-bg: #10161d;
-  --code-bg: #10161d;
-  --border: #2c3a4b;
-  --accent: #5bc5ba;
-  --accent-soft: #16343a;
+  --theme: #141414;
+  --entry: #1a1a1a;
+  --primary: #f5f5f5;
+  --secondary: #d4d4d4;
+  --tertiary: #9a9a9a;
+  --content: #e6e6e6;
+  --hljs-bg: #151515;
+  --code-bg: #151515;
+  --border: #2f2a24;
+  --accent: #7eb7d5;
+  --accent-soft: #1f2a31;
 }
 
 body {
-  font-family: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  letter-spacing: 0.01em;
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0;
+  line-height: 1.68;
 }
 
 .post-title,
@@ -39,8 +40,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
-  letter-spacing: 0.01em;
+  font-family: "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
+  letter-spacing: 0;
+  line-height: 1.18;
 }
 
 code,
@@ -54,30 +56,34 @@ pre,
   max-width: min(1040px, 94vw);
 }
 
+.post-content {
+  font-size: 1.06rem;
+}
+
 .first-entry,
 .post-entry,
 .post-single,
 .profile_inner,
 .terms-tags a {
   border: 1px solid var(--border);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 10px 28px rgba(22, 22, 22, 0.06);
 }
 
 .profile_inner {
-  background: linear-gradient(140deg, var(--entry) 60%, var(--accent-soft) 100%);
-  border-radius: 20px;
-  padding: 2.2rem;
+  background: linear-gradient(140deg, var(--entry) 58%, var(--accent-soft) 100%);
+  border-radius: 22px;
+  padding: 2.4rem;
 }
 
 .profile_inner h1 {
-  font-size: clamp(2rem, 4.4vw, 3.25rem);
+  font-size: clamp(2.2rem, 4.6vw, 3.45rem);
   line-height: 1.08;
 }
 
 .profile_inner p {
   max-width: 70ch;
   color: var(--secondary);
-  font-size: 1.08rem;
+  font-size: 1.06rem;
 }
 
 .button {
@@ -88,7 +94,7 @@ pre,
 
 .button:hover {
   background: var(--accent);
-  color: #f8fafc;
+  color: #f5f5f5;
 }
 
 .pub-grid {
@@ -102,7 +108,7 @@ pre,
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--entry);
-  padding: 1.1rem;
+  padding: 1.2rem;
 }
 
 .pub-card h3 {
