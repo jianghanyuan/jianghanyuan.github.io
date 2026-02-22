@@ -43,8 +43,10 @@ params:
         url: /profile/
       - name: Publications
         url: /publications/
-      - name: Blog
-        url: /posts/
+      - name: PaperMod Demo
+        url: /posts/papermod-front-page-demo/
+      - name: Distill Demo
+        url: /posts/distill-components-demo/
   socialIcons:
     - name: github
       url: "https://github.com/jianghanyuan"

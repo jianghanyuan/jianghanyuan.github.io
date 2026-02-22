@@ -3,3 +3,7 @@ public/
 
 # Local nested clone (not part of this Hugo site)
 jianghanyuan.github.io/
+
+# Local visual test artifacts
+.playwright-cli/
+output/
