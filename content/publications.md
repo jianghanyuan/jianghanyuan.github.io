@@ -1,6 +1,5 @@
 ---
 title: "Publications"
-description: "Selected papers and preprints."
-layout: "publications"
+layout: "redirect"
+redirect_to: "/research/#selected-publications"
 ---
-Replace placeholders in `data/publications.yaml` with your final metadata and links.

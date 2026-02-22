@@ -1,5 +1,5 @@
 {{- define "main" -}}
-<article class="post-single publication-page">
+<article class="post-single research-page">
   <header class="post-header">
     {{ partial "breadcrumbs.html" . }}
     <h1 class="post-title">{{ .Title }}</h1>
@@ -12,13 +12,12 @@
   <div class="post-content">{{ .Content }}</div>
   {{- end }}
 
-  <section class="pub-lines" aria-label="Publication list">
+  <section id="selected-publications" class="pub-lines" aria-label="Selected publications">
+    <h2>Selected Publications</h2>
     {{- range site.Data.publications.selected }}
     <article class="pub-line">
-      <h2>{{ .title }}</h2>
-      <p class="pub-authors">{{ .authors }}</p>
-      <p class="pub-venue">{{ .venue }}</p>
-      <p class="pub-summary">{{ .summary }}</p>
+      <h3>{{ .title }}</h3>
+      <p class="pub-inline-meta">{{ .authors }}. {{ .venue }}.</p>
       <p class="pub-links">
         {{- range .links -}}
         <a href="{{ .url }}">{{ .label }}</a>

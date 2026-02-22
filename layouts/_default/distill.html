@@ -1,34 +1,8 @@
 {{- define "main" -}}
-{{ partial "breadcrumbs.html" . }}
-
-<script type="text/front-matter">
-title: "{{ .Title }}"
-description: "{{ .Description }}"
-{{- with .Params.authors }}
-authors:
-{{- range . }}
-- {{ .name }}: {{ .url }}
-{{- end }}
-{{- end }}
-{{- with .Params.affiliations }}
-affiliations:
-{{- range . }}
-- {{ .name }}: {{ .url }}
-{{- end }}
-{{- end }}
-</script>
-
 <dt-article>
   <h1>{{ .Title }}</h1>
   {{- if .Description -}}<p>{{ .Description }}</p>{{- end -}}
-
-  {{- if .Content -}}
-    {{- if not (.Param "disableAnchoredHeadings") -}}
-      {{- partial "anchored_headings.html" .Content -}}
-    {{- else -}}
-      {{ .Content }}
-    {{- end -}}
-  {{- end -}}
+  {{ .Content }}
 </dt-article>
 
 <dt-appendix>

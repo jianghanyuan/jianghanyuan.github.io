@@ -2,19 +2,19 @@
 {{- if .IsHome -}}
   {{ partial "home_info.html" . }}
 
-  <section class="home-section">
+  <section class="home-section stagger-1">
     <h2>Recent Updates</h2>
     <ul class="updates-list">
-      {{- range first 6 (where site.RegularPages "Section" "posts") -}}
+      {{- range first 8 (where site.RegularPages "Section" "posts") -}}
       <li>
-        <span class="updates-date">{{ .Date.Format "2006-01-02" }}</span>
+        <span class="updates-date">{{ .Date.Format "Jan 02" }}</span>
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
       </li>
       {{- end -}}
     </ul>
   </section>
 
-  <section class="home-section">
+  <section class="home-section stagger-2">
     <h2>Research Interests</h2>
     <ul class="interest-list">
       {{- range site.Params.researchInterests -}}
@@ -23,17 +23,17 @@
     </ul>
   </section>
 
-  <section class="home-section">
+  <section class="home-section stagger-3">
     <h2>Selected Publications</h2>
     <ul class="pub-inline-list">
-      {{- range first 4 site.Data.publications.selected -}}
+      {{- range first 5 site.Data.publications.selected -}}
       <li>
-        <a class="pub-inline-title" href="/publications/">{{ .title }}</a>
+        <a class="pub-inline-title" href="/research/#selected-publications">{{ .title }}</a>
         <span class="pub-inline-meta">{{ .authors }}. {{ .venue }}.</span>
       </li>
       {{- end -}}
     </ul>
-    <p class="home-more"><a href="/publications/">View full publication list -></a></p>
+    <p class="home-more"><a href="/research/#selected-publications">View all publications -></a></p>
   </section>
 {{- else -}}
   <header class="page-header">

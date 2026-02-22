@@ -1,12 +1,47 @@
-/* Loaded only on Distill pages via extend_head.html. */
+/* Distill pages need viewport-based layout, not PaperMod container constraints. */
 .main {
-  max-width: min(1000px, 94vw);
+  max-width: 100% !important;
+  padding: 0 !important;
 }
 
-article {
-  max-width: 100%;
+/* Distill template injects a draft banner client-side; suppress it for this site. */
+dt-banner {
+  display: none !important;
 }
 
-dt-article {
-  font-size: 1.05rem;
+/* Keep Distill typography consistent with site baseline and avoid global theme collisions. */
+dt-article,
+dt-article p,
+dt-article li,
+dt-article h1,
+dt-article h2,
+dt-article h3,
+dt-article h4,
+dt-article dt-code {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #111;
+}
+
+dt-article > h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.01em;
+}
+
+dt-article p,
+dt-article li {
+  line-height: 1.72;
+  font-size: 1.03rem;
+}
+
+dt-article a {
+  color: #0b4dbb;
+}
+
+dt-article a:hover {
+  color: #08398a;
+}
+
+/* Ensure math blocks have breathing room and are centered by MathJax defaults. */
+mjx-container[jax="CHTML"][display="true"] {
+  margin: 1.2rem 0 !important;
 }

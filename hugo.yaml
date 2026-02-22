@@ -36,7 +36,7 @@ params:
     - posts
   homeInfoParams:
     Title: "Han Yuan Jiang"
-    Content: "CS PhD student in machine learning systems. I build practical methods for efficient LLM inference, robust deployment, and high-performance model serving."
+    Content: "CS PhD student in machine learning systems focused on efficient LLM inference, systems optimization, and reliable AI deployment."
   researchInterests:
     - "Efficient LLM serving and scheduling under real-world latency constraints"
     - "Training-serving co-design for scalable model systems"
@@ -47,22 +47,14 @@ params:
 
 menu:
   main:
-    - identifier: profile
-      name: Profile
-      url: /profile/
-      weight: 10
     - identifier: research
       name: Research
       url: /research/
-      weight: 20
-    - identifier: publications
-      name: Publications
-      url: /publications/
-      weight: 30
+      weight: 10
     - identifier: blog
       name: Blog
       url: /posts/
-      weight: 40
+      weight: 20
 
 permalinks:
   posts: /posts/:slug/

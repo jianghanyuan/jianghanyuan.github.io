@@ -1,23 +1,18 @@
 ---
 title: "Research"
+description: "Research interests and selected publications."
+layout: "research"
 ---
 
-## Current Themes
+I build machine learning systems that are efficient, reliable, and deployable at scale.
 
-### 1. LLM Systems Efficiency
+## Current Focus
 
-I study techniques that reduce latency and cost for large-model inference under real traffic constraints, including scheduler design, batching policy, and memory-aware serving.
+- Efficient LLM inference scheduling and serving
+- Training-serving co-design for end-to-end performance
+- Reliability and safety evaluation for production AI
 
-### 2. Training-Serving Co-Design
+## Recent Updates
 
-I investigate how training objectives and architecture choices affect downstream serving efficiency and reliability.
-
-### 3. Trustworthy Deployment
-
-I build evaluation and monitoring workflows for safety, robustness, and operational stability in long-running model services.
-
-## Methods
-
-- Systems benchmarking and profiling
-- Optimization under hardware and reliability constraints
-- Empirical studies on model-quality versus systems-cost tradeoffs
+- 2026-02: Released Distill demo post and PaperMod integration notes.
+- 2026-01: Started experiments on long-context serving throughput bottlenecks.

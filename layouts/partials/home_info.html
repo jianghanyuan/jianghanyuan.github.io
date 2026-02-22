@@ -1,12 +1,11 @@
 {{- with site.Params.homeInfoParams }}
-<section class="home-hero">
+<section class="home-hero fade-in">
   <h1>{{ .Title | markdownify }}</h1>
   <p>{{ .Content | markdownify }}</p>
   <p class="hero-links">
-    <a href="/profile/">Profile</a>
-    <a href="/research/">Research</a>
-    <a href="/publications/">Publications</a>
-    <a href="/posts/">Blog</a>
+    <a href="/research/">Research & Publications</a>
+    <a href="/posts/">Recent Posts</a>
+    <a href="https://github.com/jianghanyuan">GitHub</a>
   </p>
 </section>
 {{- end -}}
