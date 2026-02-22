@@ -2,9 +2,9 @@
 <section class="home-hero fade-in">
   <h1>{{ .Title | markdownify }}</h1>
   <p>{{ .Content | markdownify }}</p>
-  <div class="hero-actions">
-    <a class="pill-btn dark" href="/research/">Publication →</a>
-    <a class="pill-btn" href="/posts/">Blog →</a>
+  <div class="hero-links">
+    <a href="/research/">Publication</a>
+    <a href="/posts/">Blog</a>
   </div>
   <footer class="hero-social">
     {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}

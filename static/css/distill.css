@@ -1,6 +1,6 @@
 /* =============================================================
-   Distill Page Styles — Tri Dao style
-   Bold title → 3-col meta → Sticky TOC left + Article right
+   Distill Page Styles — ThinkingMachines-inspired
+   Light serif title → clean meta → Sticky TOC left + Article right
    ============================================================= */
 
 /* ── Force-hide ALL Distill chrome ── */
@@ -17,7 +17,7 @@ svg.distill-logo {
   overflow: hidden !important;
 }
 
-/* ── Kill white rectangles: force transparent on distill containers ── */
+/* ── Kill white rectangles ── */
 dt-article,
 dt-appendix,
 d-article,
@@ -43,30 +43,32 @@ d-article>* {
   border-bottom: 1px solid var(--border);
   margin-bottom: 2.5rem;
   padding-bottom: 2rem;
+  text-align: center;
 }
 
 .distill-title {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 4.5vw, 3rem);
-  font-weight: 800;
-  line-height: 1.15;
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.2;
   color: var(--primary);
   margin: 0 0 0.8rem;
 }
 
 .distill-subtitle {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   color: var(--secondary);
-  margin: 0 0 2rem;
+  margin: 0 0 1.5rem;
   line-height: 1.55;
 }
 
-/* ── 3-Column Meta Table ── */
+/* ── Meta (centered) ── */
 .distill-meta-table {
   display: flex;
   gap: 3rem;
   margin-top: 1.5rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .distill-meta-col {
@@ -78,16 +80,16 @@ d-article>* {
 .distill-meta-label {
   font-family: var(--font-body);
   font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--tertiary);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
 }
 
 .distill-meta-name {
-  font-weight: 600;
-  font-size: 0.92rem;
+  font-weight: 400;
+  font-size: 0.9rem;
   color: var(--primary);
 }
 
@@ -101,32 +103,31 @@ d-article>* {
 }
 
 .distill-meta-affil {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--secondary);
 }
 
 .distill-meta-published {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--secondary);
 }
 
-/* ── Two-Column Body ── */
+/* ── Two-Column Body: TOC left, article right ── */
 .distill-body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
   align-items: start;
-  overflow: visible !important;
 }
 
 @media (min-width: 860px) {
   .distill-body {
     grid-template-columns: 200px minmax(0, 1fr);
-    gap: 3.5rem;
+    gap: 3rem;
   }
 }
 
-/* ── Sticky TOC ── */
+/* ── Sticky TOC (separate left column) ── */
 .distill-toc {
   position: -webkit-sticky !important;
   position: sticky !important;
@@ -149,11 +150,11 @@ d-article>* {
 .distill-toc-label {
   font-family: var(--font-body);
   font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--primary);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 
 /* Hugo TOC links */
@@ -164,31 +165,32 @@ d-article>* {
 }
 
 .distill-toc #TableOfContents li {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.25rem;
 }
 
 .distill-toc #TableOfContents a {
-  font-size: 0.85rem;
-  color: var(--link);
+  font-size: 0.82rem;
+  color: var(--secondary);
   text-decoration: none;
   line-height: 1.4;
   display: block;
-  padding: 0.15rem 0;
+  padding: 0.1rem 0;
   transition: color 0.15s;
 }
 
 .distill-toc #TableOfContents a:hover {
   color: var(--primary);
+  text-decoration: underline;
 }
 
 .distill-toc #TableOfContents ul ul {
   margin-left: 0.75rem;
-  margin-top: 0.15rem;
+  margin-top: 0.1rem;
 }
 
 .distill-toc #TableOfContents ul ul a {
-  font-size: 0.8rem;
-  color: var(--secondary);
+  font-size: 0.78rem;
+  color: var(--tertiary);
 }
 
 /* ── Article Body ── */
@@ -245,28 +247,21 @@ dt-article {
   background: transparent !important;
 }
 
+/* Article headings — NOT bold, matching thinkingmachines */
 dt-article h2 {
   font-family: var(--font-heading);
-  font-size: 1.7rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 400;
   margin-top: 2.5rem;
   color: var(--primary);
-  position: relative !important;
-  width: auto !important;
-  max-width: 100% !important;
-  left: auto !important;
-  right: auto !important;
 }
 
 dt-article h3 {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 400;
   margin-top: 1.8rem;
   color: var(--primary);
-  position: relative !important;
-  width: auto !important;
-  max-width: 100% !important;
 }
 
 dt-article p {
@@ -279,6 +274,7 @@ dt-article a {
 
 dt-article a:hover {
   color: var(--link-hover);
+  text-decoration: underline;
 }
 
 dt-article ul,
@@ -311,7 +307,7 @@ dt-article pre code {
 }
 
 dt-article blockquote {
-  border-left: 3px solid var(--accent-1);
+  border-left: 2px solid var(--border);
   margin: 1.5rem 0;
   padding: 0.5rem 1rem;
   color: var(--secondary);
@@ -333,6 +329,9 @@ dt-appendix {
     border-bottom: 1px solid var(--border);
     padding-bottom: 1rem;
     margin-bottom: 1.5rem;
+    width: auto;
+    min-width: auto;
+    max-width: none;
   }
 
   .distill-wrapper {
@@ -341,5 +340,13 @@ dt-appendix {
 
   .distill-meta-table {
     gap: 1.5rem;
+  }
+
+  .distill-header {
+    text-align: left;
+  }
+
+  .distill-meta-table {
+    justify-content: flex-start;
   }
 }
