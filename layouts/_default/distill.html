@@ -21,7 +21,6 @@ affiliations:
 <dt-article>
   <h1>{{ .Title }}</h1>
   {{- if .Description -}}<p>{{ .Description }}</p>{{- end -}}
-  <dt-byline></dt-byline>
 
   {{- if .Content -}}
     {{- if not (.Param "disableAnchoredHeadings") -}}

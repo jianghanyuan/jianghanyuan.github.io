@@ -1,0 +1,31 @@
+{{- define "main" -}}
+<article class="post-single publication-page">
+  <header class="post-header">
+    {{ partial "breadcrumbs.html" . }}
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }}
+  </header>
+
+  {{- if .Content }}
+  <div class="post-content">{{ .Content }}</div>
+  {{- end }}
+
+  <section class="pub-lines" aria-label="Publication list">
+    {{- range site.Data.publications.selected }}
+    <article class="pub-line">
+      <h2>{{ .title }}</h2>
+      <p class="pub-authors">{{ .authors }}</p>
+      <p class="pub-venue">{{ .venue }}</p>
+      <p class="pub-summary">{{ .summary }}</p>
+      <p class="pub-links">
+        {{- range .links -}}
+        <a href="{{ .url }}">{{ .label }}</a>
+        {{- end -}}
+      </p>
+    </article>
+    {{- end }}
+  </section>
+</article>
+{{- end -}}

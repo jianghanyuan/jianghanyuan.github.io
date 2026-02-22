@@ -36,7 +36,11 @@ params:
     - posts
   homeInfoParams:
     Title: "Han Yuan Jiang"
-    Content: "CS PhD student in machine learning systems. I work on efficient LLM inference, distributed systems, and reliable AI deployment."
+    Content: "CS PhD student in machine learning systems. I build practical methods for efficient LLM inference, robust deployment, and high-performance model serving."
+  researchInterests:
+    - "Efficient LLM serving and scheduling under real-world latency constraints"
+    - "Training-serving co-design for scalable model systems"
+    - "Reliability, evaluation, and safety in production AI infrastructure"
   socialIcons:
     - name: github
       url: "https://github.com/jianghanyuan"

@@ -1,0 +1,73 @@
+{{- define "main" -}}
+{{- if .IsHome -}}
+  {{ partial "home_info.html" . }}
+
+  <section class="home-section">
+    <h2>Recent Updates</h2>
+    <ul class="updates-list">
+      {{- range first 6 (where site.RegularPages "Section" "posts") -}}
+      <li>
+        <span class="updates-date">{{ .Date.Format "2006-01-02" }}</span>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </li>
+      {{- end -}}
+    </ul>
+  </section>
+
+  <section class="home-section">
+    <h2>Research Interests</h2>
+    <ul class="interest-list">
+      {{- range site.Params.researchInterests -}}
+      <li>{{ . }}</li>
+      {{- end -}}
+    </ul>
+  </section>
+
+  <section class="home-section">
+    <h2>Selected Publications</h2>
+    <ul class="pub-inline-list">
+      {{- range first 4 site.Data.publications.selected -}}
+      <li>
+        <a class="pub-inline-title" href="/publications/">{{ .title }}</a>
+        <span class="pub-inline-meta">{{ .authors }}. {{ .venue }}.</span>
+      </li>
+      {{- end -}}
+    </ul>
+    <p class="home-more"><a href="/publications/">View full publication list -></a></p>
+  </section>
+{{- else -}}
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Description }}
+    <div class="post-description">{{ .Description }}</div>
+    {{- end }}
+  </header>
+
+  {{- $pages := .RegularPages -}}
+  {{- $paginator := .Paginate $pages -}}
+  {{- range $paginator.Pages -}}
+  <article class="post-entry">
+    <header class="entry-header">
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    </header>
+    {{- if .Summary }}
+    <div class="entry-content">{{ .Summary | plainify }}</div>
+    {{- end }}
+    <footer class="entry-footer">{{ .Date.Format "January 2, 2006" }}</footer>
+  </article>
+  {{- end -}}
+
+  {{- if gt $paginator.TotalPages 1 -}}
+  <footer class="page-footer">
+    <nav class="pagination">
+      {{- if $paginator.HasPrev }}
+      <a class="prev" href="{{ $paginator.Prev.URL }}">Prev</a>
+      {{- end }}
+      {{- if $paginator.HasNext }}
+      <a class="next" href="{{ $paginator.Next.URL }}">Next</a>
+      {{- end }}
+    </nav>
+  </footer>
+  {{- end -}}
+{{- end -}}
+{{- end -}}
