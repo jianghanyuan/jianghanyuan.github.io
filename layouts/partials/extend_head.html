@@ -19,18 +19,30 @@
   document.addEventListener("DOMContentLoaded", function () {
     /* ── Clean up Distill chrome — aggressively ── */
     var cleanupDistillChrome = function () {
-      document.querySelectorAll("dt-banner, dt-header, dt-footer, dt-banner .logo, svg.distill-logo, dt-banner svg, dt-header svg, dt-banner img, dt-header img").forEach(function (el) {
-        el.style.display = 'none';
-        el.style.visibility = 'hidden';
-        el.style.height = '0';
-        el.style.width = '0';
-        el.style.position = 'absolute';
-        el.style.overflow = 'hidden';
+      // Hide all distill visual elements
+      document.querySelectorAll("dt-banner, dt-header, dt-footer, dt-byline, dt-banner *, dt-header *, dt-footer *").forEach(function (el) {
+        el.style.cssText = 'display:none!important;visibility:hidden!important;height:0!important;width:0!important;position:absolute!important;overflow:hidden!important;opacity:0!important;';
+      });
+      // Remove distill-injected favicon links (they override our favicon)
+      document.querySelectorAll('link[rel="icon"][href*="distill"], link[rel="shortcut icon"][href*="distill"]').forEach(function (el) {
+        el.remove();
+      });
+      // Also remove any favicon links that don't point to our own
+      document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]').forEach(function (el) {
+        if (el.href && !el.href.includes('/favicon.png')) {
+          el.remove();
+        }
       });
     };
     cleanupDistillChrome();
     if (document.body) {
-      new MutationObserver(cleanupDistillChrome).observe(document.body, { childList: true, subtree: true });
+      new MutationObserver(function (mutations) {
+        cleanupDistillChrome();
+      }).observe(document.body, { childList: true, subtree: true });
+      // Also observe head for favicon injection
+      new MutationObserver(function (mutations) {
+        cleanupDistillChrome();
+      }).observe(document.head, { childList: true, subtree: true });
     }
 
     /* ── TOC toggle ── */
