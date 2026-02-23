@@ -44,7 +44,11 @@
     {{- range first 5 (where site.RegularPages "Section" "posts") }}
     {{- if .Params.featured }}
     <a class="featured-essay" href="{{ .RelPermalink }}">
-      <i data-lucide="file-text" style="width:14px;height:14px;flex-shrink:0;color:var(--tertiary);"></i>
+      {{- if eq .Params.featuredIcon "vision" }}
+      <i data-lucide="lightbulb" style="width:14px;height:14px;flex-shrink:0;color:#c8a24e;"></i>
+      {{- else }}
+      <i data-lucide="flask-conical" style="width:14px;height:14px;flex-shrink:0;color:#5b8fb9;"></i>
+      {{- end }}
       <span class="featured-essay-title">{{ .Title }}</span>
       <span class="featured-essay-meta"><time>{{ .Date.Format "Jan 2006" }}</time></span>
       <span class="featured-essay-arrow">→</span>
@@ -55,11 +59,11 @@
 </section>
 
 
-{{/* ── Recent Posts ── */}}
+{{/* ── Recent Blogs ── */}}
 <section class="home-section stagger-2">
   <div class="section-header">
-    <h2>Recent Posts</h2>
-    <a class="view-all" href="/posts/">All posts →</a>
+    <h2>Recent Blogs</h2>
+    <a class="view-all" href="/posts/">All blogs →</a>
   </div>
   <ul class="post-list">
     {{- range first 5 (where site.RegularPages "Section" "posts") -}}

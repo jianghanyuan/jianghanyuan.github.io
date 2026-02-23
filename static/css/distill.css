@@ -1,7 +1,7 @@
 /* =============================================================
    Distill Page Styles — Two-Column Grid Layout
    Matches distill.pub: TOC left, everything else right
-   System-UI fonts, wide content, footnote popups + bottom list
+   System-UI fonts, wide content
    ============================================================= */
 
 /* ── Force-hide ALL Distill chrome + icons ── */
@@ -69,23 +69,46 @@ body {
 
 /* ═══════════════════════════════════════════════
    TWO-COLUMN GRID — entire page
-   Column A: ~200px (spacer / TOC)
-   Column B: rest  (title / author / article)
+   Column A: ~200px (empty beside header, TOC beside article)
+   Column B: rest  (title, author, article — all aligned)
    ═══════════════════════════════════════════════ */
 .distill-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
+  display: block;
+  /* Mobile: single column */
 }
 
 @media (min-width: 900px) {
   .distill-grid {
+    display: grid;
     grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr;
     gap: 0 2.5rem;
+  }
+
+  /* Row 1: spacer (col A) + header (col B) */
+  .distill-grid-spacer {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .distill-header {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  /* Row 2: TOC (col A) + content (col B) */
+  .distill-toc {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .distill-content {
+    grid-column: 2;
+    grid-row: 2;
   }
 }
 
-/* ── Spacer (left column, beside title/author) ── */
+/* ── Spacer (left column, beside title/author — empty) ── */
 .distill-grid-spacer {
   display: none;
 }
@@ -96,7 +119,7 @@ body {
   }
 }
 
-/* ── Header: right column (title, subtitle, meta) ── */
+/* ── Header: right column (title, meta) ── */
 .distill-header {
   border-bottom: 1px solid var(--border, #e0e0e0);
   margin-bottom: 0;
@@ -226,7 +249,6 @@ body {
   text-decoration: none;
 }
 
-/* Nested TOC items */
 .distill-toc #TableOfContents ul ul {
   padding-left: 0.8rem;
   margin-top: 0.2rem;
@@ -266,14 +288,6 @@ dt-article h3 {
   font-weight: 600;
   margin-top: 1.8rem;
   margin-bottom: 0.6rem;
-}
-
-dt-article h4 {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin-top: 1.4rem;
-  margin-bottom: 0.5rem;
 }
 
 dt-article p {
@@ -340,72 +354,68 @@ dt-appendix {
   margin-right: 0.3em;
 }
 
-/* ── Footnotes section (bottom of page) ── */
-.distill-footnotes-section {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border, #e0e0e0);
+/* ── Footnotes at bottom — clean, ThinkingMachines-style ── */
+dt-article h2+ol.footnotes-bottom,
+.footnotes-bottom {
+  padding-left: 0;
+  list-style: none;
+  counter-reset: fn-counter;
 }
 
-.distill-footnotes-section h2 {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--primary, #1a1a1a);
-}
-
-.distill-footnotes-list {
-  padding-left: 1.5rem;
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: var(--secondary, #666);
-}
-
-.distill-footnotes-list li {
-  margin-bottom: 0.75rem;
-}
-
-/* ── References section (bottom of page) ── */
-.distill-references-section {
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border, #e0e0e0);
-}
-
-.distill-references-section h2 {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--primary, #1a1a1a);
-}
-
-.distill-references-list {
-  padding-left: 1.5rem;
+.footnotes-bottom li {
+  counter-increment: fn-counter;
   font-size: 0.85rem;
   line-height: 1.6;
   color: var(--secondary, #666);
+  margin-bottom: 0.5rem;
+  padding-left: 1.8rem;
+  position: relative;
 }
 
-.distill-references-list li {
+.footnotes-bottom li::before {
+  content: counter(fn-counter) ".";
+  position: absolute;
+  left: 0;
+  font-weight: 600;
+  color: var(--tertiary, #999);
+  font-size: 0.8rem;
+}
+
+/* ── References at bottom — clean list ── */
+.references-list {
+  padding-left: 0;
+  list-style: none;
+  counter-reset: ref-counter;
+}
+
+.references-list li {
+  counter-increment: ref-counter;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--secondary, #666);
   margin-bottom: 0.6rem;
+  padding-left: 1.8rem;
+  position: relative;
 }
 
-.distill-references-list a {
+.references-list li::before {
+  content: "[" counter(ref-counter) "]";
+  position: absolute;
+  left: 0;
+  font-weight: 500;
+  color: var(--tertiary, #999);
+  font-size: 0.78rem;
+}
+
+.references-list a {
   color: var(--link, #333);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  font-size: 0.78rem;
 }
 
 /* ── Responsive: mobile ── */
 @media (max-width: 899px) {
   .distill-page {
     padding: 1.5rem 16px 3rem;
-  }
-
-  .distill-grid-spacer {
-    display: none;
   }
 
   .distill-title {

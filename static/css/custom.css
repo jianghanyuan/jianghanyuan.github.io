@@ -308,6 +308,23 @@ dt-article a:hover {
 
 .hero-social {
   margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tertiary);
+  transition: color 0.15s ease;
+  text-decoration: none !important;
+}
+
+.social-icon:hover {
+  color: var(--primary);
+  text-decoration: none !important;
 }
 
 /* ── Home Sections — compact ── */
