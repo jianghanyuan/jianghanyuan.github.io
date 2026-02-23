@@ -35,7 +35,7 @@ params:
   ShowRssButtonInSectionTermList: false
   math: false
   mainSections:
-    - posts
+    - blog
   homeInfoParams:
     Title: "Hanyuan Jiang"
     Content: "CS PhD student in machine learning systems. I work on efficient LLM inference scheduling, training-serving co-design for scalable systems, and reliability and safety in production AI infrastructure."
@@ -49,18 +49,14 @@ params:
 
 menu:
   main:
-    - identifier: about
-      name: About
-      url: /
-      weight: 5
     - identifier: publications
       name: Publication
       url: /research/
       weight: 10
     - identifier: blog
       name: Blog
-      url: /posts/
+      url: /blog/
       weight: 20
 
 permalinks:
-  posts: /posts/:slug/
+  blog: /blog/:slug/

@@ -99,10 +99,10 @@
   /* Elegant explicit serif */
   font-size: 2.8rem;
   /* Make it larger and more editorial */
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.15;
   color: #1e1e1e;
-  margin: 0 auto 1rem;
+  margin: 0 auto 2.5rem;
   max-width: 800px;
   /* Readability constraint */
 }
@@ -123,7 +123,9 @@
 
 .distill-byline a {
   color: #1e1e1e;
-  text-decoration: none;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
   font-weight: 500;
   transition: opacity 0.2s ease;
 }
@@ -328,6 +330,7 @@
     border-radius: 4px;
     font-size: 0.82rem;
   }
+
 }
 
 /* Footnote superscript ref */
@@ -397,4 +400,19 @@
   dt-article {
     font-size: 1rem;
   }
+}
+
+/* ── Override all decorative underlines GLOBALLY ── */
+.distill-article a,
+.sidenote a,
+.references-list a {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.distill-article a:hover,
+.sidenote a:hover,
+.references-list a:hover {
+  opacity: 0.7;
 }

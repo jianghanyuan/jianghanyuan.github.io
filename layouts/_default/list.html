@@ -35,43 +35,40 @@
 {{/* ══════════ HOME PAGE CUSTOM SECTIONS ══════════ */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 
-{{/* ── Featured — pill buttons, no header ── */}}
-<div class="featured-pills stagger-1">
-  {{- range first 5 (where site.RegularPages "Section" "posts") }}
-  {{- if .Params.featured }}
-  <a href="{{ .RelPermalink }}" class="pill-btn">
-    <span class="pill-icon">{{- if eq .Params.featuredIcon "vision" }}✨{{- else }}💡{{- end }}</span>
-    <span class="pill-text">{{ .Title }}</span>
-  </a>
-  {{- end }}
-  {{- end }}
-</div>
-
-{{/* ── Recent Blogs ── */}}
+{{/* ── Recent Updates (Merged Blog + News) ── */}}
 <section class="home-section stagger-2">
   <div class="section-header">
-    <h2>Recent Blogs</h2>
-    <a class="view-all" href="/posts/">All blogs →</a>
+    <h2>Recent Updates</h2>
+    <a class="view-all" href="/blog/">All blogs →</a>
   </div>
-  <div class="post-list">
-    {{- range first 5 (where site.RegularPages "Section" "posts") -}}
-    <a class="post-entry" href="{{ .RelPermalink }}">
-      <article>
-        <div class="entry-header">
-          <h3 class="entry-title">{{ .Title }}</h3>
-        </div>
-        <footer class="entry-footer">
-          <span class="entry-date">{{ .Date.Format "Jan 2, 2006" }}</span>
-        </footer>
-      </article>
-    </a>
+
+  {{- $blogs := where site.RegularPages "Section" "blog" -}}
+  {{- $news := where site.RegularPages "Section" "news" -}}
+  {{- $updates := union $blogs $news -}}
+  {{- $updates = sort $updates "Date" "desc" -}}
+
+  <div class="updates-list">
+    {{- range first 5 $updates -}}
+    <div class="update-entry">
+      <div class="update-date">{{ .Date.Format "Jan 2, 2006" }}</div>
+      <div class="update-details">
+        {{- if eq .Section "blog" -}}
+        <span class="update-tag blog-tag">Blog</span> <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{- else -}}
+        <span class="update-tag news-tag">News</span> {{ .Title | markdownify }}
+        {{- end -}}
+      </div>
+    </div>
     {{- end -}}
   </div>
 </section>
 
 {{/* ── Selected Publications ── */}}
-{{ with site.Data.publications }}
-{{ with .selected }}
+{{- $recentPubs := slice -}}
+{{- range site.Data.publications.groups -}}
+{{- $recentPubs = $recentPubs | append .items -}}
+{{- end -}}
+{{- with $recentPubs -}}
 <section class="home-section stagger-3">
   <div class="section-header">
     <h2>Selected Research</h2>
@@ -79,7 +76,7 @@
   </div>
   <div class="pub-list">
     {{- range first 4 . -}}
-    <a class="pub-entry" href="/research/#selected-publications">
+    <a class="pub-entry" href="/research/">
       <article>
         <div class="entry-header">
           <h3 class="entry-title">{{ .title }}</h3>
@@ -92,8 +89,7 @@
     {{- end -}}
   </div>
 </section>
-{{ end }}
-{{ end }}
+{{- end -}}
 
 {{- end }} {{/* end home sections */}}
 
@@ -113,27 +109,27 @@
     </article>
   </a>
   {{- end }}
-  </ul>
+</div>
 
-  {{- end }}
+{{- end }}
 
-  {{- if gt $paginator.TotalPages 1 }}
-  <footer class="page-footer">
-    <nav class="pagination">
-      {{- if $paginator.HasPrev }}
-      <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
-        «&nbsp;{{ i18n "prev_page" }}&nbsp;
-      </a>
-      {{- end }}
-      {{- if $paginator.HasNext }}
-      <a class="next" href="{{ $paginator.Next.URL | absURL }}">
-        {{- i18n "next_page" }}&nbsp;»
-      </a>
-      {{- end }}
-    </nav>
-  </footer>
-  {{- end }}
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+      «&nbsp;{{ i18n "prev_page" }}&nbsp;
+    </a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+      {{- i18n "next_page" }}&nbsp;»
+    </a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}
 
-  {{- end }}{{/* end profileMode */}}
+{{- end }}{{/* end profileMode */}}
 
-  {{- end }}{{- /* end main */ -}}
+{{- end }}{{- /* end main */ -}}

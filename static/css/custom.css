@@ -301,6 +301,12 @@ a:hover {
   margin-top: 1rem;
 }
 
+.home-hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 /* ── Home Sections — compact ── */
 .home-section {
   margin: 2rem 0;
@@ -316,10 +322,11 @@ a:hover {
 }
 
 .section-header h2 {
-  font-size: 1.05rem;
-  font-weight: 400;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
   margin: 0;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
 }
 
 .section-header .view-all {
@@ -368,31 +375,71 @@ a:hover {
   font-size: 1.1rem;
 }
 
-/* ── Featured list — pill buttons ── */
-.featured-list {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0 0;
+/* ── Recent Updates (Two-Column) ── */
+.updates-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0;
 }
 
-.featured-list li a {
-  display: inline-block;
-  font-size: 0.88rem;
+.update-entry {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.update-entry:last-child {
+  border-bottom: none;
+}
+
+.update-date {
+  font-size: 0.9rem;
+  color: var(--tertiary);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.update-details {
+  font-size: 1.05rem;
+  color: var(--primary);
+  line-height: 1.5;
+}
+
+.update-details a {
   color: var(--primary);
   text-decoration: none;
-  padding: 6px 14px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 100px;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
 }
 
-.featured-list li a:hover {
-  background: #f5f5f5;
-  border-color: rgba(0, 0, 0, 0.15);
-  text-decoration: none;
+.update-details a:hover {
+  opacity: 0.7;
+}
+
+.update-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+.blog-tag {
+  background: #f0f5ff;
+  color: #2563eb;
+}
+
+.news-tag {
+  background: #fdf4ff;
+  color: #d946ef;
 }
 
 

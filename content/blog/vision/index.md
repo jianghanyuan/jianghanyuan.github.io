@@ -1,8 +1,9 @@
 ---
-title: "Part I: On Learning, Longing, and All the Things We Cannot Name"
+title: "On Learning, Longing, and All the Things We Cannot Name"
 date: 2025-01-15
 layout: distill
 distill: true
+series: ["Blue Sky Visions"]
 authors:
   - name: "Hanyuan Jiang"
     url: "/"
