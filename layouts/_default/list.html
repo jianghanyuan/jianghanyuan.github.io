@@ -35,27 +35,19 @@
 {{/* ══════════ HOME PAGE CUSTOM SECTIONS ══════════ */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 
-{{/* ── Featured Essays — Compact, Elegant ── */}}
+{{/* ── Featured ── */}}
 <section class="home-section stagger-1">
   <div class="section-header">
     <h2>Featured</h2>
   </div>
-  <div class="featured-essays">
+  <ul class="featured-list">
     {{- range first 5 (where site.RegularPages "Section" "posts") }}
     {{- if .Params.featured }}
-    <a class="featured-essay" href="{{ .RelPermalink }}">
-      {{- if eq .Params.featuredIcon "vision" }}
-      <i data-lucide="lightbulb" style="width:14px;height:14px;flex-shrink:0;color:#c8a24e;"></i>
-      {{- else }}
-      <i data-lucide="flask-conical" style="width:14px;height:14px;flex-shrink:0;color:#5b8fb9;"></i>
-      {{- end }}
-      <span class="featured-essay-title">{{ .Title }}</span>
-      <span class="featured-essay-meta"><time>{{ .Date.Format "Jan 2006" }}</time></span>
-      <span class="featured-essay-arrow">→</span>
-    </a>
+    <li><a href="{{ .RelPermalink }}">{{- if eq .Params.featuredIcon "vision" }}💡{{- else }}🔬{{- end }} {{ .Title
+        }}</a></li>
     {{- end }}
     {{- end }}
-  </div>
+  </ul>
 </section>
 
 

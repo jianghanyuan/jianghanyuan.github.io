@@ -1,10 +1,9 @@
 /* ============================================================
-   PaperMod Override — Force White Background + Font Changes
+   PaperMod Override — Force White Background + System UI Fonts
    This file lives in assets/css/extended/ so it gets bundled
    INSIDE PaperMod's CSS pipeline after theme-vars.css
    ============================================================ */
 
-/* Override PaperMod theme vars */
 :root {
     --theme: #ffffff;
     --entry: #ffffff;
@@ -19,19 +18,16 @@
     --gap: 24px;
 }
 
-/* Force .list background white */
 .list {
     background: #ffffff !important;
 }
 
-/* Force body and html white */
 html,
 body {
     background: #ffffff !important;
     background-color: #ffffff !important;
 }
 
-/* Force ALL containers transparent */
 .main,
 .post-single,
 article,
@@ -42,41 +38,36 @@ article,
 .footer,
 .nav {
     background: transparent !important;
-    background-color: transparent !important;
 }
 
-/* Typography — System UI / Inter, Semi-Bold headings */
+/* Typography — system-ui */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-weight: 600;
 }
 
-/* Body text — larger */
 body {
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 17px;
     line-height: 1.75;
 }
 
-/* Logo / site title */
 .logo a,
 .logo {
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
     font-weight: 600 !important;
 }
 
-/* Nav links — no double underline */
 #menu a {
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     border-bottom: none !important;
 }
 
-/* Content text */
 .post-content,
 .entry-content {
     font-size: 1.05rem;

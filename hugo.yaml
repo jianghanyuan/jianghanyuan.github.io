@@ -40,6 +40,10 @@ params:
     Title: "Hanyuan Jiang"
     Content: "CS PhD student in machine learning systems. I work on efficient LLM inference scheduling, training-serving co-design for scalable systems, and reliability and safety in production AI infrastructure."
   socialIcons:
+    - name: googlescholar
+      url: "https://scholar.google.com/citations?user=EBG3nD0AAAAJ&hl=en"
+    - name: x
+      url: "https://x.com/jianghanyuan"
     - name: github
       url: "https://github.com/jianghanyuan"
 

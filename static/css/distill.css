@@ -1,10 +1,9 @@
 /* =============================================================
-   Distill Page Styles — Two-Column Grid Layout
-   Matches distill.pub: TOC left, everything else right
-   System-UI fonts, wide content
+   Distill Page — ThinkingMachines-style layout
+   TOC left | Content center (~660px) | Sidenotes right margin
    ============================================================= */
 
-/* ── Force-hide ALL Distill chrome + icons ── */
+/* ── Hide Distill.js chrome ── */
 dt-banner,
 dt-header,
 dt-footer,
@@ -16,193 +15,135 @@ svg.distill-logo,
 dt-banner *,
 dt-header * {
   display: none !important;
-  opacity: 0 !important;
   visibility: hidden !important;
   height: 0 !important;
-  overflow: hidden !important;
   width: 0 !important;
   position: absolute !important;
   pointer-events: none !important;
 }
 
-/* ── Kill background on all Distill elements ── */
 dt-article,
 dt-appendix,
 d-article,
 d-appendix,
 .distill-page,
-.distill-grid,
+.distill-body,
 .distill-content,
 dt-article>*,
 d-article>* {
   background: transparent !important;
-  background-color: transparent !important;
 }
 
 body {
-  background: #ffffff !important;
+  background: #fff !important;
 }
 
-/* ── Page wrapper ── */
+/* ── Page container ── */
 .distill-page {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 24px 4rem;
-  background: #ffffff !important;
 }
 
 /* ── Back link ── */
 .back-link {
   display: inline-block;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.82rem;
-  color: var(--secondary, #666);
+  color: #888;
   text-decoration: none;
-  margin-bottom: 2rem;
-  transition: color 0.2s ease;
+  margin-bottom: 2.5rem;
 }
 
 .back-link:hover {
-  color: var(--primary, #1a1a1a);
+  color: #111;
   text-decoration: none;
 }
 
-/* ═══════════════════════════════════════════════
-   TWO-COLUMN GRID — entire page
-   Column A: ~200px (empty beside header, TOC beside article)
-   Column B: rest  (title, author, article — all aligned)
-   ═══════════════════════════════════════════════ */
-.distill-grid {
-  display: block;
-  /* Mobile: single column */
-}
-
-@media (min-width: 900px) {
-  .distill-grid {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: auto 1fr;
-    gap: 0 2.5rem;
-  }
-
-  /* Row 1: spacer (col A) + header (col B) */
-  .distill-grid-spacer {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .distill-header {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  /* Row 2: TOC (col A) + content (col B) */
-  .distill-toc {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .distill-content {
-    grid-column: 2;
-    grid-row: 2;
-  }
-}
-
-/* ── Spacer (left column, beside title/author — empty) ── */
-.distill-grid-spacer {
-  display: none;
-}
-
-@media (min-width: 900px) {
-  .distill-grid-spacer {
-    display: block;
-  }
-}
-
-/* ── Header: right column (title, meta) ── */
+/* ── Header ── */
 .distill-header {
-  border-bottom: 1px solid var(--border, #e0e0e0);
-  margin-bottom: 0;
+  max-width: 660px;
+  margin: 0 auto 2rem;
   padding-bottom: 1.5rem;
-  text-align: left;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .distill-title {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 2rem;
   font-weight: 700;
-  line-height: 1.25;
-  color: var(--primary, #1a1a1a);
+  line-height: 1.2;
+  color: #111;
   margin: 0 0 0.5rem;
 }
 
 .distill-subtitle {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 1rem;
-  font-style: normal;
-  color: var(--secondary, #666);
-  margin: 0 0 1rem;
+  color: #666;
+  margin: 0 0 0.8rem;
   line-height: 1.6;
 }
 
-/* ── Meta (AUTHORS | PUBLISHED) ── */
-.distill-meta-table {
-  display: flex;
-  gap: 2rem;
-  margin-top: 0.75rem;
-  flex-wrap: wrap;
+.distill-byline {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  color: #888;
 }
 
-.distill-meta-col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-}
-
-.distill-meta-label {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--tertiary, #999);
-  margin-bottom: 0.1rem;
-}
-
-.distill-meta-name {
-  font-family: "Inter", system-ui, sans-serif;
-  font-weight: 400;
-  font-size: 0.88rem;
-  color: var(--primary, #1a1a1a);
-}
-
-.distill-meta-name a {
-  color: var(--primary, #1a1a1a);
+.distill-byline a {
+  color: #555;
   text-decoration: none;
 }
 
-.distill-meta-name a:hover {
+.distill-byline a:hover {
   text-decoration: underline;
 }
 
-/* ── Sticky TOC (left column, beside article) ── */
+.distill-date {
+  margin-left: 1rem;
+  color: #aaa;
+}
+
+/* ═══════════════════════════════════════════
+   BODY — flexbox: TOC left, content center
+   Sidenotes overflow into right margin via
+   float + negative margin (ThinkingMachines)
+   ═══════════════════════════════════════════ */
+.distill-body {
+  display: block;
+  max-width: 660px;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media (min-width: 1000px) {
+  .distill-body {
+    display: flex;
+    max-width: none;
+    margin: 0;
+    gap: 0;
+  }
+}
+
+/* ── TOC — left column ── */
 .distill-toc {
   display: none;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
   .distill-toc {
     display: block;
+    width: 180px;
+    flex-shrink: 0;
     position: sticky;
     top: 80px;
+    align-self: flex-start;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
-    overflow-x: hidden;
     scrollbar-width: none;
-    padding-right: 1rem;
-    padding-top: 1.5rem;
-    border-right: 1px solid var(--border, #e0e0e0);
-    align-self: start;
+    padding-right: 1.5rem;
+    font-family: system-ui, -apple-system, sans-serif;
   }
 
   .distill-toc::-webkit-scrollbar {
@@ -210,20 +151,6 @@ body {
   }
 }
 
-.distill-toc-header {
-  margin-bottom: 0.6rem;
-}
-
-.distill-toc-label {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--primary, #1a1a1a);
-}
-
-/* Hugo TOC links */
 .distill-toc #TableOfContents ul {
   list-style: none;
   padding: 0;
@@ -231,170 +158,160 @@ body {
 }
 
 .distill-toc #TableOfContents li {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
 }
 
 .distill-toc #TableOfContents a {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 0.8rem;
-  color: var(--secondary, #666);
+  font-size: 0.78rem;
+  color: #888;
   text-decoration: none;
   line-height: 1.4;
   display: block;
-  transition: color 0.15s ease;
 }
 
 .distill-toc #TableOfContents a:hover {
-  color: var(--primary, #1a1a1a);
-  text-decoration: none;
+  color: #111;
 }
 
 .distill-toc #TableOfContents ul ul {
-  padding-left: 0.8rem;
-  margin-top: 0.2rem;
+  padding-left: 0.75rem;
+  margin-top: 0.15rem;
 }
 
 .distill-toc #TableOfContents ul ul a {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
 }
 
-/* ── Article content (right column) ── */
+/* ── Content — center column ── */
 .distill-content {
-  padding-top: 1.5rem;
+  flex: 1;
+  max-width: 660px;
   min-width: 0;
 }
 
 dt-article {
   display: block;
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
-  font-size: 1.08rem;
-  line-height: 1.85;
-  color: var(--content, #333);
-  background: transparent !important;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.06rem;
+  line-height: 1.8;
+  color: #333;
 }
 
 dt-article h2 {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--primary, #1a1a1a);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.8rem;
+  color: #111;
 }
 
 dt-article h3 {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: 1.2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.15rem;
   font-weight: 600;
-  margin-top: 1.8rem;
-  margin-bottom: 0.6rem;
+  margin: 1.8rem 0 0.5rem;
+  color: #222;
 }
 
 dt-article p {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.1rem;
 }
 
 dt-article a {
-  color: var(--link, #333);
+  color: #333;
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-color: rgba(0, 0, 0, 0.2);
-  transition: text-decoration-color 0.2s ease;
 }
 
 dt-article a:hover {
   text-decoration-color: currentColor;
 }
 
+dt-article em {
+  font-style: italic;
+}
+
+dt-article strong {
+  font-weight: 600;
+}
+
 dt-appendix {
   display: none;
 }
 
-/* ── Footnote popup (inline, on hover) ── */
+/* ═══════════════════════════════════════════
+   SIDENOTES — float right, negative margin
+   Appear in the right gutter on desktop
+   ═══════════════════════════════════════════ */
+.sidenote {
+  float: right;
+  clear: right;
+  width: 200px;
+  margin-right: -240px;
+  margin-bottom: 0.5rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #888;
+  vertical-align: baseline;
+}
+
+.sidenote sup {
+  font-weight: 600;
+  color: #666;
+  margin-right: 0.2em;
+}
+
+/* Mobile: sidenotes become inline blocks */
+@media (max-width: 999px) {
+  .sidenote {
+    float: none;
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0 1rem;
+    padding: 0.75rem 1rem;
+    background: #f8f8f8;
+    border-radius: 4px;
+    font-size: 0.82rem;
+  }
+}
+
+/* Also keep the popup style for backward compat */
 .footnote-ref {
   position: relative;
   display: inline;
-  cursor: pointer;
+  cursor: help;
   font-size: 0.72em;
-  color: var(--link, #333);
+  color: #333;
   font-weight: 600;
   vertical-align: super;
   line-height: 0;
-  padding: 0 2px;
 }
 
 .footnote-popup {
   display: none;
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  width: 320px;
-  max-width: 85vw;
-  background: #ffffff;
-  border: 1px solid var(--border, #e0e0e0);
-  border-radius: 4px;
-  padding: 0.9rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 400;
-  line-height: 1.55;
-  color: var(--content, #333);
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-  z-index: 100;
-  vertical-align: baseline;
+  /* popups hidden — sidenotes used instead */
 }
 
-.footnote-popup.show {
-  display: block;
-}
-
-.footnote-popup .fn-num {
-  font-weight: 600;
-  color: var(--primary, #1a1a1a);
-  margin-right: 0.3em;
-}
-
-/* ── Footnotes at bottom — clean, ThinkingMachines-style ── */
-dt-article h2+ol.footnotes-bottom,
-.footnotes-bottom {
-  padding-left: 0;
-  list-style: none;
-  counter-reset: fn-counter;
-}
-
-.footnotes-bottom li {
-  counter-increment: fn-counter;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--secondary, #666);
-  margin-bottom: 0.5rem;
-  padding-left: 1.8rem;
-  position: relative;
-}
-
-.footnotes-bottom li::before {
-  content: counter(fn-counter) ".";
-  position: absolute;
-  left: 0;
-  font-weight: 600;
-  color: var(--tertiary, #999);
-  font-size: 0.8rem;
-}
-
-/* ── References at bottom — clean list ── */
+/* ── References list at bottom ── */
 .references-list {
   padding-left: 0;
   list-style: none;
   counter-reset: ref-counter;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e5e5;
 }
 
 .references-list li {
   counter-increment: ref-counter;
+  font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.82rem;
   line-height: 1.55;
-  color: var(--secondary, #666);
-  margin-bottom: 0.6rem;
-  padding-left: 1.8rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  padding-left: 2rem;
   position: relative;
 }
 
@@ -403,23 +320,27 @@ dt-article h2+ol.footnotes-bottom,
   position: absolute;
   left: 0;
   font-weight: 500;
-  color: var(--tertiary, #999);
+  color: #999;
   font-size: 0.78rem;
 }
 
 .references-list a {
-  color: var(--link, #333);
+  color: #333;
   font-size: 0.78rem;
 }
 
-/* ── Responsive: mobile ── */
-@media (max-width: 899px) {
+/* ── Responsive ── */
+@media (max-width: 999px) {
   .distill-page {
     padding: 1.5rem 16px 3rem;
   }
 
   .distill-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+  }
+
+  .distill-header {
+    max-width: 100%;
   }
 
   dt-article {

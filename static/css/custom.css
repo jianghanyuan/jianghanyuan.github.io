@@ -79,9 +79,9 @@
   --border: #e0e0e0;
   --link: #333333;
   --link-hover: #000000;
-  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-heading: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --max-width: 780px;
   --nav-width: 1024px;
   --main-width: 780px;
@@ -359,88 +359,25 @@ dt-article a:hover {
   color: var(--primary);
 }
 
-/* ── Featured Essays — Compact, Elegant ── */
-.featured-essays {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-top: 0.25rem;
-}
-
-.featured-essay {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  text-decoration: none !important;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--border);
-  transition: opacity 0.15s ease;
-}
-
-.featured-essay:first-child {
-  border-top: 1px solid var(--border);
-}
-
-.featured-essay:hover {
-  text-decoration: none !important;
-  opacity: 0.7;
-}
-
-/* Hide SVG decoration — no longer needed */
-.featured-decoration {
-  display: none;
-}
-
-.featured-essay-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.featured-essay-label {
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--tertiary);
-  margin-right: 0.75rem;
-  flex-shrink: 0;
-}
-
-.featured-essay-title {
-  font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--primary);
+/* ── Featured list ── */
+.featured-list {
+  list-style: none;
+  padding: 0;
   margin: 0;
-  line-height: 1.4;
-  display: inline;
 }
 
-.featured-essay-excerpt {
-  display: none;
+.featured-list li {
+  padding: 0.35rem 0;
 }
 
-.featured-essay-meta {
-  display: inline;
-  margin-left: 0.5rem;
-}
-
-.featured-essay-meta time {
-  font-size: 0.75rem;
-  color: var(--tertiary);
-}
-
-.featured-essay-arrow {
-  font-size: 0.9rem;
-  color: var(--tertiary);
-  flex-shrink: 0;
-  transition: transform 0.15s ease;
-}
-
-.featured-essay:hover .featured-essay-arrow {
+.featured-list a {
+  font-size: 0.92rem;
   color: var(--primary);
-  transform: translateX(2px);
+  text-decoration: none;
+}
+
+.featured-list a:hover {
+  text-decoration: underline;
 }
 
 

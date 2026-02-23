@@ -1,80 +1,34 @@
 {{- define "main" -}}
-<div class="distill-page">
+<article class="distill-page">
 
-  {{/* ── Back link ── */}}
+  {{/* Back link */}}
   <a class="back-link" href="/posts/">← Back</a>
 
-  {{/* ── Two-column grid for the ENTIRE page ── */}}
-  {{/* Column A (left): empty beside title/author, TOC beside article */}}
-  {{/* Column B (right): title → author → article */}}
-  <div class="distill-grid">
-
-    {{/* Row 1: empty left | title right */}}
-    <div class="distill-grid-spacer"></div>
-    <header class="distill-header">
-      <h1 class="distill-title">{{ .Title }}</h1>
-      {{- if .Description }}
-      <p class="distill-subtitle">{{ .Description }}</p>
+  {{/* Title + Author — centered in the content column */}}
+  <header class="distill-header">
+    <h1 class="distill-title">{{ .Title }}</h1>
+    {{- if .Description }}
+    <p class="distill-subtitle">{{ .Description }}</p>
+    {{- end }}
+    <div class="distill-byline">
+      {{- with .Params.authors }}
+      {{- range $i, $a := . }}{{- if $i }}, {{ end }}{{- with .url }}<a href="{{ . }}">{{ end }}{{ .name }}{{- with .url
+        }}</a>{{ end }}{{- end }}
       {{- end }}
-      <div class="distill-meta-table">
-        {{- with .Params.authors }}
-        <div class="distill-meta-col">
-          <div class="distill-meta-label">Authors</div>
-          {{- range . }}
-          <div class="distill-meta-name">
-            {{- with .url }}<a href="{{ . }}">{{ end -}}
-              {{- .name -}}
-              {{- with .url }}</a>{{ end -}}
-          </div>
-          {{- end }}
-        </div>
-        {{- end }}
-        <div class="distill-meta-col">
-          <div class="distill-meta-label">Published</div>
-          <div class="distill-meta-name">{{ .Date.Format "January 2, 2006" }}</div>
-        </div>
-      </div>
-    </header>
+      <span class="distill-date">{{ .Date.Format "January 2, 2006" }}</span>
+    </div>
+  </header>
 
-    {{/* Row 2: TOC left | article right */}}
-    <nav class="distill-toc" id="distillToc" aria-label="Table of Contents">
-      <div class="distill-toc-header">
-        <span class="distill-toc-label">Contents</span>
-      </div>
+  {{/* Body: TOC left | Content center (sidenotes float right via CSS) */}}
+  <div class="distill-body">
+    <nav class="distill-toc" aria-label="Table of Contents">
       {{ .TableOfContents }}
     </nav>
 
-    <main class="distill-content">
+    <div class="distill-content">
       <dt-article>
         {{ .Content }}
       </dt-article>
-
-      {{/* Footnotes section at the bottom */}}
-      {{ if .Params.footnotes }}
-      <section class="distill-footnotes-section">
-        <h2>Footnotes</h2>
-        <ol class="distill-footnotes-list">
-          {{ range .Params.footnotes }}
-          <li id="fn-{{ .num }}">{{ .text | markdownify }}</li>
-          {{ end }}
-        </ol>
-      </section>
-      {{ end }}
-
-      {{/* References section */}}
-      {{ if .Params.references }}
-      <section class="distill-references-section">
-        <h2>References</h2>
-        <ol class="distill-references-list">
-          {{ range .Params.references }}
-          <li id="ref-{{ .key }}">
-            {{ .text | markdownify }}
-            {{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">[link]</a>{{ end }}
-          </li>
-          {{ end }}
-        </ol>
-      </section>
-      {{ end }}
 
       <dt-appendix>
         {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
@@ -83,9 +37,8 @@
         </script>
         {{ end }}
       </dt-appendix>
-    </main>
+    </div>
+  </div>
 
-  </div>{{/* end distill-grid */}}
-
-</div>{{/* end distill-page */}}
+</article>
 {{- end -}}
