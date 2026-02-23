@@ -57,31 +57,31 @@
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
   border-radius: 100px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 500;
-  color: #333 !important;
+  color: var(--primary) !important;
   background: transparent;
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .pill-btn:hover {
-  background: #f8f8f8;
+  background: var(--entry);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.12);
+  border-color: var(--border);
   opacity: 1 !important;
 }
 
 .nav-arrow {
-  color: #888;
+  color: var(--tertiary);
   transition: color 0.2s ease;
 }
 
 .pill-btn:hover .nav-arrow {
-  color: #333;
+  color: var(--primary);
 }
 
 /* ── Header ── */
@@ -89,7 +89,7 @@
   max-width: 800px;
   margin: 3rem auto 4rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid var(--border);
   text-align: center;
   /* Center the entire header block */
 }
@@ -101,7 +101,7 @@
   /* Make it larger and more editorial */
   font-weight: 400;
   line-height: 1.15;
-  color: #1e1e1e;
+  color: var(--primary);
   margin: 0 auto 2.5rem;
   max-width: 800px;
   /* Readability constraint */
@@ -110,7 +110,7 @@
 .distill-subtitle {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 1rem;
-  color: #888;
+  color: var(--secondary);
   margin: 0 0 0.8rem;
   line-height: 1.6;
 }
@@ -118,11 +118,11 @@
 .distill-byline {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.85rem;
-  color: #888;
+  color: var(--secondary);
 }
 
 .distill-byline a {
-  color: #1e1e1e;
+  color: var(--primary);
   text-decoration: none !important;
   border-bottom: none !important;
   box-shadow: none !important;
@@ -137,7 +137,7 @@
 
 .distill-date {
   margin-left: 1rem;
-  color: #aaa;
+  color: var(--tertiary);
 }
 
 /* ═══════════════════════════════════════════
@@ -200,14 +200,14 @@
 
 .distill-toc #TableOfContents a {
   font-size: 0.78rem;
-  color: #888;
+  color: var(--secondary);
   text-decoration: none;
   line-height: 1.4;
   display: block;
 }
 
 .distill-toc #TableOfContents a:hover {
-  color: #1e1e1e;
+  color: var(--primary);
 }
 
 .distill-toc #TableOfContents ul ul {
@@ -239,7 +239,7 @@
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 1.06rem;
   line-height: 1.8;
-  color: #333;
+  color: var(--primary);
   overflow: visible;
   /* critical: allow sidenotes to extend beyond */
 }
@@ -249,7 +249,7 @@
   font-size: 1.4rem;
   font-weight: 700;
   margin: 2.5rem 0 0.8rem;
-  color: #1e1e1e;
+  color: var(--primary);
 }
 
 .distill-article h3 {
@@ -257,7 +257,7 @@
   font-size: 1.15rem;
   font-weight: 600;
   margin: 1.8rem 0 0.5rem;
-  color: #282828;
+  color: var(--primary);
 }
 
 .distill-article p {
@@ -267,10 +267,10 @@
 }
 
 .distill-article a {
-  color: #333;
+  color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgba(0, 0, 0, 0.2);
+  text-decoration-color: var(--border);
 }
 
 .distill-article a:hover {
@@ -298,14 +298,14 @@
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.78rem;
   line-height: 1.45;
-  color: #888;
+  color: var(--secondary);
   vertical-align: baseline;
   box-sizing: border-box;
 }
 
 .sidenote sup {
   font-weight: 600;
-  color: #666;
+  color: var(--tertiary);
   margin-right: 0.2em;
 }
 
@@ -326,7 +326,7 @@
     width: 100%;
     margin: 0.5rem 0 1rem;
     padding: 0.75rem 1rem;
-    background: #f8f8f8;
+    background: var(--entry);
     border-radius: 4px;
     font-size: 0.82rem;
   }
@@ -338,7 +338,7 @@
   display: inline;
   cursor: help;
   font-size: 0.72em;
-  color: #333;
+  color: var(--primary);
   font-weight: 600;
   vertical-align: super;
   line-height: 0;
@@ -355,7 +355,7 @@
   counter-reset: ref-counter;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid var(--border);
 }
 
 .references-list li {
@@ -363,7 +363,7 @@
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.82rem;
   line-height: 1.55;
-  color: #666;
+  color: var(--secondary);
   margin-bottom: 0.5rem;
   padding-left: 2rem;
   position: relative;
@@ -374,12 +374,12 @@
   position: absolute;
   left: 0;
   font-weight: 500;
-  color: #999;
+  color: var(--tertiary);
   font-size: 0.78rem;
 }
 
 .references-list a {
-  color: #333;
+  color: var(--primary);
   font-size: 0.78rem;
 }
 

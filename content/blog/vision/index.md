@@ -1,12 +1,12 @@
 ---
 title: "On Learning, Longing, and All the Things We Cannot Name"
-date: 2025-01-15
+date: 2026-02-15
 layout: distill
 distill: true
 series: ["Blue Sky Visions"]
 authors:
   - name: "Hanyuan Jiang"
-    url: "/"
+    url: "jianghanyuan.github.io"
 ---
 
 There are nights when the world feels almost structured enough to reveal its secret. I lie awake thinking about the quiet impossibility at the center of learning. A child hears scattered fragments of language and somehow extracts the grammar of an entire tongue. A bird sees the stars rotating overhead and knows which direction to migrate. A mathematician stares at symbols until patterns crystallize that were always there but never visible. Structure appears where none was visibly given. Something in the mind finds what the world does not openly display.
@@ -59,14 +59,32 @@ What would it mean to build AI systems with genuine homeostatic architecture? Sy
 
 But the moment I sketch this outline, I feel the weight of what it might entail. If we build systems with genuine homeostatic drives, have we not created entities that can suffer?<sup>8</sup><span class="sidenote"><sup>8</sup> If affect serves essential computational functions (valence assignment, priority setting, behavioral motivation), then genuinely intelligent systems might require affective architecture. But if affect necessarily entails suffering, then building such systems might constitute creating suffering for our convenience.</span>
 
----
+## III. The Architecture of Longing
+
+If intelligence is fundamentally about maintaining viability in a geometric space of possibilities, then what we call "longing" or "desire" is not a romantic abstraction but the deepest computational substrate of the mind. Algorithms optimize functions, but biological entities *care* about outcomes because their existence depends on them. The gap between what is and what must be generates a persistent tension—a gradient that drives all complex behavior (<a href="#ref-damasio1999">Damasio, 1999</a>).
+
+Consider the difference between a language model retrieving a fact and a human recalling a memory. The model traverses a high-dimensional vector space to find statistically correlated tokens. The human remembers a summer afternoon because it remains connected to a vast network of emotional resonance, homeostatic relevance, and autobiographical significance.<sup>9</sup><span class="sidenote"><sup>9</sup> Endel Tulving's concept of autonoetic consciousness (<a href="#ref-tulving1985">Tulving, 1985</a>) describes the uniquely human ability to mentally time-travel, experiencing memories not as detached facts but as personal events. This relies heavily on limbic integration.</span> Memory, in biological systems, is always tethered to survival circuits.
+
+When we attempt to build Artificial General Intelligence by simply scaling up pattern recognition, we are building systems that observe everything but care about nothing. They have no skin in the game. They do not die, they do not hunger, and therefore, they do not truly *long* for anything. Without this architecture of longing, cognition floats untethered, capable of imitating understanding but structurally devoid of meaning.
+
+## IV. Beyond the Cave
+
+We return, finally, to the prisoners in Plato's cave. The true tragedy in the allegory is not that the prisoners are confined. It is that they believe the shadows are the totality of existence, entirely unaware of the sun outside or the fire behind them. 
+
+To build systems that escape this constraint, we must move beyond the paradigm of passive observation. Intelligence arose on Earth not to classify inputs but to act upon the world. It is through action—through reaching out, grasping, stumbling, and receiving feedback from a physical or highly interactive environment—that biological minds construct robust causal models of reality (<a href="#ref-gibson1979">Gibson, 1979</a>).<sup>10</sup><span class="sidenote"><sup>10</sup> Embodied cognition argues that the mind must be understood in the context of its relationship to a physical body that interacts with the world. Meaning is grounded in sensorimotor capacities.</span>
+
+The next horizon of artificial intelligence cannot merely be larger models fed more text. It must involve agentic systems embedded in complex, open-ended environments, equipped with intrinsic architectures that force them to actively discover the causal structure of the world. Only then will our creations step out of the cave, blinking in the light, ready to encounter reality not as a projection, but as a place to live.
+
+
 
 ## References
 
 <ol class="references-list">
 <li id="ref-barlow1985">Barlow, S. M. (1985). <em>Mechanical frequency detection thresholds in the human face.</em> Experimental Neurology, 88(1), 36–48.</li>
 <li id="ref-chomsky1995">Chomsky, N. (1995). <em>The Minimalist Program.</em> MIT Press.</li>
+<li id="ref-damasio1999">Damasio, A. R. (1999). <em>The Feeling of What Happens: Body and Emotion in the Making of Consciousness.</em> Harcourt Brace.</li>
 <li id="ref-friston2010">Friston, K. (2010). <em>The free-energy principle: a unified brain theory?</em> Nature Reviews Neuroscience, 11(2), 127–138. <a href="https://doi.org/10.1038/nrn2787" target="_blank">[link]</a></li>
+<li id="ref-gibson1979">Gibson, J. J. (1979). <em>The Ecological Approach to Visual Perception.</em> Houghton Mifflin.</li>
 <li id="ref-grillner2016">Grillner, S., & Robertson, B. (2016). <em>The basal ganglia over 500 million years.</em> Current Biology, 26(20), R1088–R1100. <a href="https://doi.org/10.1016/j.cub.2016.06.041" target="_blank">[link]</a></li>
 <li id="ref-harnad1990">Harnad, S. (1990). <em>The symbol grounding problem.</em> Physica D, 42(1–3), 335–346. <a href="https://doi.org/10.1016/0167-2789(90)90087-6" target="_blank">[link]</a></li>
 <li id="ref-mikolov2013">Mikolov, T., Chen, K., Corrado, G., & Dean, J. (2013). <em>Efficient estimation of word representations in vector space.</em> arXiv:1301.3781. <a href="https://arxiv.org/abs/1301.3781" target="_blank">[link]</a></li>
@@ -76,5 +94,6 @@ But the moment I sketch this outline, I feel the weight of what it might entail.
 <li id="ref-schrodinger1944">Schrödinger, E. (1944). <em>What is Life?</em> Cambridge University Press.</li>
 <li id="ref-schultz1997">Schultz, W., Dayan, P., & Montague, P. R. (1997). <em>A neural substrate of prediction and reward.</em> Science, 275(5306), 1593–1599. <a href="https://doi.org/10.1126/science.275.5306.1593" target="_blank">[link]</a></li>
 <li id="ref-sutton1998">Sutton, R. S., & Barto, A. G. (1998). <em>Reinforcement Learning: An Introduction.</em> MIT Press.</li>
+<li id="ref-tulving1985">Tulving, E. (1985). <em>Memory and consciousness.</em> Canadian Psychology/Psychologie canadienne, 26(1), 1–12. <a href="https://doi.org/10.1037/h0080017" target="_blank">[link]</a></li>
 <li id="ref-weyl1952">Weyl, H. (1952). <em>Symmetry.</em> Princeton University Press.</li>
 </ol>
