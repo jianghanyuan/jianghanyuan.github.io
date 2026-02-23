@@ -1,10 +1,12 @@
 {{- define "main" -}}
+{{/* Add distill-main class to parent .main via JS for max-width override */}}
+<script>document.currentScript.parentElement.classList.add('distill-main');</script>
 <article class="distill-page">
 
   {{/* Back link */}}
   <a class="back-link" href="/posts/">← Back</a>
 
-  {{/* Title + Author — centered in the content column */}}
+  {{/* Title + Author */}}
   <header class="distill-header">
     <h1 class="distill-title">{{ .Title }}</h1>
     {{- if .Description }}

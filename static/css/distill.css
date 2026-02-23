@@ -34,15 +34,22 @@ d-article>* {
   background: transparent !important;
 }
 
-body {
-  background: #fff !important;
+/* ═══════════════════════════════════════════════
+   CRITICAL: Override PaperMod's .main max-width
+   PaperMod sets .main { max-width: 828px }, but
+   distill needs ~1100px for TOC + content + sidenotes.
+   ═══════════════════════════════════════════════ */
+.main:has(.distill-page),
+.main.distill-main {
+  max-width: 1200px !important;
+  padding: 0 !important;
 }
 
 /* ── Page container ── */
 .distill-page {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 24px 4rem;
+  padding: 0 24px 4rem;
 }
 
 /* ── Back link ── */
@@ -52,12 +59,11 @@ body {
   font-size: 0.82rem;
   color: #888;
   text-decoration: none;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .back-link:hover {
-  color: #111;
-  text-decoration: none;
+  color: #1e1e1e;
 }
 
 /* ── Header ── */
@@ -65,7 +71,7 @@ body {
   max-width: 660px;
   margin: 0 auto 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .distill-title {
@@ -73,14 +79,14 @@ body {
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
-  color: #111;
+  color: #1e1e1e;
   margin: 0 0 0.5rem;
 }
 
 .distill-subtitle {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 1rem;
-  color: #666;
+  color: #888;
   margin: 0 0 0.8rem;
   line-height: 1.6;
 }
@@ -106,9 +112,7 @@ body {
 }
 
 /* ═══════════════════════════════════════════
-   BODY — flexbox: TOC left, content center
-   Sidenotes overflow into right margin via
-   float + negative margin (ThinkingMachines)
+   BODY — TOC left, content center
    ═══════════════════════════════════════════ */
 .distill-body {
   display: block;
@@ -120,8 +124,8 @@ body {
 @media (min-width: 1000px) {
   .distill-body {
     display: flex;
-    max-width: none;
-    margin: 0;
+    max-width: 1100px;
+    margin: 0 auto;
     gap: 0;
   }
 }
@@ -170,7 +174,7 @@ body {
 }
 
 .distill-toc #TableOfContents a:hover {
-  color: #111;
+  color: #1e1e1e;
 }
 
 .distill-toc #TableOfContents ul ul {
@@ -187,6 +191,10 @@ body {
   flex: 1;
   max-width: 660px;
   min-width: 0;
+  position: relative;
+  /* anchor for sidenotes */
+  overflow: visible;
+  /* allow sidenotes to overflow into right margin */
 }
 
 dt-article {
@@ -195,14 +203,16 @@ dt-article {
   font-size: 1.06rem;
   line-height: 1.8;
   color: #333;
+  overflow: visible;
+  /* critical: allow sidenotes to extend beyond */
 }
 
 dt-article h2 {
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   font-weight: 700;
   margin: 2.5rem 0 0.8rem;
-  color: #111;
+  color: #1e1e1e;
 }
 
 dt-article h3 {
@@ -210,11 +220,13 @@ dt-article h3 {
   font-size: 1.15rem;
   font-weight: 600;
   margin: 1.8rem 0 0.5rem;
-  color: #222;
+  color: #282828;
 }
 
 dt-article p {
   margin-bottom: 1.1rem;
+  overflow: visible;
+  /* allow sidenotes inside paragraphs */
 }
 
 dt-article a {
@@ -243,6 +255,7 @@ dt-appendix {
 /* ═══════════════════════════════════════════
    SIDENOTES — float right, negative margin
    Appear in the right gutter on desktop
+   (exactly like ThinkingMachines Lab)
    ═══════════════════════════════════════════ */
 .sidenote {
   float: right;
@@ -263,7 +276,7 @@ dt-appendix {
   margin-right: 0.2em;
 }
 
-/* Mobile: sidenotes become inline blocks */
+/* Mobile: sidenotes become inline cards */
 @media (max-width: 999px) {
   .sidenote {
     float: none;
@@ -277,9 +290,8 @@ dt-appendix {
   }
 }
 
-/* Also keep the popup style for backward compat */
+/* Footnote superscript ref */
 .footnote-ref {
-  position: relative;
   display: inline;
   cursor: help;
   font-size: 0.72em;
@@ -291,17 +303,16 @@ dt-appendix {
 
 .footnote-popup {
   display: none;
-  /* popups hidden — sidenotes used instead */
 }
 
-/* ── References list at bottom ── */
+/* ── References list ── */
 .references-list {
   padding-left: 0;
   list-style: none;
   counter-reset: ref-counter;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #eaeaea;
 }
 
 .references-list li {
@@ -332,7 +343,7 @@ dt-appendix {
 /* ── Responsive ── */
 @media (max-width: 999px) {
   .distill-page {
-    padding: 1.5rem 16px 3rem;
+    padding: 0 16px 3rem;
   }
 
   .distill-title {
