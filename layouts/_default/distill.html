@@ -28,17 +28,9 @@
     </nav>
 
     <div class="distill-content">
-      <dt-article>
+      <div class="distill-article">
         {{ .Content }}
-      </dt-article>
-
-      <dt-appendix>
-        {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
-        <script type="text/bibliography">
-{{ .Content | safeHTML }}
-        </script>
-        {{ end }}
-      </dt-appendix>
+      </div>
     </div>
   </div>
 
