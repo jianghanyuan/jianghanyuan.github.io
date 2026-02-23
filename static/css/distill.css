@@ -1,7 +1,7 @@
 /* =============================================================
-   Distill Page Styles — Phase 2
-   Left-aligned header → Dismissible TOC left + Article right
-   Footnote popups, back button
+   Distill Page Styles — Two-Column Grid Layout
+   Matches distill.pub: TOC left, everything else right
+   System-UI fonts, wide content, footnote popups + bottom list
    ============================================================= */
 
 /* ── Force-hide ALL Distill chrome + icons ── */
@@ -25,13 +25,13 @@ dt-header * {
   pointer-events: none !important;
 }
 
-/* ── Kill white rectangles ── */
+/* ── Kill background on all Distill elements ── */
 dt-article,
 dt-appendix,
 d-article,
 d-appendix,
-.distill-wrapper,
-.distill-body,
+.distill-page,
+.distill-grid,
 .distill-content,
 dt-article>*,
 d-article>* {
@@ -39,78 +39,122 @@ d-article>* {
   background-color: transparent !important;
 }
 
-/* ── Kill any Distill.js body bg ── */
 body {
   background: #ffffff !important;
 }
 
-/* ── Wrapper — match nav-bar width ── */
-.distill-wrapper {
-  max-width: var(--nav-width, 1024px);
+/* ── Page wrapper ── */
+.distill-page {
+  max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 24px 4rem;
   background: #ffffff !important;
 }
 
-/* ── Header: full-width, above the two-column grid ── */
-.distill-header {
-  border-bottom: 1px solid var(--border);
+/* ── Back link ── */
+.back-link {
+  display: inline-block;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: var(--secondary, #666);
+  text-decoration: none;
   margin-bottom: 2rem;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--primary, #1a1a1a);
+  text-decoration: none;
+}
+
+/* ═══════════════════════════════════════════════
+   TWO-COLUMN GRID — entire page
+   Column A: ~200px (spacer / TOC)
+   Column B: rest  (title / author / article)
+   ═══════════════════════════════════════════════ */
+.distill-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 900px) {
+  .distill-grid {
+    grid-template-columns: 200px 1fr;
+    gap: 0 2.5rem;
+  }
+}
+
+/* ── Spacer (left column, beside title/author) ── */
+.distill-grid-spacer {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .distill-grid-spacer {
+    display: block;
+  }
+}
+
+/* ── Header: right column (title, subtitle, meta) ── */
+.distill-header {
+  border-bottom: 1px solid var(--border, #e0e0e0);
+  margin-bottom: 0;
   padding-bottom: 1.5rem;
   text-align: left;
 }
 
 .distill-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 400;
-  line-height: 1.2;
-  color: var(--primary);
-  margin: 0 0 0.6rem;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--primary, #1a1a1a);
+  margin: 0 0 0.5rem;
 }
 
 .distill-subtitle {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  font-style: italic;
-  color: var(--secondary);
-  margin: 0 0 1.2rem;
-  line-height: 1.55;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  color: var(--secondary, #666);
+  margin: 0 0 1rem;
+  line-height: 1.6;
 }
 
-/* ── Meta (left-aligned, inline) ── */
+/* ── Meta (AUTHORS | PUBLISHED) ── */
 .distill-meta-table {
   display: flex;
-  gap: 2.5rem;
-  margin-top: 1rem;
+  gap: 2rem;
+  margin-top: 0.75rem;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
 
 .distill-meta-col {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.1rem;
 }
 
 .distill-meta-label {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--tertiary);
-  margin-bottom: 0.15rem;
+  color: var(--tertiary, #999);
+  margin-bottom: 0.1rem;
 }
 
 .distill-meta-name {
+  font-family: "Inter", system-ui, sans-serif;
   font-weight: 400;
-  font-size: 0.9rem;
-  color: var(--primary);
+  font-size: 0.88rem;
+  color: var(--primary, #1a1a1a);
 }
 
 .distill-meta-name a {
-  color: var(--primary);
+  color: var(--primary, #1a1a1a);
   text-decoration: none;
 }
 
@@ -118,129 +162,42 @@ body {
   text-decoration: underline;
 }
 
-.distill-meta-affil {
-  font-size: 0.9rem;
-  color: var(--secondary);
-}
-
-.distill-meta-published {
-  font-size: 0.9rem;
-  color: var(--secondary);
-}
-
-/* ── Two-Column Body: TOC left, article right ── */
-.distill-body {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-@media (min-width: 860px) {
-  .distill-body {
-    grid-template-columns: 220px minmax(0, 1fr);
-    gap: 2.5rem;
-  }
-}
-
-/* ── Sticky TOC (separate left column, with toggle) ── */
+/* ── Sticky TOC (left column, beside article) ── */
 .distill-toc {
-  position: -webkit-sticky !important;
-  position: sticky !important;
-  top: 80px !important;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-  z-index: 10;
-  width: 220px;
-  min-width: 220px;
-  max-width: 220px;
-  flex-shrink: 0;
-  border-right: 1px solid var(--border);
-  padding-right: 1.5rem;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.distill-toc::-webkit-scrollbar {
   display: none;
 }
 
-/* TOC header with close button */
+@media (min-width: 900px) {
+  .distill-toc {
+    display: block;
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+    border-right: 1px solid var(--border, #e0e0e0);
+    align-self: start;
+  }
+
+  .distill-toc::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .distill-toc-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 0.6rem;
 }
 
 .distill-toc-label {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--primary);
-}
-
-.toc-close-btn {
-  background: none;
-  border: none;
-  font-size: 1rem;
-  color: var(--tertiary);
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-  transition: color var(--transition);
-}
-
-.toc-close-btn:hover {
-  color: var(--primary);
-}
-
-/* TOC collapsed state */
-.distill-toc.collapsed {
-  width: 0;
-  min-width: 0;
-  max-width: 0;
-  border-right: none;
-  padding-right: 0;
-  opacity: 0;
-  overflow: hidden;
-}
-
-.distill-toc.collapsed+.distill-content {
-  grid-column: 1 / -1;
-}
-
-/* Open TOC button (shown when collapsed) */
-.toc-open-btn {
-  display: none;
-  position: fixed;
-  left: 16px;
-  top: 80px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 6px 10px;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--secondary);
-  cursor: pointer;
-  z-index: 20;
-  transition: color var(--transition), border-color var(--transition);
-}
-
-.toc-open-btn:hover {
-  color: var(--primary);
-  border-color: var(--secondary);
-}
-
-.toc-open-btn.visible {
-  display: block;
+  color: var(--primary, #1a1a1a);
 }
 
 /* Hugo TOC links */
@@ -251,261 +208,211 @@ body {
 }
 
 .distill-toc #TableOfContents li {
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.35rem;
 }
 
 .distill-toc #TableOfContents a {
-  font-size: 0.82rem;
-  color: var(--secondary);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--secondary, #666);
   text-decoration: none;
-  line-height: 1.35;
+  line-height: 1.4;
   display: block;
-  padding: 0.1rem 0;
-  transition: color 0.15s;
+  transition: color 0.15s ease;
 }
 
 .distill-toc #TableOfContents a:hover {
-  color: var(--primary);
-  text-decoration: underline;
+  color: var(--primary, #1a1a1a);
+  text-decoration: none;
 }
 
+/* Nested TOC items */
 .distill-toc #TableOfContents ul ul {
-  margin-left: 0.75rem;
-  margin-top: 0.1rem;
+  padding-left: 0.8rem;
+  margin-top: 0.2rem;
 }
 
 .distill-toc #TableOfContents ul ul a {
-  font-size: 0.78rem;
-  color: var(--tertiary);
+  font-size: 0.75rem;
 }
 
-/* ── Article Body ── */
+/* ── Article content (right column) ── */
 .distill-content {
+  padding-top: 1.5rem;
   min-width: 0;
-  max-width: 100%;
-  overflow: visible;
-  position: relative;
-}
-
-/* Reset ALL Distill.js element positioning — force standard block flow */
-dt-article,
-dt-article h1,
-dt-article h2,
-dt-article h3,
-dt-article h4,
-dt-article p,
-dt-article ul,
-dt-article ol,
-dt-article li,
-dt-article figure,
-dt-article blockquote,
-dt-article pre,
-dt-article code,
-dt-article table,
-dt-article d-math,
-dt-article d-code,
-dt-article d-figure,
-dt-article d-footnote-list,
-dt-article d-citation-list,
-dt-article dt-byline,
-dt-appendix,
-dt-appendix h3,
-dt-appendix p,
-dt-appendix ul,
-dt-appendix li {
-  width: auto !important;
-  max-width: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  left: auto !important;
-  right: auto !important;
-  position: relative !important;
-  grid-column: auto !important;
-  float: none !important;
 }
 
 dt-article {
   display: block;
-  font-family: var(--font-body);
-  font-size: 1.1rem;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 1.08rem;
   line-height: 1.85;
-  color: var(--content);
+  color: var(--content, #333);
   background: transparent !important;
 }
 
-/* Article headings — NOT bold, serif */
 dt-article h2 {
-  font-family: var(--font-heading);
+  font-family: "Inter", system-ui, sans-serif;
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 600;
   margin-top: 2.5rem;
-  margin-bottom: 0.6rem;
-  color: var(--primary);
+  margin-bottom: 1rem;
+  color: var(--primary, #1a1a1a);
 }
 
 dt-article h3 {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 400;
-  font-style: italic;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
   margin-top: 1.8rem;
-  color: var(--primary);
+  margin-bottom: 0.6rem;
+}
+
+dt-article h4 {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 1.4rem;
+  margin-bottom: 0.5rem;
 }
 
 dt-article p {
-  margin: 0 0 1.2em;
+  margin-bottom: 1.2rem;
 }
 
 dt-article a {
-  color: var(--link);
+  color: var(--link, #333);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(0, 0, 0, 0.2);
+  transition: text-decoration-color 0.2s ease;
 }
 
 dt-article a:hover {
-  color: var(--link-hover);
-  text-decoration: underline;
-}
-
-dt-article ul,
-dt-article ol {
-  padding-left: 1.2rem;
-  margin-bottom: 1.2em;
-}
-
-dt-article li {
-  padding: 0.15rem 0;
-}
-
-dt-article code {
-  font-size: 0.875em;
-  background: var(--code-bg);
-  padding: 0.15em 0.35em;
-  border-radius: 4px;
-}
-
-dt-article pre {
-  background: var(--code-bg) !important;
-  border-radius: 8px;
-  padding: 1rem 1.2rem;
-  overflow-x: auto;
-}
-
-dt-article pre code {
-  background: none;
-  padding: 0;
-}
-
-dt-article blockquote {
-  border-left: 2px solid var(--border);
-  margin: 1.5rem 0;
-  padding: 0.5rem 1rem;
-  color: var(--secondary);
-  font-style: italic;
-}
-
-/* ── References section ── */
-.references-section {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-}
-
-.references-section h2 {
-  font-family: var(--font-heading);
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-}
-
-.references-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.references-list li {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--secondary);
-  padding: 0.3rem 0;
-  padding-left: 2em;
-  text-indent: -2em;
+  text-decoration-color: currentColor;
 }
 
 dt-appendix {
-  display: block;
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-  background: transparent !important;
+  display: none;
 }
 
-/* ── Footnotes section at bottom ── */
-.footnotes-section {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-}
-
-.footnotes-section h2 {
-  font-family: var(--font-heading);
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-}
-
-.footnotes-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  counter-reset: footnote;
-}
-
-.footnotes-list li {
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  line-height: 1.65;
-  color: var(--content);
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  gap: 0.6rem;
-}
-
-.footnotes-list li:last-child {
-  border-bottom: none;
-}
-
-.footnotes-list .fn-marker {
+/* ── Footnote popup (inline, on hover) ── */
+.footnote-ref {
+  position: relative;
+  display: inline;
+  cursor: pointer;
+  font-size: 0.72em;
+  color: var(--link, #333);
   font-weight: 600;
-  color: var(--primary);
-  flex-shrink: 0;
-  min-width: 1.5em;
+  vertical-align: super;
+  line-height: 0;
+  padding: 0 2px;
 }
 
-/* ── Mobile ── */
-@media (max-width: 860px) {
-  .distill-toc {
-    position: static !important;
-    border-bottom: 1px solid var(--border);
-    border-right: none;
-    padding-bottom: 1rem;
-    padding-right: 0;
-    margin-bottom: 1.5rem;
-    width: auto;
-    min-width: auto;
-    max-width: none;
+.footnote-popup {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  max-width: 85vw;
+  background: #ffffff;
+  border: 1px solid var(--border, #e0e0e0);
+  border-radius: 4px;
+  padding: 0.9rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--content, #333);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+  vertical-align: baseline;
+}
+
+.footnote-popup.show {
+  display: block;
+}
+
+.footnote-popup .fn-num {
+  font-weight: 600;
+  color: var(--primary, #1a1a1a);
+  margin-right: 0.3em;
+}
+
+/* ── Footnotes section (bottom of page) ── */
+.distill-footnotes-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border, #e0e0e0);
+}
+
+.distill-footnotes-section h2 {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary, #1a1a1a);
+}
+
+.distill-footnotes-list {
+  padding-left: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--secondary, #666);
+}
+
+.distill-footnotes-list li {
+  margin-bottom: 0.75rem;
+}
+
+/* ── References section (bottom of page) ── */
+.distill-references-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border, #e0e0e0);
+}
+
+.distill-references-section h2 {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary, #1a1a1a);
+}
+
+.distill-references-list {
+  padding-left: 1.5rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--secondary, #666);
+}
+
+.distill-references-list li {
+  margin-bottom: 0.6rem;
+}
+
+.distill-references-list a {
+  color: var(--link, #333);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Responsive: mobile ── */
+@media (max-width: 899px) {
+  .distill-page {
+    padding: 1.5rem 16px 3rem;
   }
 
-  .toc-open-btn {
-    display: none !important;
+  .distill-grid-spacer {
+    display: none;
   }
 
-  .distill-wrapper {
-    padding: 1.5rem 1rem 3rem;
+  .distill-title {
+    font-size: 1.6rem;
   }
 
-  .distill-meta-table {
-    gap: 1.5rem;
+  dt-article {
+    font-size: 1rem;
   }
 }

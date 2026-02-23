@@ -35,7 +35,7 @@
 {{/* ══════════ HOME PAGE CUSTOM SECTIONS ══════════ */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 
-{{/* ── Featured Essays — Avant-garde Minimalist ── */}}
+{{/* ── Featured Essays — Compact, Elegant ── */}}
 <section class="home-section stagger-1">
   <div class="section-header">
     <h2>Featured</h2>
@@ -44,23 +44,10 @@
     {{- range first 5 (where site.RegularPages "Section" "posts") }}
     {{- if .Params.featured }}
     <a class="featured-essay" href="{{ .RelPermalink }}">
-      {{/* SVG vector decoration */}}
-      <svg class="featured-decoration" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true">
-        <circle cx="160" cy="40" r="80" stroke="rgba(0,0,0,0.04)" stroke-width="1" />
-        <circle cx="160" cy="40" r="50" stroke="rgba(0,0,0,0.03)" stroke-width="0.5" />
-        <line x1="0" y1="180" x2="200" y2="120" stroke="rgba(0,0,0,0.03)" stroke-width="0.5" />
-        <line x1="0" y1="190" x2="200" y2="140" stroke="rgba(0,0,0,0.02)" stroke-width="0.5" />
-      </svg>
-      <div class="featured-essay-content">
-        <span class="featured-essay-label">Essay</span>
-        <h3 class="featured-essay-title">{{ .Title }}</h3>
-        <p class="featured-essay-excerpt">{{ .Description }}</p>
-        <div class="featured-essay-meta">
-          <time>{{ .Date.Format "Jan 2006" }}</time>
-          <span class="featured-essay-arrow">→</span>
-        </div>
-      </div>
+      <i data-lucide="file-text" style="width:14px;height:14px;flex-shrink:0;color:var(--tertiary);"></i>
+      <span class="featured-essay-title">{{ .Title }}</span>
+      <span class="featured-essay-meta"><time>{{ .Date.Format "Jan 2006" }}</time></span>
+      <span class="featured-essay-arrow">→</span>
     </a>
     {{- end }}
     {{- end }}
