@@ -36,14 +36,16 @@
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 
 {{/* ── Featured — pill buttons, no header ── */}}
-<ul class="featured-list stagger-1">
+<div class="featured-pills stagger-1">
   {{- range first 5 (where site.RegularPages "Section" "posts") }}
   {{- if .Params.featured }}
-  <li><a href="{{ .RelPermalink }}">{{- if eq .Params.featuredIcon "vision" }}💡{{- else }}🔬{{- end }} {{ .Title }}</a>
-  </li>
+  <a href="{{ .RelPermalink }}" class="pill-btn">
+    <span class="pill-icon">{{- if eq .Params.featuredIcon "vision" }}✨{{- else }}💡{{- end }}</span>
+    <span class="pill-text">{{ .Title }}</span>
+  </a>
   {{- end }}
   {{- end }}
-</ul>
+</div>
 
 {{/* ── Recent Blogs ── */}}
 <section class="home-section stagger-2">
@@ -51,16 +53,20 @@
     <h2>Recent Blogs</h2>
     <a class="view-all" href="/posts/">All blogs →</a>
   </div>
-  <ul class="post-list">
+  <div class="post-list">
     {{- range first 5 (where site.RegularPages "Section" "posts") -}}
-    <li>
-      <span class="post-list-date">{{ .Date.Format "Jan 2, 2006" }}</span>
-      <div>
-        <a class="post-list-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
-      </div>
-    </li>
+    <a class="post-entry" href="{{ .RelPermalink }}">
+      <article>
+        <div class="entry-header">
+          <h3 class="entry-title">{{ .Title }}</h3>
+        </div>
+        <footer class="entry-footer">
+          <span class="entry-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+        </footer>
+      </article>
+    </a>
     {{- end -}}
-  </ul>
+  </div>
 </section>
 
 {{/* ── Selected Publications ── */}}
@@ -71,14 +77,20 @@
     <h2>Selected Research</h2>
     <a class="view-all" href="/research/">All publications →</a>
   </div>
-  <ul class="pub-inline-list">
+  <div class="pub-list">
     {{- range first 4 . -}}
-    <li>
-      <a class="pub-inline-title" href="/research/#selected-publications">{{ .title }}</a>
-      <span class="pub-inline-meta">{{ .authors }}. {{ .venue }}.</span>
-    </li>
+    <a class="pub-entry" href="/research/#selected-publications">
+      <article>
+        <div class="entry-header">
+          <h3 class="entry-title">{{ .title }}</h3>
+        </div>
+        <footer class="entry-footer">
+          <span class="entry-meta">{{ .authors }}. {{ .venue }}.</span>
+        </footer>
+      </article>
+    </a>
     {{- end -}}
-  </ul>
+  </div>
 </section>
 {{ end }}
 {{ end }}
@@ -88,38 +100,40 @@
 {{/* ══════════ BLOG LIST PAGE (non-home) ══════════ */}}
 {{- if or (not .IsHome) (gt $paginator.PageNumber 1) }}
 
-<ul class="post-list">
+<div class="post-list">
   {{- range $index, $page := $paginator.Pages }}
-  <li>
-    <span class="post-list-date">{{ .Date.Format "Jan 2, 2006" }}</span>
-    <div>
-      <a class="post-list-title" href="{{ .Permalink }}">{{ .Title }}</a>
-      <div class="post-list-author">{{ with .Params.author }}{{ . }}{{ else }}{{ with site.Params.author }}{{ with .name
-        }}{{ . }}{{ end }}{{ end }}{{ end }}</div>
-    </div>
-  </li>
+  <a class="post-entry" href="{{ .RelPermalink }}">
+    <article>
+      <div class="entry-header">
+        <h3 class="entry-title">{{ .Title }}</h3>
+      </div>
+      <footer class="entry-footer">
+        <span class="entry-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+      </footer>
+    </article>
+  </a>
   {{- end }}
-</ul>
+  </ul>
 
-{{- end }}
+  {{- end }}
 
-{{- if gt $paginator.TotalPages 1 }}
-<footer class="page-footer">
-  <nav class="pagination">
-    {{- if $paginator.HasPrev }}
-    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
-      «&nbsp;{{ i18n "prev_page" }}&nbsp;
-    </a>
-    {{- end }}
-    {{- if $paginator.HasNext }}
-    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
-      {{- i18n "next_page" }}&nbsp;»
-    </a>
-    {{- end }}
-  </nav>
-</footer>
-{{- end }}
+  {{- if gt $paginator.TotalPages 1 }}
+  <footer class="page-footer">
+    <nav class="pagination">
+      {{- if $paginator.HasPrev }}
+      <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+        «&nbsp;{{ i18n "prev_page" }}&nbsp;
+      </a>
+      {{- end }}
+      {{- if $paginator.HasNext }}
+      <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+        {{- i18n "next_page" }}&nbsp;»
+      </a>
+      {{- end }}
+    </nav>
+  </footer>
+  {{- end }}
 
-{{- end }}{{/* end profileMode */}}
+  {{- end }}{{/* end profileMode */}}
 
-{{- end }}{{- /* end main */ -}}
+  {{- end }}{{- /* end main */ -}}

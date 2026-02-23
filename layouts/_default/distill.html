@@ -3,9 +3,6 @@
 <script>document.currentScript.parentElement.classList.add('distill-main');</script>
 <article class="distill-page">
 
-  {{/* Back link */}}
-  <a class="back-link" href="/posts/">← Back</a>
-
   {{/* Title + Author */}}
   <header class="distill-header">
     <h1 class="distill-title">{{ .Title }}</h1>
@@ -33,6 +30,9 @@
       </div>
     </div>
   </div>
+
+  {{/* Elegant pagination for series (e.g., Blue Sky Visions) */}}
+  {{ partial "distill_nav.html" . }}
 
 </article>
 {{- end -}}

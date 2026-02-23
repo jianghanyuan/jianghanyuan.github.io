@@ -11,19 +11,27 @@
   <div class="post-content">{{ .Content }}</div>
   {{- end }}
 
-  <section id="selected-publications" class="pub-lines" aria-label="Selected publications">
+  <section id="selected-publications" aria-label="Selected publications">
     <h2>Selected Publications</h2>
-    {{- range site.Data.publications.selected }}
-    <article class="pub-line">
-      <h3>{{ .title }}</h3>
-      <p class="pub-inline-meta">{{ .authors }}. {{ .venue }}.</p>
-      <p class="pub-links">
-        {{- range .links -}}
-        <a href="{{ .url }}">{{ .label }}</a>
-        {{- end -}}
-      </p>
-    </article>
-    {{- end }}
+    <div class="pub-list">
+      {{- range site.Data.publications.selected }}
+      <div class="pub-entry pub-page-entry">
+        <article>
+          <div class="entry-header">
+            <h3 class="entry-title">{{ .title }}</h3>
+          </div>
+          <footer class="entry-footer">
+            <span class="entry-meta">{{ .authors }}. {{ .venue }}.</span>
+          </footer>
+          <div class="pub-links-bar">
+            {{- range .links -}}
+            <a href="{{ .url }}" class="pill-btn pub-link-pill">{{ .label }}</a>
+            {{- end -}}
+          </div>
+        </article>
+      </div>
+      {{- end }}
+    </div>
   </section>
 </article>
 {{- end -}}
