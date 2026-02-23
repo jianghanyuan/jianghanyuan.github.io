@@ -24,7 +24,7 @@ params:
   author:
     name: "Hanyuan Jiang"
   defaultTheme: light
-  disableThemeToggle: false
+  disableThemeToggle: true
   ShowReadingTime: true
   ShowShareButtons: false
   ShowCodeCopyButtons: true
