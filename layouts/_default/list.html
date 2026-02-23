@@ -35,21 +35,15 @@
 {{/* ══════════ HOME PAGE CUSTOM SECTIONS ══════════ */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 
-{{/* ── Featured ── */}}
-<section class="home-section stagger-1">
-  <div class="section-header">
-    <h2>Featured</h2>
-  </div>
-  <ul class="featured-list">
-    {{- range first 5 (where site.RegularPages "Section" "posts") }}
-    {{- if .Params.featured }}
-    <li><a href="{{ .RelPermalink }}">{{- if eq .Params.featuredIcon "vision" }}💡{{- else }}🔬{{- end }} {{ .Title
-        }}</a></li>
-    {{- end }}
-    {{- end }}
-  </ul>
-</section>
-
+{{/* ── Featured — pill buttons, no header ── */}}
+<ul class="featured-list stagger-1">
+  {{- range first 5 (where site.RegularPages "Section" "posts") }}
+  {{- if .Params.featured }}
+  <li><a href="{{ .RelPermalink }}">{{- if eq .Params.featuredIcon "vision" }}💡{{- else }}🔬{{- end }} {{ .Title }}</a>
+  </li>
+  {{- end }}
+  {{- end }}
+</ul>
 
 {{/* ── Recent Blogs ── */}}
 <section class="home-section stagger-2">
@@ -63,8 +57,6 @@
       <span class="post-list-date">{{ .Date.Format "Jan 2, 2006" }}</span>
       <div>
         <a class="post-list-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <div class="post-list-author">{{ with .Params.author }}{{ . }}{{ else }}{{ with site.Params.author }}{{ with
-          .name }}{{ . }}{{ end }}{{ end }}{{ end }}</div>
       </div>
     </li>
     {{- end -}}
