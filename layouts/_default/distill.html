@@ -4,39 +4,13 @@
   {{/* ── Back link ── */}}
   <a class="back-link" href="/posts/">← Back</a>
 
-  {{/* ── Title area (left-aligned, above the two-column split) ── */}}
-  <header class="distill-header">
-    <h1 class="distill-title">{{ .Title }}</h1>
-    {{- if .Description }}
-    <p class="distill-subtitle">{{ .Description }}</p>
-    {{- end }}
-
-    {{/* ── Metadata table (AUTHORS | PUBLISHED) ── */}}
-    <div class="distill-meta-table">
-      {{- with .Params.authors }}
-      <div class="distill-meta-col distill-meta-authors">
-        <div class="distill-meta-label">Authors</div>
-        {{- range . }}
-        <div class="distill-meta-name">
-          {{- with .url }}<a href="{{ . }}">{{ end -}}
-            {{- .name -}}
-            {{- with .url }}</a>{{ end -}}
-        </div>
-        {{- end }}
-      </div>
-      {{- end }}
-      <div class="distill-meta-col distill-meta-published">
-        <div class="distill-meta-label">Published</div>
-        <div>{{ .Date.Format "January 2, 2006" }}</div>
-      </div>
-    </div>
-  </header>
-
-  {{/* ── TOC open button (shown when TOC is collapsed) ── */}}
+  {{/* ── TOC open button (shown when TOC is closed) ── */}}
   <button class="toc-open-btn" id="tocOpenBtn" aria-label="Open table of contents">Contents</button>
 
-  {{/* ── Two-column layout: TOC sidebar + Article body ── */}}
+  {{/* ── Full-page two-column grid: TOC left | everything right ── */}}
   <div class="distill-body">
+
+    {{/* ── Left: sticky TOC ── */}}
     <nav class="distill-toc" id="distillToc" aria-label="Table of Contents">
       <div class="distill-toc-header">
         <span class="distill-toc-label">Contents</span>
@@ -45,20 +19,53 @@
       {{ .TableOfContents }}
     </nav>
 
-    <main class="distill-content">
-      <dt-article>
-        {{ .Content }}
-      </dt-article>
+    {{/* ── Right: header + article ── */}}
+    <div class="distill-content">
 
-      <dt-appendix>
-        {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
-        <script type="text/bibliography">
+      {{/* ── Title area (left-aligned) ── */}}
+      <header class="distill-header">
+        <h1 class="distill-title">{{ .Title }}</h1>
+        {{- if .Description }}
+        <p class="distill-subtitle">{{ .Description }}</p>
+        {{- end }}
+
+        {{/* ── Metadata (AUTHORS | PUBLISHED) ── */}}
+        <div class="distill-meta-table">
+          {{- with .Params.authors }}
+          <div class="distill-meta-col distill-meta-authors">
+            <div class="distill-meta-label">Authors</div>
+            {{- range . }}
+            <div class="distill-meta-name">
+              {{- with .url }}<a href="{{ . }}">{{ end -}}
+                {{- .name -}}
+                {{- with .url }}</a>{{ end -}}
+            </div>
+            {{- end }}
+          </div>
+          {{- end }}
+          <div class="distill-meta-col distill-meta-published">
+            <div class="distill-meta-label">Published</div>
+            <div>{{ .Date.Format "January 2, 2006" }}</div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <dt-article>
+          {{ .Content }}
+        </dt-article>
+
+        <dt-appendix>
+          {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
+          <script type="text/bibliography">
 {{ .Content | safeHTML }}
-        </script>
-        {{ end }}
-      </dt-appendix>
-    </main>
-  </div>
+          </script>
+          {{ end }}
+        </dt-appendix>
+      </main>
 
-</div>
+    </div>{{/* end distill-content */}}
+  </div>{{/* end distill-body */}}
+
+</div>{{/* end distill-wrapper */}}
 {{- end -}}
