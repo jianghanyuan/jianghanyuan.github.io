@@ -35,8 +35,26 @@
 {{/* ══════════ HOME PAGE CUSTOM SECTIONS ══════════ */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 
-{{/* ── Recent Posts (thinkingmachines date|title style) ── */}}
+{{/* ── Featured Essays ── */}}
 <section class="home-section stagger-1">
+  <div class="section-header">
+    <h2>Featured</h2>
+  </div>
+  <div class="featured-essays">
+    {{- range first 5 (where site.RegularPages "Section" "posts") }}
+    {{- if .Params.featured }}
+    <a class="featured-essay" href="{{ .RelPermalink }}">
+      <h3 class="featured-essay-title">{{ .Title }}</h3>
+      <p class="featured-essay-excerpt">{{ .Description }}</p>
+      <span class="featured-essay-arrow">Read →</span>
+    </a>
+    {{- end }}
+    {{- end }}
+  </div>
+</section>
+
+{{/* ── Recent Posts ── */}}
+<section class="home-section stagger-2">
   <div class="section-header">
     <h2>Recent Posts</h2>
     <a class="view-all" href="/posts/">All posts →</a>
@@ -58,7 +76,7 @@
 {{/* ── Selected Publications ── */}}
 {{ with site.Data.publications }}
 {{ with .selected }}
-<section class="home-section stagger-2">
+<section class="home-section stagger-3">
   <div class="section-header">
     <h2>Selected Research</h2>
     <a class="view-all" href="/research/">All publications →</a>
@@ -73,20 +91,6 @@
   </ul>
 </section>
 {{ end }}
-{{ end }}
-
-{{/* ── Research Interests ── */}}
-{{ with site.Params.researchInterests }}
-<section class="home-section stagger-3">
-  <div class="section-header">
-    <h2>Research Interests</h2>
-  </div>
-  <ul class="interest-list">
-    {{- range . -}}
-    <li>{{ . }}</li>
-    {{- end -}}
-  </ul>
-</section>
 {{ end }}
 
 {{- end }} {{/* end home sections */}}

@@ -1,14 +1,17 @@
 {{- define "main" -}}
 <div class="distill-wrapper">
 
-  {{/* ── Title area (full-width, above the two-column split) ── */}}
+  {{/* ── Back link ── */}}
+  <a class="back-link" href="/posts/">← Back</a>
+
+  {{/* ── Title area (left-aligned, above the two-column split) ── */}}
   <header class="distill-header">
     <h1 class="distill-title">{{ .Title }}</h1>
     {{- if .Description }}
     <p class="distill-subtitle">{{ .Description }}</p>
     {{- end }}
 
-    {{/* ── Metadata table (AUTHORS | AFFILIATIONS | PUBLISHED) ── */}}
+    {{/* ── Metadata table (AUTHORS | PUBLISHED) ── */}}
     <div class="distill-meta-table">
       {{- with .Params.authors }}
       <div class="distill-meta-col distill-meta-authors">
@@ -21,14 +24,6 @@
         </div>
         {{- end }}
       </div>
-      <div class="distill-meta-col distill-meta-affiliations">
-        <div class="distill-meta-label">Affiliations</div>
-        {{- range . }}
-        <div class="distill-meta-affil">
-          {{- with .affiliation }}{{ . }}{{ else }}&nbsp;{{ end -}}
-        </div>
-        {{- end }}
-      </div>
       {{- end }}
       <div class="distill-meta-col distill-meta-published">
         <div class="distill-meta-label">Published</div>
@@ -37,10 +32,16 @@
     </div>
   </header>
 
+  {{/* ── TOC open button (shown when TOC is collapsed) ── */}}
+  <button class="toc-open-btn" id="tocOpenBtn" aria-label="Open table of contents">Contents</button>
+
   {{/* ── Two-column layout: TOC sidebar + Article body ── */}}
   <div class="distill-body">
-    <nav class="distill-toc" aria-label="Table of Contents">
-      <div class="distill-toc-label">Contents</div>
+    <nav class="distill-toc" id="distillToc" aria-label="Table of Contents">
+      <div class="distill-toc-header">
+        <span class="distill-toc-label">Contents</span>
+        <button class="toc-close-btn" id="tocCloseBtn" aria-label="Close table of contents">✕</button>
+      </div>
       {{ .TableOfContents }}
     </nav>
 

@@ -38,11 +38,7 @@ params:
     - posts
   homeInfoParams:
     Title: "Hanyuan Jiang"
-    Content: "CS PhD student in machine learning systems focused on efficient LLM inference, systems optimization, and reliable AI deployment."
-  researchInterests:
-    - "Efficient LLM serving and scheduling under real-world latency constraints"
-    - "Training-serving co-design for scalable model systems"
-    - "Reliability, evaluation, and safety in production AI infrastructure"
+    Content: "CS PhD student in machine learning systems. I work on efficient LLM inference scheduling, training-serving co-design for scalable systems, and reliability and safety in production AI infrastructure."
   socialIcons:
     - name: github
       url: "https://github.com/jianghanyuan"

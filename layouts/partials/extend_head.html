@@ -17,6 +17,7 @@
 <script src="https://distill.pub/template.v1.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    /* ── Clean up Distill chrome ── */
     var cleanupDistillChrome = function () {
       document.querySelectorAll("dt-banner, dt-header, dt-footer, dt-banner .logo, svg.distill-logo").forEach(function (el) { el.style.display = 'none'; });
     };
@@ -24,6 +25,78 @@
     if (document.body) {
       new MutationObserver(cleanupDistillChrome).observe(document.body, { childList: true, subtree: true });
     }
+
+    /* ── TOC toggle ── */
+    var toc = document.getElementById('distillToc');
+    var closeBtn = document.getElementById('tocCloseBtn');
+    var openBtn = document.getElementById('tocOpenBtn');
+
+    if (closeBtn && toc) {
+      closeBtn.addEventListener('click', function () {
+        toc.classList.add('collapsed');
+        if (openBtn) openBtn.classList.add('visible');
+      });
+    }
+
+    if (openBtn && toc) {
+      openBtn.addEventListener('click', function () {
+        toc.classList.remove('collapsed');
+        openBtn.classList.remove('visible');
+      });
+    }
+
+    /* ── Footnote popups ── */
+    var fnRefs = document.querySelectorAll('.footnote-ref');
+    var activePopup = null;
+
+    fnRefs.forEach(function (ref) {
+      var popupEl = ref.querySelector('.footnote-popup');
+      if (!popupEl) return;
+
+      ref.addEventListener('mouseenter', function () {
+        if (activePopup && activePopup !== popupEl) {
+          activePopup.classList.remove('show');
+        }
+        popupEl.classList.add('show');
+        activePopup = popupEl;
+
+        // Reposition if off-screen
+        var rect = popupEl.getBoundingClientRect();
+        if (rect.left < 8) {
+          popupEl.style.left = '0';
+          popupEl.style.transform = 'none';
+        } else if (rect.right > window.innerWidth - 8) {
+          popupEl.style.left = 'auto';
+          popupEl.style.right = '0';
+          popupEl.style.transform = 'none';
+        }
+      });
+
+      ref.addEventListener('mouseleave', function () {
+        popupEl.classList.remove('show');
+        if (activePopup === popupEl) activePopup = null;
+      });
+
+      ref.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (popupEl.classList.contains('show')) {
+          popupEl.classList.remove('show');
+          activePopup = null;
+        } else {
+          if (activePopup) activePopup.classList.remove('show');
+          popupEl.classList.add('show');
+          activePopup = popupEl;
+        }
+      });
+    });
+
+    // Close popup on click outside
+    document.addEventListener('click', function (e) {
+      if (activePopup && !e.target.closest('.footnote-ref')) {
+        activePopup.classList.remove('show');
+        activePopup = null;
+      }
+    });
   });
 </script>
 <link rel="stylesheet" href="/css/distill.css" />

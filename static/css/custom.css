@@ -1,25 +1,66 @@
 /* ============================================================
-   Custom Theme — Minimalist Academic
-   Inspired by thinkingmachines.ai
-   Font: Neuton (headings) + Inter (body)
+   Custom Theme — Minimalist Academic (Phase 2)
+   Font: Linux Libertine (headings) + Inter (body)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap');
+/* ── Self-hosted Linux Libertine (Libertinus Serif) ── */
+@font-face {
+  font-family: "Linux Libertine";
+  src: url("/fonts/LibertinusSerif-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine";
+  src: url("/fonts/LibertinusSerif-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine";
+  src: url("/fonts/LibertinusSerif-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine";
+  src: url("/fonts/LibertinusSerif-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine Display";
+  src: url("/fonts/LibertinusSerifDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 /* ── Design Tokens ── */
 :root {
-  --bg: #f7f7f5;
-  --bg-card: #f0f0ee;
+  --bg: #f5f5f0;
+  --bg-card: #eeeee8;
   --primary: #1a1a1a;
   --secondary: #666666;
   --tertiary: #999999;
   --content: #333333;
-  --border: #e0e0de;
+  --border: #ddddd8;
   --link: #333333;
   --link-hover: #000000;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif;
-  --font-heading: "Neuton", Georgia, "Times New Roman", serif;
-  --code-bg: #eeeee8;
+  --font-heading: "Linux Libertine", Georgia, "Times New Roman", serif;
+  --font-display: "Linux Libertine Display", "Linux Libertine", Georgia, serif;
+  --code-bg: #eaeae4;
   --max-width: 780px;
   --transition: 0.2s ease;
 }
@@ -57,6 +98,16 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Consistent BG on ALL containers ── */
+.main,
+.post-single,
+article,
+.archive-entry,
+.terms-tags,
+.pagination {
+  background: transparent !important;
 }
 
 /* ── Typography — no bold headings ── */
@@ -122,7 +173,7 @@ dt-article a:hover {
   text-decoration-color: currentColor;
 }
 
-/* ── Navigation — minimal ── */
+/* ── Navigation — minimal, NO double underlines ── */
 .nav {
   min-height: 56px;
   border-bottom: 1px solid var(--border);
@@ -138,6 +189,7 @@ dt-article a:hover {
   transition: color var(--transition);
   background: none !important;
   border-radius: 0;
+  border-bottom: none !important;
 }
 
 #menu a:hover,
@@ -145,6 +197,14 @@ dt-article a:hover {
   color: var(--primary);
   background: none !important;
   text-decoration: underline;
+  text-underline-offset: 4px;
+  border-bottom: none !important;
+}
+
+/* Kill PaperMod's native active indicator */
+#menu a.active::after,
+#menu a.active::before {
+  display: none !important;
 }
 
 /* ── Max width ── */
@@ -152,27 +212,44 @@ dt-article a:hover {
   max-width: var(--max-width);
 }
 
+/* ── Back link ── */
+.back-link {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--secondary);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.back-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 /* ── Home Hero ── */
 .home-hero {
-  padding: 4rem 0 2.5rem;
+  padding: 3rem 0 1.5rem;
 }
 
 .home-hero h1 {
+  font-family: var(--font-display);
   font-size: 2.8rem;
   font-weight: 400;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
   letter-spacing: -0.02em;
 }
 
 .home-hero p {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--secondary);
-  max-width: 560px;
-  line-height: 1.7;
+  max-width: 580px;
+  line-height: 1.75;
 }
 
 .hero-links {
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   display: flex;
   gap: 2rem;
 }
@@ -193,12 +270,12 @@ dt-article a:hover {
 }
 
 .hero-social {
-  margin-top: 1.2rem;
+  margin-top: 1rem;
 }
 
-/* ── Home Sections — flat text ── */
+/* ── Home Sections — compact ── */
 .home-section {
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 
 .section-header {
@@ -206,12 +283,12 @@ dt-article a:hover {
   justify-content: space-between;
   align-items: baseline;
   border-bottom: 1px solid var(--border);
-  padding-bottom: 0.4rem;
-  margin-bottom: 1rem;
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.8rem;
 }
 
 .section-header h2 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 400;
   margin: 0;
   letter-spacing: 0;
@@ -228,6 +305,60 @@ dt-article a:hover {
   color: var(--primary);
 }
 
+/* ── Featured Essays (Research Interests + Vision) ── */
+.featured-essays {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.featured-essay {
+  display: block;
+  text-decoration: none !important;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  transition: border-color var(--transition);
+}
+
+.featured-essay:hover {
+  border-color: var(--secondary);
+  text-decoration: none !important;
+}
+
+.featured-essay-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--primary);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+
+.featured-essay-excerpt {
+  font-size: 0.88rem;
+  color: var(--secondary);
+  line-height: 1.6;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.featured-essay-arrow {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.82rem;
+  color: var(--tertiary);
+  transition: color var(--transition);
+}
+
+.featured-essay:hover .featured-essay-arrow {
+  color: var(--primary);
+}
+
 /* ── Blog-style post list (date | title) ── */
 .post-list {
   list-style: none;
@@ -239,7 +370,7 @@ dt-article a:hover {
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 1.5rem;
-  padding: 0.8rem 0;
+  padding: 0.6rem 0;
   border-bottom: 1px solid var(--border);
   align-items: baseline;
 }
@@ -257,7 +388,7 @@ dt-article a:hover {
 
 .post-list-title {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 400;
   color: var(--primary);
   text-decoration: none;
@@ -270,7 +401,7 @@ dt-article a:hover {
 .post-list-author {
   font-size: 0.82rem;
   color: var(--secondary);
-  margin-top: 0.15rem;
+  margin-top: 0.1rem;
 }
 
 /* Publications list (home) */
@@ -281,11 +412,11 @@ dt-article a:hover {
 }
 
 .pub-inline-list li {
-  padding: 0.8rem 0;
+  padding: 0.6rem 0;
   border-bottom: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.15rem;
 }
 
 .pub-inline-list li:last-child {
@@ -294,7 +425,7 @@ dt-article a:hover {
 
 .pub-inline-title {
   font-family: var(--font-heading);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   color: var(--primary);
   text-decoration: none;
   font-weight: 400;
@@ -310,25 +441,6 @@ dt-article a:hover {
   line-height: 1.5;
 }
 
-/* Interest list */
-.interest-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  color: var(--content);
-}
-
-.interest-list li {
-  padding: 0.3rem 0;
-  font-size: 0.95rem;
-}
-
-.interest-list li::before {
-  content: '·';
-  margin-right: 0.6rem;
-  color: var(--tertiary);
-}
-
 /* ── Cards / Entries: flat, for blog list page ── */
 .post-entry,
 .first-entry,
@@ -338,7 +450,7 @@ dt-article a:hover {
   box-shadow: none;
   border-radius: 0;
   border-bottom: 1px solid var(--border);
-  padding: 1.2rem 0;
+  padding: 1rem 0;
 }
 
 .post-entry:last-child {
@@ -437,11 +549,76 @@ pre code {
   padding: 0;
 }
 
+/* ── Footnote Popup System ── */
+.footnote-ref {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--secondary);
+  cursor: pointer;
+  text-decoration: none !important;
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 500;
+  padding: 0 2px;
+}
+
+.footnote-ref:hover {
+  color: var(--primary);
+  text-decoration: none !important;
+}
+
+.footnote-popup {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  max-width: 90vw;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--content);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+:root[data-theme="dark"] .footnote-popup {
+  background: var(--bg-card);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.footnote-popup.show {
+  display: block;
+}
+
+.footnote-popup::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--border);
+}
+
+.footnote-popup .fn-num {
+  font-weight: 600;
+  color: var(--primary);
+  margin-right: 0.3em;
+}
+
 /* ── Entrance Animations (subtle) ── */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
 
   to {
@@ -451,23 +628,23 @@ pre code {
 }
 
 .fade-in {
-  animation: fadeIn 0.4s ease both;
+  animation: fadeIn 0.35s ease both;
 }
 
 .stagger-1 {
-  animation: fadeIn 0.4s ease 0.05s both;
+  animation: fadeIn 0.35s ease 0.05s both;
 }
 
 .stagger-2 {
-  animation: fadeIn 0.4s ease 0.1s both;
+  animation: fadeIn 0.35s ease 0.1s both;
 }
 
 .stagger-3 {
-  animation: fadeIn 0.4s ease 0.15s both;
+  animation: fadeIn 0.35s ease 0.15s both;
 }
 
 .stagger-4 {
-  animation: fadeIn 0.4s ease 0.2s both;
+  animation: fadeIn 0.35s ease 0.2s both;
 }
 
 /* ── Page header ── */
@@ -490,6 +667,10 @@ pre code {
   .post-list li {
     grid-template-columns: 1fr;
     gap: 0.2rem;
+  }
+
+  .featured-essays {
+    grid-template-columns: 1fr;
   }
 }
 
