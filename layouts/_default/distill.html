@@ -4,68 +4,63 @@
   {{/* ── Back link ── */}}
   <a class="back-link" href="/posts/">← Back</a>
 
-  {{/* ── TOC open button (shown when TOC is closed) ── */}}
-  <button class="toc-open-btn" id="tocOpenBtn" aria-label="Open table of contents">Contents</button>
+  {{/* ── TITLE BLOCK — full width, above the two-column grid ── */}}
+  <header class="distill-header">
+    <h1 class="distill-title">{{ .Title }}</h1>
+    {{- if .Description }}
+    <p class="distill-subtitle">{{ .Description }}</p>
+    {{- end }}
+    <div class="distill-meta-table">
+      {{- with .Params.authors }}
+      <div class="distill-meta-col">
+        <div class="distill-meta-label">Authors</div>
+        {{- range . }}
+        <div class="distill-meta-name">
+          {{- with .url }}<a href="{{ . }}">{{ end -}}
+            {{- .name -}}
+            {{- with .url }}</a>{{ end -}}
+        </div>
+        {{- end }}
+      </div>
+      {{- end }}
+      <div class="distill-meta-col">
+        <div class="distill-meta-label">Published</div>
+        <div class="distill-meta-name">{{ .Date.Format "January 2, 2006" }}</div>
+      </div>
+    </div>
+  </header>
 
-  {{/* ── Full-page two-column grid: TOC left | everything right ── */}}
+  {{/* ── TWO-COLUMN: TOC left | Article right — only below the header ── */}}
   <div class="distill-body">
 
-    {{/* ── Left: sticky TOC ── */}}
+    {{/* Left column: sticky TOC */}}
     <nav class="distill-toc" id="distillToc" aria-label="Table of Contents">
       <div class="distill-toc-header">
         <span class="distill-toc-label">Contents</span>
-        <button class="toc-close-btn" id="tocCloseBtn" aria-label="Close table of contents">✕</button>
+        <button class="toc-close-btn" id="tocCloseBtn" aria-label="Close">✕</button>
       </div>
       {{ .TableOfContents }}
     </nav>
 
-    {{/* ── Right: header + article ── */}}
-    <div class="distill-content">
+    {{/* Right column: article body */}}
+    <main class="distill-content">
+      <dt-article>
+        {{ .Content }}
+      </dt-article>
 
-      {{/* ── Title area (left-aligned) ── */}}
-      <header class="distill-header">
-        <h1 class="distill-title">{{ .Title }}</h1>
-        {{- if .Description }}
-        <p class="distill-subtitle">{{ .Description }}</p>
-        {{- end }}
-
-        {{/* ── Metadata (AUTHORS | PUBLISHED) ── */}}
-        <div class="distill-meta-table">
-          {{- with .Params.authors }}
-          <div class="distill-meta-col distill-meta-authors">
-            <div class="distill-meta-label">Authors</div>
-            {{- range . }}
-            <div class="distill-meta-name">
-              {{- with .url }}<a href="{{ . }}">{{ end -}}
-                {{- .name -}}
-                {{- with .url }}</a>{{ end -}}
-            </div>
-            {{- end }}
-          </div>
-          {{- end }}
-          <div class="distill-meta-col distill-meta-published">
-            <div class="distill-meta-label">Published</div>
-            <div>{{ .Date.Format "January 2, 2006" }}</div>
-          </div>
-        </div>
-      </header>
-
-      <main>
-        <dt-article>
-          {{ .Content }}
-        </dt-article>
-
-        <dt-appendix>
-          {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
-          <script type="text/bibliography">
+      <dt-appendix>
+        {{ with .Resources.GetMatch (default "references.bib" .Params.bibliography) }}
+        <script type="text/bibliography">
 {{ .Content | safeHTML }}
-          </script>
-          {{ end }}
-        </dt-appendix>
-      </main>
+        </script>
+        {{ end }}
+      </dt-appendix>
+    </main>
 
-    </div>{{/* end distill-content */}}
   </div>{{/* end distill-body */}}
+
+  {{/* Open TOC button (fixed, shown only when TOC is collapsed on desktop) */}}
+  <button class="toc-open-btn" id="tocOpenBtn" aria-label="Open table of contents">Contents</button>
 
 </div>{{/* end distill-wrapper */}}
 {{- end -}}

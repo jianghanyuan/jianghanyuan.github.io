@@ -32,14 +32,20 @@ d-article>* {
   background-color: transparent !important;
 }
 
+/* ── Kill any Distill.js body bg ── */
+body {
+  background: #ffffff !important;
+}
+
 /* ── Wrapper ── */
 .distill-wrapper {
   max-width: 1000px;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
+  background: #ffffff !important;
 }
 
-/* ── Header: Left-aligned Title + Meta ── */
+/* ── Header: full-width, above the two-column grid ── */
 .distill-header {
   border-bottom: 1px solid var(--border);
   margin-bottom: 2rem;
@@ -313,9 +319,9 @@ dt-appendix li {
 
 dt-article {
   display: block;
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  line-height: 1.8;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.85;
   color: var(--content);
   background: transparent !important;
 }
