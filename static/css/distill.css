@@ -4,18 +4,25 @@
    Footnote popups, back button
    ============================================================= */
 
-/* ── Force-hide ALL Distill chrome ── */
+/* ── Force-hide ALL Distill chrome + icons ── */
 dt-banner,
 dt-header,
 dt-footer,
 dt-byline,
 .logo-distill,
-svg.distill-logo {
+svg.distill-logo,
+[class*="distill-logo"],
+[class*="dt-logo"],
+dt-banner *,
+dt-header * {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
   height: 0 !important;
   overflow: hidden !important;
+  width: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
 }
 
 /* ── Kill white rectangles ── */
@@ -37,11 +44,11 @@ body {
   background: #ffffff !important;
 }
 
-/* ── Wrapper ── */
+/* ── Wrapper — match nav-bar width ── */
 .distill-wrapper {
-  max-width: 1000px;
+  max-width: var(--nav-width, 1024px);
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 2rem 24px 4rem;
   background: #ffffff !important;
 }
 

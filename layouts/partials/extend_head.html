@@ -17,9 +17,16 @@
 <script src="https://distill.pub/template.v1.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    /* ── Clean up Distill chrome ── */
+    /* ── Clean up Distill chrome — aggressively ── */
     var cleanupDistillChrome = function () {
-      document.querySelectorAll("dt-banner, dt-header, dt-footer, dt-banner .logo, svg.distill-logo").forEach(function (el) { el.style.display = 'none'; });
+      document.querySelectorAll("dt-banner, dt-header, dt-footer, dt-banner .logo, svg.distill-logo, dt-banner svg, dt-header svg, dt-banner img, dt-header img").forEach(function (el) {
+        el.style.display = 'none';
+        el.style.visibility = 'hidden';
+        el.style.height = '0';
+        el.style.width = '0';
+        el.style.position = 'absolute';
+        el.style.overflow = 'hidden';
+      });
     };
     cleanupDistillChrome();
     if (document.body) {
