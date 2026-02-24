@@ -160,6 +160,11 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
+.home-section {
+  margin-top: 0 !important;
+  margin-bottom: 2rem;
+}
+
 h3 {
   font-weight: 600;
   font-size: 1.15rem;
@@ -189,20 +194,20 @@ a:hover {
 .post-content a,
 .entry-content a,
 .distill-article a {
-  text-decoration: none;
+  text-decoration: underline !important;
+  text-decoration-color: var(--tertiary) !important;
+  text-underline-offset: 3px;
   color: var(--primary);
   font-weight: 500;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  /* Very subtle bottom border instead of harsh underline */
+  border-bottom: none;
   transition: all var(--transition);
 }
 
 .post-content a:hover,
 .entry-content a:hover,
 .distill-article a:hover {
-  border-bottom-color: var(--primary);
+  text-decoration-color: var(--primary) !important;
   opacity: 1;
-  /* override universal opacity */
 }
 
 /* ── Navigation — minimal, NO double underlines ── */
@@ -258,7 +263,8 @@ a:hover {
 
 /* ── Home Hero ── */
 .home-hero {
-  padding: 3rem 0 1.5rem;
+  padding: 3rem 0 0 !important;
+  margin-bottom: 1rem !important;
 }
 
 .home-hero h1 {
@@ -487,9 +493,9 @@ a:hover {
 }
 
 .pub-entry .entry-title {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
   color: var(--primary);
   margin-bottom: 0.25rem;
   margin-top: 0;
@@ -792,11 +798,10 @@ pre code {
   align-items: baseline;
   gap: 1.5rem;
   color: var(--primary);
-  text-decoration: none;
+  text-decoration: none !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0.5rem 0;
-  border-bottom: 1px dotted var(--tertiary);
-  /* Optional subtle divider */
+  border-bottom: none !important;
 }
 
 .elegant-entry:last-child {
