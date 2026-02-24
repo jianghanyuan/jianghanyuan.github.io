@@ -96,17 +96,12 @@
 {{/* ══════════ BLOG LIST PAGE (non-home) ══════════ */}}
 {{- if or (not .IsHome) (gt $paginator.PageNumber 1) }}
 
-<div class="post-list">
+<div class="elegant-list">
   {{- range $index, $page := $paginator.Pages }}
-  <a class="post-entry" href="{{ .RelPermalink }}">
-    <article>
-      <div class="entry-header">
-        <h3 class="entry-title">{{ .Title }}</h3>
-      </div>
-      <footer class="entry-footer">
-        <span class="entry-date">{{ .Date.Format "Jan 2, 2006" }}</span>
-      </footer>
-    </article>
+  <a class="elegant-entry" href="{{ .RelPermalink }}">
+    <div class="elegant-date">{{ .Date.Format "Jan 2, 2006" }}</div>
+    <div class="elegant-divider"></div>
+    <div class="elegant-title">{{ .Title }}</div>
   </a>
   {{- end }}
 </div>

@@ -1,19 +1,22 @@
 {{- define "main" -}}
-<header class="page-header">
-    <h1>{{ .Title }}</h1>
+<header class="page-header vision-header">
+    <h1 style="font-family: 'Libertinus Serif', serif; font-weight: 400; font-size: 2.5rem; text-align: center;">{{
+        .Title }}</h1>
+    {{- if .Content }}
+    <div class="vision-intro"
+        style="font-family: var(--font-body); font-weight: 400; max-width: 600px; margin: 1rem auto 3rem; text-align: center; color: var(--secondary);">
+        {{ .Content }}
+    </div>
+    {{- end }}
 </header>
-<div class="post-list" style="margin-top: 2rem;">
+
+<div class="elegant-list">
     {{- range where site.RegularPages "Section" "blog" }}
     {{- if in .Params.series "Blue Sky Visions" }}
-    <a class="post-entry" href="{{ .RelPermalink }}">
-        <article>
-            <div class="entry-header">
-                <h3 class="entry-title">{{ .Title }}</h3>
-            </div>
-            <footer class="entry-footer">
-                <span class="entry-date">{{ .Date.Format "Jan 2, 2006" }}</span>
-            </footer>
-        </article>
+    <a class="elegant-entry" href="{{ .RelPermalink }}">
+        <div class="elegant-date">{{ .Date.Format "Jan 2, 2006" }}</div>
+        <div class="elegant-divider"></div>
+        <div class="elegant-title">{{ .Title }}</div>
     </a>
     {{- end }}
     {{- end }}

@@ -777,3 +777,67 @@ pre code {
     transition: none !important;
   }
 }
+
+/* ── Elegant List Layout (Date | Title) ── */
+.elegant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.elegant-entry {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: baseline;
+  gap: 1.5rem;
+  color: var(--primary);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted var(--tertiary);
+  /* Optional subtle divider */
+}
+
+.elegant-entry:last-child {
+  border-bottom: none;
+}
+
+.elegant-date {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--secondary);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.elegant-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--primary);
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+
+.elegant-entry:hover .elegant-title {
+  color: var(--secondary);
+}
+
+@media screen and (max-width: 600px) {
+  .elegant-entry {
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .elegant-entry {
+    grid-template-columns: 90px 1fr;
+    gap: 0.5rem;
+  }
+
+  .elegant-date {
+    font-size: 0.85rem;
+  }
+}
