@@ -4,20 +4,59 @@ groups:
     items:
       - title: "The Cost of Delegation"
         authors: "Hanyuan Jiang, Yi Man"
-        venue: "Preprint"
+        venue: "Preprint. 2026"
         summary: ""
         links:
           - label: "Paper"
             url: "/cost-of-delegation.pdf"
 
-      - title: "Inference-Aware Scheduling for Long-Context LLM Serving"
-        authors: "Hanyuan Jiang, Collaborator A, Collaborator B"
-        venue: "Conference 2026"
-        summary: "A scheduling policy that improves p99 latency while preserving throughput under bursty workloads."
+      - title: "Learn fast, dream slow: Long-horizon Understanding via Controllable Information Decomposition"
+        authors: "Hanyuan Jiang"
+        venue: "WIP. 2026"
+        summary: "LUCID learns to separate what changes quickly from what persists, then allocates expensive planning only to persistent variables that compound over time."
+        links:
+          - label: "Idea"
+            url: "https://docs.google.com/document/d/1LPAsy5h4NJp1FC5UUzswi3BeOfXOY1qt3eUwVeFsocY"
+
+      - title: "Learning Trajectory Design in Multi-Agent Reinforcement Learning"
+        authors: "Hanyuan Jiang"
+        venue: "WIP. 2026"
+        summary: "A novel framework for multi-agent reinforcement learning that optimizes probability distributions over learning trajectories rather than equilibrium outcomes."
+
+  - topic: "Deep Learning"
+    year: "2026"
+    items:
+      - title: "The Hidden Experiment: Neural Networks as Internal Statistical Laboratories"
+        authors: "Hanyuan Jiang"
+        venue: "WIP. 2026"
+        summary: "When can two neural network internal representations be considered equivalent, and how does it enable generalization and emergent computation?"
+
+      - title: "The Shape of Beliefs to Come"
+        authors: "Hanyuan Jiang"
+        venue: "WIP. 2026"
+        summary: "Neural networks that know what they don’t know, then learn to make smarter decisions together."
+
+  - topic: "Political Economy & Law"
+    items:
+      - title: "The Resource Curse of Communication: Evidence from Brazilian Municipalities"
+        authors: "Hanyuan Jiang"
+        venue: "Working paper. 2025 (STICERD & CEPR)"
         links:
           - label: "Paper"
-            url: "#"
-          - label: "Code"
-            url: "#"
-          - label: "Slides"
-            url: "#"
+            url: "/resource_curse.pdf"
+
+      - title: "Construct to Commitment: The Effect of Narratives on Economic Growth "
+        authors: "Hanyuan Jiang, Yi Man"
+        venue: "Working paper. 2025 (LSE STICERD, PKU NSE)"
+        links:
+          - label: "Paper"
+            url: "https://arxiv.org/abs/2504.21060"
+
+  - topic: "Macroeconomics"
+    items:
+      - title: "The Bones and Shapes of the Phillips Curve"
+        authors: "Hanyuan Jiang"
+        venue: "Thesis. 2025 (Highest Distinction in the cohort)"
+        links:
+          - label: "Paper"
+            url: "https://arxiv.org/abs/2506.14030"
