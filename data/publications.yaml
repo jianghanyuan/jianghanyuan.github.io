@@ -1,8 +1,9 @@
 groups:
-  - year: "2026"
+  - topic: "Reinforcement Learning"
+    year: "2026"
     items:
       - title: "The Cost of Delegation"
-        authors: "Hanyuan Jiang"
+        authors: "Hanyuan Jiang, Yi Man"
         venue: "Preprint"
         summary: ""
         links:
@@ -19,26 +20,4 @@ groups:
           - label: "Code"
             url: "#"
           - label: "Slides"
-            url: "#"
-
-  - year: "2025"
-    items:
-      - title: "Practical Robustness Checks for Deployed Foundation Models"
-        authors: "Hanyuan Jiang, Collaborator C"
-        venue: "Workshop 2025"
-        summary: "A reproducible deployment-time stress testing pipeline for detecting regressions and risk patterns."
-        links:
-          - label: "Paper"
-            url: "#"
-          - label: "Poster"
-            url: "#"
-
-      - title: "Systems-Quality Tradeoffs in Retrieval-Augmented Generation Pipelines"
-        authors: "Collaborator D, Hanyuan Jiang, Collaborator E"
-        venue: "Preprint"
-        summary: "An empirical study of latency, cost, and quality tradeoffs across retrieval and reranking strategies."
-        links:
-          - label: "Preprint"
-            url: "#"
-          - label: "Code"
             url: "#"
