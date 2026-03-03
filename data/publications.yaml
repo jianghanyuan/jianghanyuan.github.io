@@ -1,6 +1,14 @@
 groups:
   - year: "2026"
     items:
+      - title: "The Cost of Delegation"
+        authors: "Hanyuan Jiang"
+        venue: "Preprint"
+        summary: ""
+        links:
+          - label: "Paper"
+            url: "/cost-of-delegation.pdf"
+
       - title: "Inference-Aware Scheduling for Long-Context LLM Serving"
         authors: "Hanyuan Jiang, Collaborator A, Collaborator B"
         venue: "Conference 2026"

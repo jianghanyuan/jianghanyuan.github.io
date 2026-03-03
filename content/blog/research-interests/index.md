@@ -9,7 +9,7 @@ math: true
 authors:
   - name: "Hanyuan Jiang"
     url: "https://jianghanyuan.github.io"
-    affiliation: "CS PhD Program"
+    affiliation: ""
 tags: ["research", "systems", "llm"]
 featured: true
 featuredIcon: "research"
