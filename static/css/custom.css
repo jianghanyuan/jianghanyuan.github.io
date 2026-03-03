@@ -492,6 +492,17 @@ a:hover {
   /* Override a:hover */
 }
 
+.pub-entry-static {
+  cursor: default;
+}
+
+.pub-entry-static:hover {
+  background: transparent;
+  border-color: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
 .pub-entry .entry-title {
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 1.05rem;
@@ -781,6 +792,100 @@ pre code {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* ── Blog Topic Cards ── */
+.blog-topics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.topic-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: inherit;
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+}
+
+.topic-card:hover {
+  background: #fbfbfb;
+  border-color: rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  opacity: 1 !important;
+}
+
+.topic-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.topic-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.topic-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 0.15rem;
+}
+
+.topic-desc {
+  font-size: 0.88rem;
+  color: var(--secondary);
+  margin: 0;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topic-arrow {
+  font-size: 1rem;
+  color: var(--tertiary);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.topic-card:hover .topic-arrow {
+  transform: translateX(3px);
+}
+
+/* ── Blog Group Headers ── */
+.blog-group {
+  margin-bottom: 2rem;
+}
+
+.blog-group-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
+  margin-bottom: 0;
+}
+
+.blog-group-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+  color: var(--primary);
+}
+
+@media (max-width: 680px) {
+  .topic-desc {
+    white-space: normal;
   }
 }
 

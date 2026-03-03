@@ -63,20 +63,26 @@
   </div>
 </section>
 
-{{/* ── Selected Publications ── */}}
-{{- $recentPubs := slice -}}
+{{/* ── Selected Research ── */}}
+{{- $featured := slice "The Cost of Delegation" "The Resource Curse of Communication: Evidence from Brazilian
+Municipalities" "The Bones and Shapes of the Phillips Curve" -}}
+{{- $featuredPubs := slice -}}
 {{- range site.Data.publications.groups -}}
-{{- $recentPubs = $recentPubs | append .items -}}
+{{- range .items -}}
+{{- if in $featured .title -}}
+{{- $featuredPubs = $featuredPubs | append . -}}
 {{- end -}}
-{{- with $recentPubs -}}
+{{- end -}}
+{{- end -}}
+{{- with $featuredPubs -}}
 <section class="home-section stagger-3">
   <div class="section-header">
     <h2>Selected Research</h2>
     <a class="view-all" href="/research/">All publications →</a>
   </div>
   <div class="pub-list">
-    {{- range first 4 . -}}
-    <a class="pub-entry" href="/research/">
+    {{- range . -}}
+    <div class="pub-entry pub-entry-static">
       <article>
         <div class="entry-header">
           <h3 class="entry-title">{{ .title }}</h3>
@@ -84,8 +90,15 @@
         <footer class="entry-footer">
           <span class="entry-meta">{{ .authors }}. {{ .venue }}.</span>
         </footer>
+        {{- if .links }}
+        <div class="pub-links-bar">
+          {{- range .links -}}
+          <a href="{{ .url }}" class="pill-btn pub-link-pill">{{ .label }}</a>
+          {{- end -}}
+        </div>
+        {{- end }}
       </article>
-    </a>
+    </div>
     {{- end -}}
   </div>
 </section>
@@ -96,14 +109,85 @@
 {{/* ══════════ BLOG LIST PAGE (non-home) ══════════ */}}
 {{- if or (not .IsHome) (gt $paginator.PageNumber 1) }}
 
-<div class="elegant-list">
-  {{- range $index, $page := $paginator.Pages }}
-  <a class="elegant-entry" href="{{ .RelPermalink }}">
-    <div class="elegant-date">{{ .Date.Format "Jan 2, 2006" }}</div>
-    <div class="elegant-title">{{ .Title }}</div>
+{{/* ── Featured Topic Cards ── */}}
+{{- $featuredSections := where .Sections "Params.featured" true }}
+{{- if $featuredSections }}
+<div class="blog-topics">
+  {{- range $featuredSections }}
+  <a class="topic-card" href="{{ .RelPermalink }}">
+    {{- $icons := dict "research" "🔬" "vision" "🌌" "systems" "⚙️" "notes" "📝" }}
+    {{- $icon := index $icons (.Params.featuredIcon | default "") }}
+    {{- if $icon }}<span class="topic-icon">{{ $icon }}</span>{{ end }}
+    <div class="topic-info">
+      <h3 class="topic-title">{{ .Title }}</h3>
+      {{- with .Description }}
+      <p class="topic-desc">{{ . }}</p>
+      {{- end }}
+    </div>
+    <span class="topic-arrow">→</span>
   </a>
   {{- end }}
 </div>
+{{- end }}
+
+{{/* ── Collect all series names ── */}}
+{{- $allSeries := slice }}
+{{- range $paginator.Pages }}
+{{- with .Params.series }}
+{{- range . }}
+{{- if not (in $allSeries .) }}
+{{- $allSeries = $allSeries | append . }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{/* ── Render each series group ── */}}
+{{- $seriesPages := slice }}
+{{- range $seriesName := $allSeries }}
+<div class="blog-group">
+  <div class="blog-group-header">
+    <h2>{{ $seriesName }}</h2>
+  </div>
+  <div class="elegant-list">
+    {{- range $paginator.Pages }}
+    {{- if in .Params.series $seriesName }}
+    {{- $seriesPages = $seriesPages | append . }}
+    <a class="elegant-entry" href="{{ .RelPermalink }}">
+      <div class="elegant-date">{{ .Date.Format "Jan 2, 2006" }}</div>
+      <div class="elegant-title">{{ .Title }}</div>
+    </a>
+    {{- end }}
+    {{- end }}
+  </div>
+</div>
+{{- end }}
+
+{{/* ── Standalone posts (no series) ── */}}
+{{- $standalone := slice }}
+{{- range $paginator.Pages }}
+{{- if not .Params.series }}
+{{- $standalone = $standalone | append . }}
+{{- end }}
+{{- end }}
+
+{{- if $standalone }}
+<div class="blog-group">
+  {{- if $allSeries }}
+  <div class="blog-group-header">
+    <h2>Other Posts</h2>
+  </div>
+  {{- end }}
+  <div class="elegant-list">
+    {{- range $standalone }}
+    <a class="elegant-entry" href="{{ .RelPermalink }}">
+      <div class="elegant-date">{{ .Date.Format "Jan 2, 2006" }}</div>
+      <div class="elegant-title">{{ .Title }}</div>
+    </a>
+    {{- end }}
+  </div>
+</div>
+{{- end }}
 
 {{- end }}
 

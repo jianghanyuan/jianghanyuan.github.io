@@ -12,10 +12,10 @@
   {{- end }}
 
   {{- range site.Data.publications.groups }}
-  <section class="pub-year-group" aria-label="Publications in {{ .year }}">
+  <section class="pub-year-group" aria-label="{{ .topic }}">
     <h2 class="pub-year-title"
       style="margin-top: 2rem; margin-bottom: 1rem; font-size: 1.5rem; font-weight: 500; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
-      {{ .year }}</h2>
+      {{ .topic }}</h2>
     <div class="pub-list">
       {{- range .items }}
       <div class="pub-entry pub-page-entry">

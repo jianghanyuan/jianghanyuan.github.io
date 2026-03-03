@@ -5,7 +5,7 @@ hideMeta: true
 ---
 <style>
 .post-title, .page-header h1 {
-    font-family: 'Libertinus Serif', serif !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
     font-weight: 700 !important;
 }
 </style>
