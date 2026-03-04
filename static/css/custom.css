@@ -160,10 +160,7 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
-.home-section {
-  margin-top: 0 !important;
-  margin-bottom: 2rem;
-}
+
 
 h3 {
   font-weight: 600;
@@ -264,7 +261,6 @@ a:hover {
 /* ── Home Hero ── */
 .home-hero {
   padding: 3rem 0 0 !important;
-  margin-bottom: 1rem !important;
 }
 
 .home-hero h1 {
@@ -305,6 +301,10 @@ a:hover {
 
 .hero-social {
   margin-top: 1rem;
+}
+
+.home-hero {
+  margin-bottom: 6rem;
 }
 
 .home-hero h1 {
