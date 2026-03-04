@@ -35,7 +35,6 @@
 {{/* ══════════ HOME PAGE CUSTOM SECTIONS ══════════ */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 
-{{/* ── Recent Updates (Merged Blog + News) ── */}}
 <section class="home-section stagger-2">
   <div class="section-header">
     <h2>Recent Updates</h2>
@@ -47,19 +46,121 @@
   {{- $updates := union $blogs $news -}}
   {{- $updates = sort $updates "Date" "desc" -}}
 
-  <div class="updates-list">
-    {{- range first 5 $updates -}}
-    <div class="update-entry">
-      <div class="update-date">{{ .Date.Format "Jan 2, 2006" }}</div>
-      <div class="update-details">
-        {{- if eq .Section "blog" -}}
-        <span class="update-tag blog-tag">Blog</span> <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        {{- else -}}
-        <span class="update-tag news-tag">News</span> {{ .Title | markdownify }}
-        {{- end -}}
-      </div>
+  {{- /* Find the featured post ("On Learning, Longing...") */ -}}
+  {{- $featuredPost := index (where $updates "Title" "On Learning, Longing, and All the Ideas We Cannot Name") 0 -}}
+
+  {{- /* Get the remaining posts, excluding the featured one */ -}}
+  {{- $remainingUpdates := where $updates "Title" "!=" "On Learning, Longing, and All the Ideas We Cannot Name" -}}
+
+  <div class="updates-grid">
+
+    {{- /* Left Column: Featured Post (60%) */ -}}
+    <div class="updates-featured" style="display: flex; flex-direction: column;">
+      {{- if $featuredPost -}}
+      <a href="{{ $featuredPost.RelPermalink }}"
+        style="display: block; text-decoration: none; color: inherit; border-bottom: none; height: 100%; display: flex; flex-direction: column;">
+        <div class="featured-image-wrapper"
+          style="width: 100%; border-radius: 12px; overflow: hidden; background: #1a1a1a; margin-bottom: 1rem; flex-shrink: 0; aspect-ratio: 5 / 3;">
+          <img src="/20250801_2119_Casual Watercolor Lightning_remix_01k1jwdgwsfm3text2tajhxjkf.png"
+            alt="Featured Image" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+        <div style="margin-top: 0.5rem;">
+          <div
+            style="font-size: 1.5rem; font-weight: 700; font-family: var(--font-heading); color: var(--primary); margin-bottom: 0.5rem; line-height: 1.2;">
+            {{ $featuredPost.Title }}
+          </div>
+          <div style="font-size: 0.95rem; color: var(--secondary); margin-bottom: 0.8rem; line-height: 1.5;">
+            Learning fundamentally involves discovering invariances preserved under transformation.
+          </div>
+          <div style="font-size: 0.9rem; color: var(--secondary); display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-weight: 600; color: #2563eb;">Featured</span>
+            <span>{{ $featuredPost.Date.Format "Jan 2, 2006" }}</span>
+          </div>
+        </div>
+      </a>
+      {{- end -}}
     </div>
-    {{- end -}}
+
+    {{- /* Right Column: List of 2 other updates (40%) */ -}}
+    <div class="updates-list-side" style="display: flex; flex-direction: column; justify-content: space-between;">
+      {{- $secondVisionPost := index (where $updates "Title" "The Second Vision: Placeholder") 0 -}}
+      {{- $thirdVisionPost := index (where $updates "Title" "The Third Vision: placeholder") 0 -}}
+      {{- $rightSidePosts := slice $secondVisionPost $thirdVisionPost -}}
+
+      {{- range $rightSidePosts -}}
+      <div class="update-card"
+        style="padding-bottom: 1rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem;">
+        {{- if .Params.image -}}
+        <a href="{{ .RelPermalink }}" class="right-col-img"
+          style="display: block; margin-bottom: 0.75rem; border-bottom: none; border-radius: 8px; overflow: hidden; aspect-ratio: 5 / 3;">
+          <img src="{{ .Params.image }}" alt="Featured Image"
+            style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </a>
+        {{- end -}}
+        <div
+          style="font-size: 0.8rem; color: var(--secondary); margin-bottom: 0.3rem; display: flex; gap: 0.5rem; font-weight: 500;">
+          {{- if eq .Section "blog" -}}<span style="color: #111;">Blog</span>{{- else -}}<span
+            style="color: #111;">News</span>{{- end -}}
+          <span>{{ .Date.Format "Jan 2, 2006" }}</span>
+        </div>
+        <a href="{{ .RelPermalink }}" class="right-col-title"
+          style="display: block; font-family: var(--font-heading); font-size: 1.05rem; font-weight: 600; color: var(--primary); text-decoration: none !important; border-bottom: none !important; line-height: 1.25; margin-bottom: 0;">
+          {{ .Title | markdownify }}
+        </a>
+      </div>
+      {{- end -}}
+      {{- /* Remove border and margin from last item to fit nicely */ -}}
+      <style>
+        .updates-grid {
+          display: grid;
+          grid-template-columns: 7fr 3fr;
+          gap: 1rem;
+          margin-top: 2rem;
+          align-items: stretch;
+        }
+
+        .updates-list-side .update-card:last-child {
+          border-bottom: none !important;
+          margin-bottom: 0 !important;
+          padding-bottom: 0 !important;
+        }
+
+        a.right-col-img {
+          text-decoration: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+        }
+
+        a.right-col-title {
+          text-decoration: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          background-image: none !important;
+        }
+
+        a.right-col-title:hover {
+          text-decoration: none !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+          background: none !important;
+          background-image: none !important;
+          opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+          .updates-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+
+          .featured-image-wrapper {
+            min-height: 200px !important;
+          }
+        }
+      </style>
+    </div>
+
   </div>
 </section>
 
@@ -92,9 +193,15 @@
     {{- if $linkParams -}}
     {{- $targetUrl = $linkParams.url -}}
     {{- end -}}
-    <a class="elegant-entry home-research-entry" href="{{ $targetUrl }}">
-      <div class="elegant-date" style="color: var(--tertiary); font-size: 0.9rem;">{{ .topic }}</div>
-      <div class="elegant-title">{{ .title }}</div>
+    <a class="elegant-entry home-research-entry" href="{{ $targetUrl }}"
+      style="grid-template-columns: 160px 1fr !important; align-items: start; gap: 1.5rem; padding: 0.8rem 0;">
+      <div class="elegant-date"
+        style="color: var(--secondary); font-size: 0.85rem; font-weight: 600; font-family: var(--font-body); margin-top: 0.2rem;">
+        {{
+        .topic }}</div>
+      <div class="elegant-title"
+        style="font-size: 1.2rem; font-weight: 600; font-family: var(--font-heading); color: var(--primary); line-height: 1.3;">
+        {{ .title }}</div>
     </a>
     {{- end -}}
   </div>

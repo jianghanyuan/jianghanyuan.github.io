@@ -42,7 +42,7 @@
   max-width: 660px;
   margin: 4rem auto 2rem;
   padding-top: 2rem;
-  border-top: 1px solid #eaeaea;
+  border-top: none;
 }
 
 .distill-series-nav a {
@@ -54,7 +54,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
+  padding: 0.85rem 1.4rem;
   border-radius: 100px;
   border: none !important;
   font-family: var(--font-body);
@@ -83,11 +83,46 @@
 }
 
 /* ── Header ── */
+
+/* ── Override PaperMod's Default Pagination Navigation Container ── */
+.paginav {
+  background: transparent !important;
+  border: none !important;
+  margin: 4rem auto 2rem !important;
+  /* Matches distill-series-nav */
+  padding: 0 !important;
+  max-width: 660px;
+  /* Aligns strictly with the distill center body */
+}
+
+.paginav a {
+  background: #f3f4f6 !important;
+  border-radius: 100px !important;
+  padding: 0.85rem 1.4rem !important;
+  color: #000 !important;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.paginav a:hover {
+  background: #e5e7eb !important;
+  transform: translateY(-1px);
+  color: var(--primary) !important;
+}
+
+.paginav span:hover:not(.title) {
+  box-shadow: none !important;
+}
+
 .distill-header {
   max-width: 800px;
   margin: 3rem auto 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: none;
   text-align: center;
   /* Center the entire header block */
 }
@@ -115,7 +150,7 @@
 
 .distill-byline {
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: var(--secondary);
 }
 
@@ -404,6 +439,7 @@
 
 /* ── Override all decorative underlines GLOBALLY ── */
 .distill-article a,
+.distill-byline a,
 .sidenote a,
 .references-list a {
   text-decoration: none !important;

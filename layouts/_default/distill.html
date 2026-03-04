@@ -18,6 +18,14 @@
     </div>
   </header>
 
+  {{- if .Params.image }}
+  <div class="distill-featured-image"
+    style="max-width: 600px; margin: 0 auto 3rem; border-radius: 12px; overflow: hidden; aspect-ratio: 5 / 3;">
+    <img src="{{ .Params.image }}" alt="Featured Image for {{ .Title }}"
+      style="width: 100%; height: 100%; object-fit: cover; display: block;">
+  </div>
+  {{- end }}
+
   {{/* Body: TOC left | Content center (sidenotes float right via CSS) */}}
   <div class="distill-body">
     <nav class="distill-toc" aria-label="Table of Contents">
@@ -38,10 +46,8 @@
     style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); max-width: 800px; margin-left: auto; margin-right: auto; color: var(--secondary);">
     <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary);">Citation Information</h3>
     <p style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Please cite this work as:</strong></p>
-    <p style="font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.5;">
-      {{ range $index, $author := .Params.authors }}{{ if $index }}, {{ end }}{{ $author.name }}{{ end }} ({{
-      .Date.Format "2006" }}). <em>{{ .Title }}</em>. Blue Sky Visions. {{ .Permalink }}
-    </p>
+    <pre
+      style="background: #f3f4f6; padding: 1rem; border-radius: 6px; font-size: 0.85rem; overflow-x: auto; margin-bottom: 1.5rem;"><code>{{ range $index, $author := .Params.authors }}{{ if $index }}, {{ end }}{{ $author.name }}{{ end }} ({{ .Date.Format "2006" }}). {{ .Title }}. Blue Sky Visions. {{ .Permalink }}</code></pre>
     <p style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>BibTeX citation:</strong></p>
     <pre style="background: #f3f4f6; padding: 1rem; border-radius: 6px; font-size: 0.85rem; overflow-x: auto;"><code>@misc{jiang{{ .Date.Format "2006" }}{{ with .File }}{{ .ContentBaseName | replaceRE "[^a-zA-Z0-9]" "" }}{{ else }}bluesky{{ end }},
   author = { {{ range $index, $author := .Params.authors }}{{ if $index }} and {{ end }}{{ $author.name }}{{ end }} },

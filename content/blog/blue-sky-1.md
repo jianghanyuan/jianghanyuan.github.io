@@ -1,6 +1,6 @@
 ---
-title: "On Learning, Longing, and All the Things We Cannot Name"
-slug: "on-learning-longing-and-all-the-things-we-cannot-name"
+title: "On Learning, Longing, and All the Ideas We Cannot Name"
+slug: "on-learning-longing-and-all-the-ideas-we-cannot-name"
 date: 2026-02-20
 layout: distill
 distill: true
@@ -8,6 +8,7 @@ series: ["Blue Sky Visions"]
 authors:
   - name: "Hanyuan Jiang"
     url: "/"
+image: "/20250801_2119_Casual Watercolor Lightning_remix_01k1jwdgwsfm3text2tajhxjkf.png"
 ---
 
 

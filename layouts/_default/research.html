@@ -15,6 +15,10 @@
       margin-top: 3rem;
     }
   }
+
+  .research-page .distill-toc #TableOfContents a {
+    font-size: 0.95rem !important;
+  }
 </style>
 
 <article class="distill-page research-page">
@@ -32,7 +36,7 @@
     {{/* --- TOC Sidebar (Distill style) --- */}}
     <nav class="distill-toc" aria-label="Table of Contents">
       <nav id="TableOfContents">
-        <ul style="padding-top: 0.65rem;">
+        <ul>
           {{- range site.Data.publications.groups }}
           <li>
             <a href="#{{ .topic | urlize }}">{{ .topic }}</a>
@@ -47,11 +51,11 @@
       <div class="distill-article" style="margin-right: 0; margin-top: 0;">
 
         {{- if .Content }}
-        <div class="post-content">{{ .Content }}</div>
+        <div class="post-content" style="margin: 0; padding: 0;">{{ .Content }}</div>
         {{- end }}
 
         {{- range $index, $group := site.Data.publications.groups }}
-        <section class="pub-year-group" aria-label="{{ .topic }}">
+        <section class="pub-year-group" data-topic="{{ .topic | urlize }}" aria-label="{{ .topic }}">
           <h2 id="{{ .topic | urlize }}" class="pub-year-title"
             style="{{ if eq $index 0 }}margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;{{ else }}margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid var(--border);{{ end }} margin-bottom: 1.5rem; font-size: 1.6rem; font-weight: 700; font-family: system-ui, -apple-system, sans-serif; letter-spacing: -0.01em;">
             {{ .topic }}</h2>
@@ -88,10 +92,73 @@
             {{- end }}
           </div>
         </section>
-        </section>
         {{- end }}
       </div>
     </div>
   </div>
 </article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll("section.pub-year-group");
+    const navLinks = document.querySelectorAll(".distill-toc #TableOfContents a");
+
+    let manualTopicId = null;
+    let scrollTimeout = null;
+
+    function updateHighlight(topicId) {
+      navLinks.forEach(link => {
+        link.style.color = "var(--secondary)";
+        link.style.fontWeight = "normal";
+        if (topicId && link.getAttribute("href") === "#" + topicId) {
+          link.style.color = "var(--primary)";
+          link.style.fontWeight = "700";
+        }
+      });
+    }
+
+    // Handle clicks to guarantee the clicked item gets highlighted instantly
+    navLinks.forEach(link => {
+      link.addEventListener("click", function (e) {
+        manualTopicId = this.getAttribute("href").substring(1);
+        updateHighlight(manualTopicId);
+
+        clearTimeout(scrollTimeout);
+        // Suppress auto-highlight for 1 second during smooth scroll
+        scrollTimeout = setTimeout(() => {
+          manualTopicId = null;
+        }, 1000);
+      });
+    });
+
+    function onScroll() {
+      if (manualTopicId) return; // Skip if a click is currently forcing the highlight
+
+      let currentTopicId = "";
+      const scrollPos = window.scrollY + 100; // Trigger line at 100px from top
+
+      sections.forEach(section => {
+        if (section.offsetTop <= scrollPos) {
+          currentTopicId = section.getAttribute("data-topic");
+        }
+      });
+
+      // If we've scrolled to the absolute bottom of the page natively, activate the last section
+      const isAtBottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 10;
+      if (isAtBottom && sections.length > 0) {
+        currentTopicId = sections[sections.length - 1].getAttribute("data-topic");
+      }
+
+      // Default to the first section if above the first trigger
+      if (!currentTopicId && sections.length > 0) {
+        currentTopicId = sections[0].getAttribute("data-topic");
+      }
+
+      updateHighlight(currentTopicId);
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // initial check
+  });
+</script>
 {{- end -}}

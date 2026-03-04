@@ -45,7 +45,7 @@ def process():
             processed_lines.append("")
             continue
             
-        if line == "Blue Sky Visions: On Learning, Longing, and All the Things We Cannot Name":
+        if line == "Blue Sky Visions: On Learning, Longing, and All the Ideas We Cannot Name":
             continue
 
         if line in header_patterns:
@@ -82,7 +82,7 @@ def process():
 
     # Synthesize new content
     frontmatter = """---
-title: "On Learning, Longing, and All the Things We Cannot Name"
+title: "On Learning, Longing, and All the Ideas We Cannot Name"
 date: 2025-01-15
 layout: distill
 distill: true

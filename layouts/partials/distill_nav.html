@@ -8,23 +8,25 @@ Elegant pill buttons for Next / Previous essay parts
 <nav class="distill-series-nav">
     <div class="nav-prev">
         {{ with .NextInSection }}
-        <a href="{{ .RelPermalink }}" class="pill-btn nav-pill">
-            <span class="nav-arrow">
+        <a href="{{ .RelPermalink }}" class="pill-btn nav-pill"
+            style="align-items: center; justify-content: center; display: flex;">
+            <span class="nav-arrow" style="display: flex; align-items: center;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m15 18-6-6 6-6" />
                 </svg>
             </span>
-            <span class="nav-text">Previous Part</span>
+            <span class="nav-text" style="line-height: 1;">Previous</span>
         </a>
         {{ end }}
     </div>
 
     <div class="nav-next">
         {{ with .PrevInSection }}
-        <a href="{{ .RelPermalink }}" class="pill-btn nav-pill">
-            <span class="nav-text">Next Part</span>
-            <span class="nav-arrow">
+        <a href="{{ .RelPermalink }}" class="pill-btn nav-pill"
+            style="align-items: center; justify-content: center; display: flex;">
+            <span class="nav-text" style="line-height: 1;">Next</span>
+            <span class="nav-arrow" style="display: flex; align-items: center;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m9 18 6-6-6-6" />
