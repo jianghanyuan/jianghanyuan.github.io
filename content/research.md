@@ -2,6 +2,7 @@
 title: "Research"
 layout: "research"
 hideMeta: true
+distill: true
 ---
 <style>
 .post-title {

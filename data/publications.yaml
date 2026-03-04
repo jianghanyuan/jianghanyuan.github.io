@@ -1,6 +1,6 @@
 groups:
   - topic: "Reinforcement Learning"
-    year: "2026"
+
     items:
       - title: "The Cost of Delegation"
         authors: "Hanyuan Jiang, Yi Man"
@@ -10,7 +10,7 @@ groups:
           - label: "Paper"
             url: "/cost-of-delegation.pdf"
 
-      - title: "Learn fast, dream slow: Long-horizon Understanding via Controllable Information Decomposition"
+      - title: "Learn Fast, Dream Slow: Long-horizon Understanding via Controllable Information Decomposition"
         authors: "Hanyuan Jiang"
         venue: "WIP. 2026"
         summary: "LUCID learns to separate what changes quickly from what persists, then allocates expensive planning only to persistent variables that compound over time."
@@ -24,7 +24,7 @@ groups:
         summary: "A novel framework for multi-agent reinforcement learning that optimizes probability distributions over learning trajectories rather than equilibrium outcomes."
 
   - topic: "Deep Learning"
-    year: "2026"
+
     items:
       - title: "The Hidden Experiment: Neural Networks as Internal Statistical Laboratories"
         authors: "Hanyuan Jiang"

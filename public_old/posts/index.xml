@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Hanyuan Jiang</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Hanyuan Jiang</description>
+    <generator>Hugo -- 0.156.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 15 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part I</title>
+      <link>http://localhost:1313/posts/vision/</link>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/vision/</guid>
+      <description>&lt;p&gt;There are nights when the world feels almost structured enough to reveal its secret. I lie awake thinking about the quiet impossibility at the center of learning. A child hears scattered fragments of language and somehow extracts the grammar of an entire tongue. A bird sees the stars rotating overhead and knows which direction to migrate. A mathematician stares at symbols until patterns crystallize that were always there but never visible. Structure appears where none was visibly given. Something in the mind finds what the world does not openly display.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

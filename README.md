@@ -1,6 +1,6 @@
-# Han Yuan Jiang - Personal Website
+# Hanyuan Jiang - Personal Website
 
-This repository is a Hugo site using PaperMod, with optional Distill-style post pages.
+Welcome to my personal website. 
 
 ## Local setup
 
@@ -10,15 +10,3 @@ This repository is a Hugo site using PaperMod, with optional Distill-style post 
 ```bash
 hugo server -D
 ```
-
-## Distill-enabled posts
-
-Use a leaf bundle and set:
-
-```yaml
-layout: distill
-distill: true
-math: true
-```
-
-Example: `content/posts/my-distill-post/index.md`.

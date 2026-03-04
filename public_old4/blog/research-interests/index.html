@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="light">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Research Interests | Hanyuan Jiang</title>
+<meta name="keywords" content="research, systems, llm">
+<meta name="description" content="From efficient inference to reliable deployment — building the systems that power modern AI.">
+<meta name="author" content="Hanyuan Jiang">
+<link rel="canonical" href="http://localhost:1313/blog/research-interests/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.33f6a060f0577a54838c786b3cd5adfac6de6d0604531efd530f06383d07e3c7.css" integrity="sha256-M/agYPBXelSDjHhrPNWt&#43;sbebQYEUx79Uw8GOD0H48c=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/blog/research-interests/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<link rel="stylesheet" href="/css/custom.css" />
+
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  
+</script>
+<link rel="stylesheet" href="/css/distill.css" />
+
+<meta property="og:url" content="http://localhost:1313/blog/research-interests/">
+  <meta property="og:site_name" content="Hanyuan Jiang">
+  <meta property="og:title" content="Research Interests">
+  <meta property="og:description" content="From efficient inference to reliable deployment — building the systems that power modern AI.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2026-02-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-22T00:00:00+00:00">
+    <meta property="article:tag" content="Research">
+    <meta property="article:tag" content="Systems">
+    <meta property="article:tag" content="Llm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Research Interests">
+<meta name="twitter:description" content="From efficient inference to reliable deployment — building the systems that power modern AI.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blog",
+      "item": "http://localhost:1313/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Research Interests",
+      "item": "http://localhost:1313/blog/research-interests/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Research Interests",
+  "name": "Research Interests",
+  "description": "From efficient inference to reliable deployment — building the systems that power modern AI.",
+  "keywords": [
+    "research", "systems", "llm"
+  ],
+  "articleBody": "The Systems Behind Intelligence Modern AI is not just about better models — it is about the systems that make those models useful. Every breakthrough in model architecture eventually meets the same question: how do we deploy this at scale, reliably, and efficiently?\nMy research lives at this intersection. I study how to build the infrastructure that bridges the gap between a trained model and a production service that millions of people depend on.\nEfficient LLM Serving Large language models are extraordinarily expensive to run. A single inference request can consume gigabytes of GPU memory and milliseconds of precious compute. When you multiply this by millions of concurrent users, the engineering challenge becomes immense.\nI work on scheduling algorithms that intelligently batch and prioritize requests to maximize throughput while meeting strict latency targets. The key insight is that not all requests are equal — some are short and urgent, others are long and tolerant of delay. By understanding this structure, we can serve significantly more users with the same hardware.\nKey Questions How do we schedule heterogeneous requests on shared GPU clusters? Can we predict request complexity before execution begins? What is the theoretical throughput limit for a given model and hardware configuration? Training-Serving Co-Design Traditionally, training and serving are treated as separate problems. You train a model, freeze the weights, and hand them to a different team to deploy. But this separation leaves performance on the table.\nI explore co-design approaches where the training process is aware of deployment constraints. For example:\nTraining with quantization-aware methods that produce models naturally suited for efficient inference Architecture modifications that trade a small amount of accuracy for significant serving speedups Distillation pipelines that produce smaller, faster models tailored to specific deployment targets Reliability and Safety A model that is fast but unreliable is worse than useless — it is dangerous. My work on reliability focuses on:\nMonitoring: How do we detect when a model is producing low-quality or harmful outputs in real time? Evaluation: How do we build comprehensive test suites that capture the full range of model behavior? Graceful degradation: How should a system behave when it encounters inputs outside its training distribution? These questions are not purely academic. Every production AI system faces them daily, and the answers have real consequences for the people who rely on these systems.\nLooking Forward The next generation of AI systems will be agentic — they will plan, act, and learn from their environment. Building reliable infrastructure for these systems is an open and urgent challenge. I am particularly excited about:\nLong-horizon planning under uncertainty Multi-agent coordination and resource allocation Safety guarantees for autonomous systems The systems we build today will determine what kind of AI is possible tomorrow.\n",
+  "wordCount" : "455",
+  "inLanguage": "en",
+  "datePublished": "2026-02-22T00:00:00Z",
+  "dateModified": "2026-02-22T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"name":"Hanyuan Jiang"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/blog/research-interests/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hanyuan Jiang",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Hanyuan Jiang (Alt + H)">Hanyuan Jiang</a>
+            <div class="logo-switches">
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/research/" title="Research">
+                    <span>Research</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/blog/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/misc/" title="Misc">
+                    <span>Misc</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+<script>document.currentScript.parentElement.classList.add('distill-main');</script>
+<article class="distill-page">
+
+  
+  <header class="distill-header">
+    <h1 class="distill-title">Research Interests</h1>
+    <p class="distill-subtitle">From efficient inference to reliable deployment — building the systems that power modern AI.</p>
+    <div class="distill-byline"><a href="https://jianghanyuan.github.io">Hanyuan Jiang</a>
+      <span class="distill-date">February 22, 2026</span>
+    </div>
+  </header>
+
+  
+  <div class="distill-body">
+    <nav class="distill-toc" aria-label="Table of Contents">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-systems-behind-intelligence">The Systems Behind Intelligence</a></li>
+    <li><a href="#efficient-llm-serving">Efficient LLM Serving</a>
+      <ul>
+        <li><a href="#key-questions">Key Questions</a></li>
+      </ul>
+    </li>
+    <li><a href="#training-serving-co-design">Training-Serving Co-Design</a></li>
+    <li><a href="#reliability-and-safety">Reliability and Safety</a></li>
+    <li><a href="#looking-forward">Looking Forward</a></li>
+  </ul>
+</nav>
+    </nav>
+
+    <div class="distill-content">
+      <div class="distill-article">
+        <h2 id="the-systems-behind-intelligence">The Systems Behind Intelligence</h2>
+<p>Modern AI is not just about better models — it is about the <strong>systems</strong> that make those models useful. Every breakthrough in model architecture eventually meets the same question: <em>how do we deploy this at scale, reliably, and efficiently?</em></p>
+<p>My research lives at this intersection. I study how to build the infrastructure that bridges the gap between a trained model and a production service that millions of people depend on.</p>
+<h2 id="efficient-llm-serving">Efficient LLM Serving</h2>
+<p>Large language models are extraordinarily expensive to run. A single inference request can consume gigabytes of GPU memory and milliseconds of precious compute. When you multiply this by millions of concurrent users, the engineering challenge becomes immense.</p>
+<p>I work on <strong>scheduling algorithms</strong> that intelligently batch and prioritize requests to maximize throughput while meeting strict latency targets. The key insight is that not all requests are equal — some are short and urgent, others are long and tolerant of delay. By understanding this structure, we can serve significantly more users with the same hardware.</p>
+<h3 id="key-questions">Key Questions</h3>
+<ul>
+<li>How do we schedule heterogeneous requests on shared GPU clusters?</li>
+<li>Can we predict request complexity before execution begins?</li>
+<li>What is the theoretical throughput limit for a given model and hardware configuration?</li>
+</ul>
+<h2 id="training-serving-co-design">Training-Serving Co-Design</h2>
+<p>Traditionally, training and serving are treated as separate problems. You train a model, freeze the weights, and hand them to a different team to deploy. But this separation leaves performance on the table.</p>
+<p>I explore <strong>co-design</strong> approaches where the training process is aware of deployment constraints. For example:</p>
+<ul>
+<li>Training with quantization-aware methods that produce models naturally suited for efficient inference</li>
+<li>Architecture modifications that trade a small amount of accuracy for significant serving speedups</li>
+<li>Distillation pipelines that produce smaller, faster models tailored to specific deployment targets</li>
+</ul>
+<h2 id="reliability-and-safety">Reliability and Safety</h2>
+<p>A model that is fast but unreliable is worse than useless — it is dangerous. My work on reliability focuses on:</p>
+<ul>
+<li><strong>Monitoring</strong>: How do we detect when a model is producing low-quality or harmful outputs in real time?</li>
+<li><strong>Evaluation</strong>: How do we build comprehensive test suites that capture the full range of model behavior?</li>
+<li><strong>Graceful degradation</strong>: How should a system behave when it encounters inputs outside its training distribution?</li>
+</ul>
+<p>These questions are not purely academic. Every production AI system faces them daily, and the answers have real consequences for the people who rely on these systems.</p>
+<h2 id="looking-forward">Looking Forward</h2>
+<p>The next generation of AI systems will be <strong>agentic</strong> — they will plan, act, and learn from their environment. Building reliable infrastructure for these systems is an open and urgent challenge. I am particularly excited about:</p>
+<ul>
+<li>Long-horizon planning under uncertainty</li>
+<li>Multi-agent coordination and resource allocation</li>
+<li>Safety guarantees for autonomous systems</li>
+</ul>
+<p>The systems we build today will determine what kind of AI is possible tomorrow.</p>
+
+      </div>
+    </div>
+  </div>
+
+  
+
+  
+
+  
+
+
+
+<nav class="distill-series-nav">
+    <div class="nav-prev">
+        
+    </div>
+
+    <div class="nav-next">
+        
+        <a href="/blog/on-learning-longing-and-all-the-things-we-cannot-name/" class="pill-btn nav-pill">
+            <span class="nav-text">Next Part</span>
+            <span class="nav-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </span>
+        </a>
+        
+    </div>
+</nav>
+
+
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2026 <a href="http://localhost:1313/">Hanyuan Jiang</a></span>
+
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script></body>
+
+</html>

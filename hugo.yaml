@@ -20,7 +20,7 @@ markup:
 params:
   env: production
   title: "Hanyuan Jiang"
-  description: "CS PhD student in machine learning systems"
+  description: "Understand and build general, safe, and emergent intelligence."
   author:
     name: "Hanyuan Jiang"
   defaultTheme: light
@@ -38,7 +38,7 @@ params:
     - blog
   homeInfoParams:
     Title: "Hanyuan Jiang"
-    Content: "CS PhD student in machine learning systems. I work on efficient LLM inference scheduling, training-serving co-design for scalable systems, and reliability and safety in production AI infrastructure."
+    Content: "Understand and build general, safe, and emergent intelligence."
   socialIcons:
     - name: googlescholar
       url: "https://scholar.google.com/citations?user=EBG3nD0AAAAJ&hl=en"
@@ -53,8 +53,8 @@ menu:
       name: About
       url: /
       weight: 5
-    - identifier: publications
-      name: Publication
+    - identifier: research
+      name: Research
       url: /research/
       weight: 10
     - identifier: blog

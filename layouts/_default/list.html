@@ -64,13 +64,18 @@
 </section>
 
 {{/* ── Selected Research ── */}}
-{{- $featured := slice "The Cost of Delegation" "The Resource Curse of Communication: Evidence from Brazilian
-Municipalities" "The Bones and Shapes of the Phillips Curve" -}}
+{{- $featured := slice
+"The Cost of Delegation"
+"The Resource Curse of Communication: Evidence from Brazilian Municipalities"
+"The Bones and Shapes of the Phillips Curve"
+-}}
 {{- $featuredPubs := slice -}}
 {{- range site.Data.publications.groups -}}
+{{- $topic := .topic -}}
 {{- range .items -}}
 {{- if in $featured .title -}}
-{{- $featuredPubs = $featuredPubs | append . -}}
+{{- $pubWithTopic := merge . (dict "topic" $topic) -}}
+{{- $featuredPubs = $featuredPubs | append $pubWithTopic -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -80,25 +85,17 @@ Municipalities" "The Bones and Shapes of the Phillips Curve" -}}
     <h2>Selected Research</h2>
     <a class="view-all" href="/research/">All publications →</a>
   </div>
-  <div class="pub-list">
+  <div class="elegant-list" style="margin-top: 1rem;">
     {{- range . -}}
-    <div class="pub-entry pub-entry-static">
-      <article>
-        <div class="entry-header">
-          <h3 class="entry-title">{{ .title }}</h3>
-        </div>
-        <footer class="entry-footer">
-          <span class="entry-meta">{{ .authors }}. {{ .venue }}.</span>
-        </footer>
-        {{- if .links }}
-        <div class="pub-links-bar">
-          {{- range .links -}}
-          <a href="{{ .url }}" class="pill-btn pub-link-pill">{{ .label }}</a>
-          {{- end -}}
-        </div>
-        {{- end }}
-      </article>
-    </div>
+    {{- $linkParams := index .links 0 -}}
+    {{- $targetUrl := "/research/" -}}
+    {{- if $linkParams -}}
+    {{- $targetUrl = $linkParams.url -}}
+    {{- end -}}
+    <a class="elegant-entry home-research-entry" href="{{ $targetUrl }}">
+      <div class="elegant-date" style="color: var(--tertiary); font-size: 0.9rem;">{{ .topic }}</div>
+      <div class="elegant-title">{{ .title }}</div>
+    </a>
     {{- end -}}
   </div>
 </section>

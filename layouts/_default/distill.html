@@ -32,6 +32,26 @@
   </div>
 
   {{/* Elegant pagination for series (e.g., Blue Sky Visions) */}}
+
+  {{ if in .Params.series "Blue Sky Visions" }}
+  <div class="distill-citation"
+    style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); max-width: 800px; margin-left: auto; margin-right: auto; color: var(--secondary);">
+    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--primary);">Citation Information</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Please cite this work as:</strong></p>
+    <p style="font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.5;">
+      {{ range $index, $author := .Params.authors }}{{ if $index }}, {{ end }}{{ $author.name }}{{ end }} ({{
+      .Date.Format "2006" }}). <em>{{ .Title }}</em>. Blue Sky Visions. {{ .Permalink }}
+    </p>
+    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>BibTeX citation:</strong></p>
+    <pre style="background: #f3f4f6; padding: 1rem; border-radius: 6px; font-size: 0.85rem; overflow-x: auto;"><code>@misc{jiang{{ .Date.Format "2006" }}{{ with .File }}{{ .ContentBaseName | replaceRE "[^a-zA-Z0-9]" "" }}{{ else }}bluesky{{ end }},
+  author = { {{ range $index, $author := .Params.authors }}{{ if $index }} and {{ end }}{{ $author.name }}{{ end }} },
+  title = { {{ .Title }} },
+  url = { {{ .Permalink }} },
+  year = { {{ .Date.Format "2006" }} }
+}</code></pre>
+  </div>
+  {{ end }}
+
   {{ partial "distill_nav.html" . }}
 
 </article>

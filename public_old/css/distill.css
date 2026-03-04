@@ -1,0 +1,418 @@
+/* =============================================================
+   Distill Page — ThinkingMachines-style layout
+   TOC left | Content center (~660px) | Sidenotes right margin
+   ============================================================= */
+
+.distill-page,
+.distill-body,
+.distill-content,
+.distill-article>* {
+  background: transparent !important;
+}
+
+/* ═══════════════════════════════════════════════
+   CRITICAL: Override PaperMod's .main max-width
+   PaperMod sets .main { max-width: 828px }, but
+   distill needs ~1100px for TOC + content + sidenotes.
+   ═══════════════════════════════════════════════ */
+.main:has(.distill-page),
+.main.distill-main {
+  max-width: none !important;
+  /* CRITICAL: Remove max-width constraint completely */
+  padding: 0 !important;
+}
+
+/* ── Page container ── */
+.distill-page {
+  width: 100%;
+  max-width: 1200px;
+  /* Constrain the distill page itself */
+  margin: 0 auto;
+  padding: 0 16px 4rem;
+  /* Safe padding for wide screens */
+  box-sizing: border-box;
+}
+
+/* ═══════════════════════════════════════════════
+   SERIES NAVIGATION (Next/Prev Parts)
+   ═══════════════════════════════════════════════ */
+.distill-series-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 660px;
+  margin: 4rem auto 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eaeaea;
+}
+
+.distill-series-nav a {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary) !important;
+  background: transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.pill-btn:hover {
+  background: var(--entry);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-color: var(--border);
+  opacity: 1 !important;
+}
+
+.nav-arrow {
+  color: var(--tertiary);
+  transition: color 0.2s ease;
+}
+
+.pill-btn:hover .nav-arrow {
+  color: var(--primary);
+}
+
+/* ── Header ── */
+.distill-header {
+  max-width: 800px;
+  margin: 3rem auto 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  /* Center the entire header block */
+}
+
+.distill-title {
+  font-family: var(--font-serif);
+  /* Elegant explicit serif */
+  font-size: 2.8rem;
+  /* Make it larger and more editorial */
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--primary);
+  margin: 0 auto 2.5rem;
+  max-width: 800px;
+  /* Readability constraint */
+}
+
+.distill-subtitle {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1rem;
+  color: var(--secondary);
+  margin: 0 0 0.8rem;
+  line-height: 1.6;
+}
+
+.distill-byline {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+
+.distill-byline a {
+  color: var(--primary);
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.distill-byline a:hover {
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+.distill-date {
+  margin-left: 1rem;
+  color: var(--tertiary);
+}
+
+/* ═══════════════════════════════════════════
+   BODY — TOC left, content center
+   ═══════════════════════════════════════════ */
+.distill-body {
+  display: block;
+  max-width: 660px;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media (min-width: 1000px) {
+  .distill-body {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 4rem;
+    /* Restore clean gap between TOC and content */
+    align-items: flex-start;
+  }
+}
+
+/* ── TOC — left column ── */
+.distill-toc {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .distill-toc {
+    display: block;
+    width: 220px;
+    /* Generous width for TOC */
+    flex-shrink: 0;
+    position: sticky;
+    top: 80px;
+    align-self: flex-start;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding-right: 1.5rem;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .distill-toc::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.distill-toc #TableOfContents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.distill-toc #TableOfContents li {
+  margin-bottom: 0.3rem;
+}
+
+.distill-toc #TableOfContents a {
+  font-size: 0.78rem;
+  color: var(--secondary);
+  text-decoration: none;
+  line-height: 1.4;
+  display: block;
+}
+
+.distill-toc #TableOfContents a:hover {
+  color: var(--primary);
+}
+
+.distill-toc #TableOfContents ul ul {
+  padding-left: 0.75rem;
+  margin-top: 0.15rem;
+}
+
+.distill-toc #TableOfContents ul ul a {
+  font-size: 0.72rem;
+}
+
+/* ── Content — center column ── */
+.distill-content {
+  flex: 0 1 660px;
+  /* Exact max size */
+  max-width: 660px;
+  min-width: 0;
+  /* Fixes text wrapping issues */
+  position: relative;
+  /* anchor for sidenotes */
+  overflow: visible;
+  /* allow sidenotes to overflow into right margin */
+  margin-right: 240px;
+  /* Reserve space for sidenotes on the right */
+}
+
+.distill-article {
+  display: block;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.06rem;
+  line-height: 1.8;
+  color: var(--primary);
+  overflow: visible;
+  /* critical: allow sidenotes to extend beyond */
+}
+
+.distill-article h2 {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.8rem;
+  color: var(--primary);
+}
+
+.distill-article h3 {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1.8rem 0 0.5rem;
+  color: var(--primary);
+}
+
+.distill-article p {
+  margin-bottom: 1.1rem;
+  overflow: visible;
+  /* allow sidenotes inside paragraphs */
+}
+
+.distill-article a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--border);
+}
+
+.distill-article a:hover {
+  text-decoration-color: currentColor;
+}
+
+.distill-article em {
+  font-style: italic;
+}
+
+.distill-article strong {
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════
+   SIDENOTES — absolute positioning approach
+   Appear in the right gutter on desktop
+   (exactly like ThinkingMachines Lab)
+   ═══════════════════════════════════════════ */
+.sidenote {
+  position: absolute;
+  right: -240px;
+  /* Push into the reserved margin */
+  width: 200px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--secondary);
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+.sidenote sup {
+  font-weight: 600;
+  color: var(--tertiary);
+  margin-right: 0.2em;
+}
+
+/* Mobile: sidenotes become inline cards */
+@media (max-width: 1200px) {
+
+  /* Adjust break point to trigger earlier */
+  .distill-content {
+    margin-right: 0;
+    /* Remove right padding on small screens */
+  }
+
+  .sidenote {
+    position: relative;
+    /* Reset absolute on small screens */
+    right: 0;
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--entry);
+    border-radius: 4px;
+    font-size: 0.82rem;
+  }
+
+}
+
+/* Footnote superscript ref */
+.footnote-ref {
+  display: inline;
+  cursor: help;
+  font-size: 0.72em;
+  color: var(--primary);
+  font-weight: 600;
+  vertical-align: super;
+  line-height: 0;
+}
+
+.footnote-popup {
+  display: none;
+}
+
+/* ── References list ── */
+.references-list {
+  padding-left: 0;
+  list-style: none;
+  counter-reset: ref-counter;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.references-list li {
+  counter-increment: ref-counter;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+  padding-left: 2rem;
+  position: relative;
+}
+
+.references-list li::before {
+  content: "[" counter(ref-counter) "]";
+  position: absolute;
+  left: 0;
+  font-weight: 500;
+  color: var(--tertiary);
+  font-size: 0.78rem;
+}
+
+.references-list a {
+  color: var(--primary);
+  font-size: 0.78rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 999px) {
+  .distill-page {
+    padding: 0 16px 3rem;
+  }
+
+  .distill-title {
+    font-size: 1.5rem;
+  }
+
+  .distill-header {
+    max-width: 100%;
+  }
+
+  dt-article {
+    font-size: 1rem;
+  }
+}
+
+/* ── Override all decorative underlines GLOBALLY ── */
+.distill-article a,
+.sidenote a,
+.references-list a {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.distill-article a:hover,
+.sidenote a:hover,
+.references-list a:hover {
+  opacity: 0.7;
+}

@@ -359,22 +359,21 @@ a:hover {
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
   border-radius: 100px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: none !important;
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--primary);
-  background: transparent;
-  transition: all 0.25s ease;
+  color: #000 !important;
+  background: #f3f4f6 !important;
+  transition: all 0.2s ease;
   text-decoration: none;
+  box-shadow: none !important;
 }
 
 .featured-pills .pill-btn:hover {
-  background: #f8f8f8;
+  background: #e5e7eb !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.15);
-  opacity: 1 !important;
+  color: var(--primary);
 }
 
 .pill-icon {
@@ -484,12 +483,10 @@ a:hover {
 }
 
 .pub-entry:hover {
-  background: #fbfbfb;
-  border-color: rgba(0, 0, 0, 0.05);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  background: transparent;
+  transform: none;
+  box-shadow: none;
   opacity: 1 !important;
-  /* Override a:hover */
 }
 
 .pub-entry-static {
@@ -524,7 +521,7 @@ a:hover {
 }
 
 .pub-page-entry:hover {
-  transform: translateY(-2px);
+  transform: none;
 }
 
 .pub-links-bar {
@@ -897,6 +894,10 @@ pre code {
   margin-top: 1.5rem;
 }
 
+#top .home-section .elegant-list .home-research-entry {
+  grid-template-columns: 220px 1fr !important;
+}
+
 .elegant-entry {
   display: grid;
   grid-template-columns: 140px 1fr;
@@ -911,6 +912,23 @@ pre code {
 
 .elegant-entry:last-child {
   border-bottom: none;
+}
+
+/* ── Pagination Buttons (Sleek Grey) ── */
+#top .pagination a {
+  background: #f3f4f6 !important;
+  color: var(--primary) !important;
+  border: none !important;
+  border-radius: 100px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+#top .pagination a:hover {
+  background: var(--entry) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .elegant-date {
@@ -931,7 +949,7 @@ pre code {
 }
 
 .elegant-entry:hover .elegant-title {
-  color: var(--secondary);
+  /* Removed color shift to keep text static */
 }
 
 @media screen and (max-width: 600px) {

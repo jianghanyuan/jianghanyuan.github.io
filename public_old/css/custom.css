@@ -1,0 +1,953 @@
+/* ============================================================
+   Custom Theme — Minimalist Academic (Phase 2)
+   Font: Linux Libertine (headings) + Inter (body)
+   ============================================================ */
+
+/* ── Self-hosted Linux Libertine (Libertinus Serif) ── */
+@font-face {
+  font-family: "Linux Libertine";
+  src: url("/fonts/LibertinusSerif-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine";
+  src: url("/fonts/LibertinusSerif-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine";
+  src: url("/fonts/LibertinusSerif-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine";
+  src: url("/fonts/LibertinusSerif-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine Display";
+  src: url("/fonts/LibertinusSerifDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine Display";
+  src: url("/fonts/LibertinusSerif-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Linux Libertine Display";
+  src: url("/fonts/LibertinusSerif-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* No external font @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ── Design Tokens (override PaperMod theme-vars) ── */
+:root {
+  --theme: #ffffff !important;
+  --entry: #ffffff !important;
+  --code-bg: #f5f5f5;
+  --code-block-bg: rgb(28, 29, 33);
+  --bg: #ffffff;
+  --bg-card: #ffffff;
+  --primary: #1e1e1e;
+  --secondary: #888888;
+  --tertiary: #aaaaaa;
+  --content: #333333;
+  --border: #eaeaea;
+  --link: #333333;
+  --link-hover: #000000;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Libertinus Serif", "Libre Baskerville", Georgia, serif;
+  --max-width: 780px;
+  --nav-width: 1024px;
+  --main-width: 780px;
+  --transition: 0.2s ease;
+}
+
+/* Dark mode — use PaperMod defaults, no overrides */
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #ffffff !important;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--content);
+  background: #ffffff !important;
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Consistent BG on ALL containers — force white ── */
+.main,
+.post-single,
+article,
+.archive-entry,
+.terms-tags,
+.pagination,
+.nav,
+header,
+footer,
+.header,
+.footer,
+[class*="wrapper"],
+[class*="container"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* ── PaperMod .list bg override — force white ── */
+.list {
+  background: #ffffff !important;
+}
+
+/* ── Typography ── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-section {
+  margin-top: 0 !important;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin-top: 1.5rem;
+}
+
+.logo a {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--primary) !important;
+}
+
+/* ── Links — graceful color fade on hover only ── */
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color var(--transition), opacity var(--transition);
+}
+
+a:hover {
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+/* Content links: elegant color fade */
+.post-content a,
+.entry-content a,
+.distill-article a {
+  text-decoration: underline !important;
+  text-decoration-color: var(--tertiary) !important;
+  text-underline-offset: 3px;
+  color: var(--primary);
+  font-weight: 500;
+  border-bottom: none;
+  transition: all var(--transition);
+}
+
+.post-content a:hover,
+.entry-content a:hover,
+.distill-article a:hover {
+  text-decoration-color: var(--primary) !important;
+  opacity: 1;
+}
+
+/* ── Navigation — minimal, NO double underlines ── */
+.nav {
+  min-height: 56px;
+  border-bottom: 1px solid var(--border);
+}
+
+#menu a {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--secondary);
+  padding: 0.3rem 0;
+  margin: 0 0.8rem;
+  transition: color var(--transition);
+  background: none !important;
+  border-radius: 0;
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+#menu a:hover,
+#menu .active {
+  color: var(--primary);
+  background: none !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  opacity: 1;
+}
+
+/* Kill PaperMod's native active indicator */
+#menu a.active::after,
+#menu a.active::before {
+  display: none !important;
+}
+
+/* ── Max width ── */
+.main {
+  max-width: var(--max-width);
+}
+
+/* ── Back link ── */
+.back-link {
+  display: none !important;
+  /* Globally disable all back buttons */
+}
+
+.back-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* ── Home Hero ── */
+.home-hero {
+  padding: 3rem 0 0 !important;
+  margin-bottom: 1rem !important;
+}
+
+.home-hero h1 {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.02em;
+}
+
+.home-hero p {
+  font-size: 1rem;
+  color: var(--secondary);
+  max-width: 580px;
+  line-height: 1.75;
+}
+
+.hero-links {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.hero-links a {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.hero-links a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.hero-links a::after {
+  content: ' →';
+}
+
+.hero-social {
+  margin-top: 1rem;
+}
+
+.home-hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ── Home Sections — compact ── */
+.home-section {
+  margin: 2rem 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.section-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.section-header .view-all {
+  font-size: 0.82rem;
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.section-header .view-all:hover {
+  text-decoration: underline;
+  color: var(--primary);
+}
+
+.featured-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0 3rem;
+}
+
+.featured-pills .pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: transparent;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.featured-pills .pill-btn:hover {
+  background: #f8f8f8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.15);
+  opacity: 1 !important;
+}
+
+.pill-icon {
+  font-size: 1.1rem;
+}
+
+/* ── Recent Updates (Two-Column) ── */
+.updates-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.update-entry {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.update-entry:last-child {
+  border-bottom: none;
+}
+
+.update-date {
+  font-size: 0.9rem;
+  color: var(--tertiary);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.update-details {
+  font-size: 1.05rem;
+  color: var(--primary);
+  line-height: 1.5;
+}
+
+.update-details a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.update-details a:hover {
+  opacity: 0.7;
+}
+
+.update-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+.blog-tag {
+  background: #f0f5ff;
+  color: #2563eb;
+}
+
+.news-tag {
+  background: #fdf4ff;
+  color: #d946ef;
+}
+
+
+/* ── Blog-style post list (date | title) ── */
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-list li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pub-entry {
+  display: block;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid transparent;
+  /* Prepare for hover */
+  transition: all 0.25s ease;
+}
+
+.pub-entry:hover {
+  background: #fbfbfb;
+  border-color: rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  opacity: 1 !important;
+  /* Override a:hover */
+}
+
+.pub-entry-static {
+  cursor: default;
+}
+
+.pub-entry-static:hover {
+  background: transparent;
+  border-color: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
+.pub-entry .entry-title {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+}
+
+.pub-entry .entry-meta {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.pub-page-entry {
+  cursor: default;
+  /* Remove pointer since links are inside */
+}
+
+.pub-page-entry:hover {
+  transform: translateY(-2px);
+}
+
+.pub-links-bar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+
+.pub-link-pill {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  background: white;
+}
+
+/* ── Cards / Entries: elegant interactive rows ── */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.post-entry:hover {
+  background: #fbfbfb;
+  border-color: rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  opacity: 1 !important;
+  /* Override standard link hover */
+}
+
+.post-entry .entry-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0;
+}
+
+.post-entry .entry-date {
+  font-size: 0.9rem;
+  color: var(--tertiary);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.post-content,
+.entry-content,
+.post-single .post-content {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--content);
+}
+
+/* ── Research / Publication page ── */
+.pub-line {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.pub-line:last-child {
+  border-bottom: none;
+}
+
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.pub-links a {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--secondary);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--transition);
+}
+
+.pub-links a:hover {
+  color: var(--primary);
+  text-decoration-color: currentColor;
+}
+
+/* ── Meta ── */
+.post-meta,
+.post-description,
+.breadcrumbs,
+.entry-footer {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--tertiary);
+}
+
+.post-title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+/* ── Code ── */
+code {
+  font-size: 0.875em;
+  background: var(--code-bg);
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+}
+
+pre {
+  background: var(--code-bg) !important;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* ── Footnote Popup System ── */
+.footnote-ref {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--secondary);
+  cursor: pointer;
+  text-decoration: none !important;
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 500;
+  padding: 0 2px;
+}
+
+.footnote-ref:hover {
+  color: var(--primary);
+  text-decoration: none !important;
+}
+
+.footnote-popup {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  max-width: 90vw;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--content);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+:root[data-theme="dark"] .footnote-popup {
+  background: var(--bg-card);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.footnote-popup.show {
+  display: block;
+}
+
+.footnote-popup::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--border);
+}
+
+.footnote-popup .fn-num {
+  font-weight: 600;
+  color: var(--primary);
+  margin-right: 0.3em;
+}
+
+/* ── Entrance Animations (subtle) ── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.35s ease both;
+}
+
+.stagger-1 {
+  animation: fadeIn 0.35s ease 0.05s both;
+}
+
+.stagger-2 {
+  animation: fadeIn 0.35s ease 0.1s both;
+}
+
+.stagger-3 {
+  animation: fadeIn 0.35s ease 0.15s both;
+}
+
+.stagger-4 {
+  animation: fadeIn 0.35s ease 0.2s both;
+}
+
+/* ── Page header ── */
+.page-header h1 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 2.2rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .home-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .post-list li {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .featured-essays {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Blog Topic Cards ── */
+.blog-topics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.topic-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: inherit;
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+}
+
+.topic-card:hover {
+  background: #fbfbfb;
+  border-color: rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  opacity: 1 !important;
+}
+
+.topic-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.topic-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.topic-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 0.15rem;
+}
+
+.topic-desc {
+  font-size: 0.88rem;
+  color: var(--secondary);
+  margin: 0;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topic-arrow {
+  font-size: 1rem;
+  color: var(--tertiary);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.topic-card:hover .topic-arrow {
+  transform: translateX(3px);
+}
+
+/* ── Blog Group Headers ── */
+.blog-group {
+  margin-bottom: 2rem;
+}
+
+.blog-group-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
+  margin-bottom: 0;
+}
+
+.blog-group-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+  color: var(--primary);
+}
+
+@media (max-width: 680px) {
+  .topic-desc {
+    white-space: normal;
+  }
+}
+
+/* ── Elegant List Layout (Date | Title) ── */
+.elegant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.elegant-entry {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: baseline;
+  gap: 1.5rem;
+  color: var(--primary);
+  text-decoration: none !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.5rem 0;
+  border-bottom: none !important;
+}
+
+.elegant-entry:last-child {
+  border-bottom: none;
+}
+
+.elegant-date {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--secondary);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.elegant-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--primary);
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+
+.elegant-entry:hover .elegant-title {
+  color: var(--secondary);
+}
+
+@media screen and (max-width: 600px) {
+  .elegant-entry {
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .elegant-entry {
+    grid-template-columns: 90px 1fr;
+    gap: 0.5rem;
+  }
+
+  .elegant-date {
+    font-size: 0.85rem;
+  }
+}

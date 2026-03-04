@@ -1,5 +1,6 @@
 ---
 title: "On Learning, Longing, and All the Things We Cannot Name"
+slug: "on-learning-longing-and-all-the-things-we-cannot-name"
 date: 2026-02-20
 layout: distill
 distill: true

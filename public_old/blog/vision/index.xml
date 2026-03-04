@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Blue Sky Visions on Hanyuan Jiang</title>
+    <link>http://localhost:1313/blog/vision/</link>
+    <description>Recent content in Blue Sky Visions on Hanyuan Jiang</description>
+    <generator>Hugo -- 0.156.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/vision/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Second Vision: Placeholder</title>
+      <link>http://localhost:1313/blog/the-second-vision-placeholder/</link>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/the-second-vision-placeholder/</guid>
+      <description>&lt;p&gt;&lt;em&gt;(Drafting in progress&amp;hellip;)&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>On Learning, Longing, and All the Things We Cannot Name</title>
+      <link>http://localhost:1313/blog/on-learning-longing-and-all-the-things-we-cannot-name/</link>
+      <pubDate>Wed, 15 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/on-learning-longing-and-all-the-things-we-cannot-name/</guid>
+      <description>&lt;p&gt;There are nights when the world feels almost structured enough to reveal its secret. I lie awake thinking about the quiet impossibility at the center of learning. A child hears scattered fragments of language and somehow extracts the grammar of an entire tongue. A bird sees the stars rotating overhead and knows which direction to migrate. A mathematician stares at symbols until patterns crystallize that were always there but never visible. Structure appears where none was visibly given. Something in the mind finds what the world does not openly display.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

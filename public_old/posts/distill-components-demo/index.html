@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="light">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Distill Components Demo: Efficient LLM Serving | Han Yuan Jiang</title>
+<meta name="keywords" content="distill, systems, llm">
+<meta name="description" content="Demo post using dt-cite, dt-fn, dt-code, and bibliography support.">
+<meta name="author" content="map[name:Han Yuan Jiang]">
+<link rel="canonical" href="http://localhost:1313/posts/distill-components-demo/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.da3211e5ef867bf2b75fd5a6515cfed7195c011e8ab735694e203810a827097b.css" integrity="sha256-2jIR5e&#43;Ge/K3X9WmUVz&#43;1xlcAR6KtzVpTiA4EKgnCXs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/distill-components-demo/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    }
+
+</script><link rel="stylesheet" href="/css/custom.css" />
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://distill.pub/template.v1.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var cleanupDistillChrome = function () {
+      document.querySelectorAll("dt-banner, dt-header, dt-footer").forEach(function (el) { el.remove(); });
+    };
+    cleanupDistillChrome();
+    if (document.body) {
+      new MutationObserver(cleanupDistillChrome).observe(document.body, { childList: true });
+    }
+  });
+</script>
+<link rel="stylesheet" href="/css/distill.css" />
+
+
+<meta property="og:url" content="http://localhost:1313/posts/distill-components-demo/">
+  <meta property="og:site_name" content="Han Yuan Jiang">
+  <meta property="og:title" content="Distill Components Demo: Efficient LLM Serving">
+  <meta property="og:description" content="Demo post using dt-cite, dt-fn, dt-code, and bibliography support.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-02-22T00:00:00+00:00">
+    <meta property="article:tag" content="Distill">
+    <meta property="article:tag" content="Systems">
+    <meta property="article:tag" content="Llm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Distill Components Demo: Efficient LLM Serving">
+<meta name="twitter:description" content="Demo post using dt-cite, dt-fn, dt-code, and bibliography support.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blog",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Distill Components Demo: Efficient LLM Serving",
+      "item": "http://localhost:1313/posts/distill-components-demo/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Distill Components Demo: Efficient LLM Serving",
+  "name": "Distill Components Demo: Efficient LLM Serving",
+  "description": "Demo post using dt-cite, dt-fn, dt-code, and bibliography support.",
+  "keywords": [
+    "distill", "systems", "llm"
+  ],
+  "articleBody": "This post demonstrates real Distill tags inside Hugo + PaperMod.\nLatency-aware batching can improve serving efficiency .\nA Distill footnote example Use this for concise hover explanations..\nDistill Code Snippet class Scheduler: def score(self, queue_len, token_budget): return queue_len / max(token_budget, 1) Equation $$ \\text{throughput} = \\frac{\\text{tokens}}{\\text{second}} $$\n",
+  "wordCount" : "47",
+  "inLanguage": "en",
+  "datePublished": "2026-02-22T00:00:00Z",
+  "dateModified": "2026-02-22T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"name":"Han Yuan Jiang"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/distill-components-demo/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Han Yuan Jiang",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Han Yuan Jiang (Alt + H)">Han Yuan Jiang</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/research/" title="Research">
+                    <span>Research</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"><div class="distill-layout">
+  <aside class="distill-side" aria-label="Article metadata">
+    <h2>Distill Components Demo: Efficient LLM Serving</h2>
+    <p class="distill-side-desc">Demo post using dt-cite, dt-fn, dt-code, and bibliography support.</p>
+    <div class="distill-side-block">
+      <div class="distill-side-label">Authors</div>
+      <ul>
+        <li><a href="https://jianghanyuan.github.io">Han Yuan Jiang</a><span class="distill-affil">, CS PhD Program</span></li>
+        <li><a href="https://example.com">Collaborator A</a><span class="distill-affil">, Research Lab</span></li>
+      </ul>
+    </div>
+
+    <div class="distill-side-block">
+      <div class="distill-side-label">Published</div>
+      <div>Feb 22, 2026</div>
+    </div>
+    <div class="distill-side-block">
+      <div class="distill-side-label">Tags</div>
+      <ul>
+        <li>distill</li>
+        <li>systems</li>
+        <li>llm</li>
+      </ul>
+    </div>
+  </aside>
+
+  <div class="distill-main">
+    <dt-article>
+      <h1>Distill Components Demo: Efficient LLM Serving</h1><p>Demo post using dt-cite, dt-fn, dt-code, and bibliography support.</p><p>This post demonstrates <strong>real Distill tags</strong> inside Hugo + PaperMod.</p>
+<p>Latency-aware batching can improve serving efficiency <dt-cite key="vaswani2017attention"></dt-cite>.</p>
+<p>A Distill footnote example <dt-fn>Use this for concise hover explanations.</dt-fn>.</p>
+<h2 id="distill-code-snippet">Distill Code Snippet</h2>
+<dt-code block language="python">
+class Scheduler:
+    def score(self, queue_len, token_budget):
+        return queue_len / max(token_budget, 1)
+</dt-code>
+<h2 id="equation">Equation</h2>
+<p>$$
+\text{throughput} = \frac{\text{tokens}}{\text{second}}
+$$</p>
+
+    </dt-article>
+
+    <dt-appendix>
+      
+      <script type="text/bibliography">
+@article{vaswani2017attention,
+  title={Attention Is All You Need},
+  author={Vaswani, Ashish and others},
+  journal={NeurIPS},
+  year={2017}
+}
+
+      </script>
+      
+    </dt-appendix>
+  </div>
+</div>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Han Yuan Jiang</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

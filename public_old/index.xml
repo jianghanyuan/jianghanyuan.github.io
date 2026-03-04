@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Hanyuan Jiang</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Hanyuan Jiang</description>
+    <generator>Hugo -- 0.156.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Research Interests</title>
+      <link>http://localhost:1313/blog/research-interests/</link>
+      <pubDate>Sun, 22 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/research-interests/</guid>
+      <description>From efficient inference to reliable deployment — building the systems that power modern AI.</description>
+    </item>
+    <item>
+      <title>On Learning, Longing, and All the Things We Cannot Name</title>
+      <link>http://localhost:1313/blog/on-learning-longing-and-all-the-things-we-cannot-name/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/on-learning-longing-and-all-the-things-we-cannot-name/</guid>
+      <description>&lt;p&gt;There are nights when the world feels almost structured enough to reveal its secret. I lie awake thinking about the quiet impossibility at the center of learning. A child hears scattered fragments of language and somehow extracts the grammar of an entire tongue. A bird sees the stars rotating overhead and knows which direction to migrate. A mathematician stares at symbols until patterns crystallize that were always there but never visible. Structure appears where none was visibly given. Something in the mind finds what the world does not openly display.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Second Vision: Placeholder</title>
+      <link>http://localhost:1313/blog/the-second-vision-placeholder/</link>
+      <pubDate>Wed, 18 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/blog/the-second-vision-placeholder/</guid>
+      <description>&lt;p&gt;&lt;em&gt;(Drafting in progress&amp;hellip;)&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Misc</title>
+      <link>http://localhost:1313/misc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/misc/</guid>
+      <description>&lt;style&gt;
+.post-title, .page-header h1 {
+    font-family: system-ui, -apple-system, sans-serif !important;
+    font-weight: 700 !important;
+}
+&lt;/style&gt;
+&lt;p&gt;Did you know that&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Publications</title>
+      <link>http://localhost:1313/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/publications/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Research</title>
+      <link>http://localhost:1313/research/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/research/</guid>
+      <description>&lt;style&gt;
+.post-title {
+    font-family: system-ui, -apple-system, sans-serif !important;
+    font-weight: 700 !important;
+}
+&lt;/style&gt;</description>
+    </item>
+  </channel>
+</rss>

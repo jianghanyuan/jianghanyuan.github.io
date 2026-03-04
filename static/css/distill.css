@@ -15,7 +15,6 @@
    PaperMod sets .main { max-width: 828px }, but
    distill needs ~1100px for TOC + content + sidenotes.
    ═══════════════════════════════════════════════ */
-.main:has(.distill-page),
 .main.distill-main {
   max-width: none !important;
   /* CRITICAL: Remove max-width constraint completely */
@@ -57,22 +56,21 @@
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
   border-radius: 100px;
-  border: 1px solid var(--border);
+  border: none !important;
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--primary) !important;
-  background: transparent;
+  color: #000 !important;
+  background: #f3f4f6 !important;
   transition: all 0.2s ease;
   cursor: pointer;
+  box-shadow: none !important;
 }
 
 .pill-btn:hover {
-  background: var(--entry);
+  background: #e5e7eb !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  border-color: var(--border);
-  opacity: 1 !important;
+  color: var(--primary) !important;
 }
 
 .nav-arrow {
@@ -87,8 +85,8 @@
 /* ── Header ── */
 .distill-header {
   max-width: 800px;
-  margin: 3rem auto 4rem;
-  padding-bottom: 2rem;
+  margin: 3rem auto 1.5rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border);
   text-align: center;
   /* Center the entire header block */
@@ -157,7 +155,6 @@
     max-width: 1200px;
     margin: 0 auto;
     gap: 4rem;
-    /* Restore clean gap between TOC and content */
     align-items: flex-start;
   }
 }
@@ -172,10 +169,8 @@
     display: block;
     width: 220px;
     /* Generous width for TOC */
-    flex-shrink: 0;
     position: sticky;
     top: 80px;
-    align-self: flex-start;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
     scrollbar-width: none;
@@ -186,6 +181,11 @@
   .distill-toc::-webkit-scrollbar {
     display: none;
   }
+}
+
+.distill-toc #TableOfContents {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .distill-toc #TableOfContents ul {
