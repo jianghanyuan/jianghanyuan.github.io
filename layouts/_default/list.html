@@ -83,11 +83,12 @@
 
     {{- /* Right Column: List of 2 other updates (40%) */ -}}
     <div class="updates-list-side" style="display: flex; flex-direction: column; justify-content: space-between;">
-      {{- $secondVisionPost := index (where $updates "Title" "The Second Vision: Placeholder") 0 -}}
+      {{- $secondVisionPost := index (where $updates "Title" "Humanity’s Thousand-Year Alignment Experiment") 0 -}}
       {{- $thirdVisionPost := index (where $updates "Title" "The Third Vision: placeholder") 0 -}}
       {{- $rightSidePosts := slice $secondVisionPost $thirdVisionPost -}}
 
       {{- range $rightSidePosts -}}
+      {{- if . -}}
       <div class="update-card"
         style="padding-bottom: 1rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem;">
         {{- if .Params.image -}}
@@ -108,6 +109,7 @@
           {{ .Title | markdownify }}
         </a>
       </div>
+      {{- end -}}
       {{- end -}}
       {{- /* Remove border and margin from last item to fit nicely */ -}}
       <style>
