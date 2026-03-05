@@ -81,87 +81,136 @@
       {{- end -}}
     </div>
 
-    {{- /* Right Column: List of 2 other updates (40%) */ -}}
-    <div class="updates-list-side" style="display: flex; flex-direction: column; justify-content: space-between;">
-      {{- $secondVisionPost := index (where $updates "Title" "Humanity’s Thousand-Year Alignment Experiment") 0 -}}
-      {{- $thirdVisionPost := index (where $updates "Title" "The Third Vision: placeholder") 0 -}}
-      {{- $rightSidePosts := slice $secondVisionPost $thirdVisionPost -}}
-
-      {{- range $rightSidePosts -}}
+    {{- /* Right Column: Scrollable list of all other updates (40%) */ -}}
+    <div class="updates-list-side">
+      {{- range $remainingUpdates -}}
       {{- if . -}}
-      <div class="update-card"
-        style="padding-bottom: 1rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem;">
+      <a href="{{ .RelPermalink }}" class="update-card-link">
         {{- if .Params.image -}}
-        <a href="{{ .RelPermalink }}" class="right-col-img"
-          style="display: block; margin-bottom: 0.75rem; border-bottom: none; border-radius: 8px; overflow: hidden; aspect-ratio: 5 / 3;">
-          <img src="{{ .Params.image }}" alt="Featured Image"
-            style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </a>
+        <div class="update-card-img">
+          <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+        </div>
         {{- end -}}
-        <div
-          style="font-size: 0.8rem; color: var(--secondary); margin-bottom: 0.3rem; display: flex; gap: 0.5rem; font-weight: 500;">
-          {{- if eq .Section "blog" -}}<span style="color: #111;">Blog</span>{{- else -}}<span
-            style="color: #111;">News</span>{{- end -}}
+        <div class="update-card-meta">
+          {{- if eq .Slug "humanitys-thousand-year-alignment-experiment" -}}<span
+            style="font-weight: 600; color: #2563eb;">Featured</span>{{- else -}}{{- if eq .Section "blog" -}}<span
+            class="update-card-tag">Blog</span>{{- else -}}<span class="update-card-tag">News</span>{{- end -}}{{- end
+          -}}
           <span>{{ .Date.Format "Jan 2, 2006" }}</span>
         </div>
-        <a href="{{ .RelPermalink }}" class="right-col-title"
-          style="display: block; font-family: var(--font-heading); font-size: 1.05rem; font-weight: 600; color: var(--primary); text-decoration: none !important; border-bottom: none !important; line-height: 1.25; margin-bottom: 0;">
-          {{ .Title | markdownify }}
-        </a>
-      </div>
+        <div class="update-card-title">{{ .Title | markdownify }}</div>
+      </a>
       {{- end -}}
       {{- end -}}
-      {{- /* Remove border and margin from last item to fit nicely */ -}}
-      <style>
-        .updates-grid {
-          display: grid;
-          grid-template-columns: 7fr 3fr;
-          gap: 1rem;
-          margin-top: 1rem;
-          align-items: stretch;
-        }
-
-        .updates-list-side .update-card:last-child {
-          border-bottom: none !important;
-          margin-bottom: 0 !important;
-          padding-bottom: 0 !important;
-        }
-
-        a.right-col-img {
-          text-decoration: none !important;
-          border-bottom: none !important;
-          box-shadow: none !important;
-        }
-
-        a.right-col-title {
-          text-decoration: none !important;
-          border-bottom: none !important;
-          box-shadow: none !important;
-          background: none !important;
-          background-image: none !important;
-        }
-
-        a.right-col-title:hover {
-          text-decoration: none !important;
-          border-bottom: none !important;
-          box-shadow: none !important;
-          background: none !important;
-          background-image: none !important;
-          opacity: 0.7;
-        }
-
-        @media (max-width: 768px) {
-          .updates-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-
-          .featured-image-wrapper {
-            min-height: 200px !important;
-          }
-        }
-      </style>
     </div>
+
+    <style>
+      .updates-grid {
+        display: grid;
+        grid-template-columns: 6fr 4fr;
+        gap: 1rem;
+        margin-top: 1rem;
+        align-items: start;
+      }
+
+      .updates-list-side {
+        max-height: 480px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border) transparent;
+        padding-right: 0.5rem;
+      }
+
+      .updates-list-side::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .updates-list-side::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .updates-list-side::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 4px;
+      }
+
+      a.update-card-link {
+        display: block;
+        text-decoration: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+        background: none !important;
+        background-image: none !important;
+        color: inherit;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border) !important;
+        transition: opacity 0.15s ease;
+      }
+
+      a.update-card-link:first-child {
+        padding-top: 0;
+      }
+
+      a.update-card-link:last-child {
+        border-bottom: none !important;
+      }
+
+      a.update-card-link:hover {
+        opacity: 0.7;
+      }
+
+      .update-card-img {
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        aspect-ratio: 5 / 3;
+        margin-bottom: 0.75rem;
+      }
+
+      .update-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .update-card-meta {
+        font-size: 0.8rem;
+        color: var(--secondary);
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+      }
+
+      .update-card-tag {
+        color: #111;
+      }
+
+      .update-card-title {
+        font-family: var(--font-heading);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--primary);
+        line-height: 1.3;
+      }
+
+      @media (max-width: 768px) {
+        .updates-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .featured-image-wrapper {
+          min-height: 200px !important;
+        }
+
+        .updates-list-side {
+          max-height: 320px;
+        }
+      }
+    </style>
 
   </div>
 </section>
