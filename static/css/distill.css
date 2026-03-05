@@ -262,7 +262,7 @@
   min-width: 0;
   /* Fixes text wrapping issues */
   position: relative;
-  /* anchor for sidenotes */
+  /* anchor for absolutely-positioned sidenotes */
   overflow: visible;
   /* allow sidenotes to overflow into right margin */
   margin-right: 240px;
@@ -321,20 +321,19 @@
 }
 
 /* ═══════════════════════════════════════════
-   SIDENOTES — absolute positioning approach
-   Appear in the right gutter on desktop
-   (exactly like ThinkingMachines Lab)
+   SIDENOTES — absolute + JS layout
+   Positioned in the right gutter on desktop.
+   JavaScript in distill.html calculates 
+   non-overlapping top values on page load.
    ═══════════════════════════════════════════ */
 .sidenote {
   position: absolute;
   right: -240px;
-  /* Push into the reserved margin */
   width: 200px;
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 0.78rem;
   line-height: 1.45;
   color: var(--secondary);
-  vertical-align: baseline;
   box-sizing: border-box;
 }
 
@@ -354,9 +353,9 @@
   }
 
   .sidenote {
-    position: relative;
-    /* Reset absolute on small screens */
-    right: 0;
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
     display: block;
     width: 100%;
     margin: 0.5rem 0 1rem;

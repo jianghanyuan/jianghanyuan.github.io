@@ -39,6 +39,50 @@
     </div>
   </div>
 
+  <script>
+    // Layout sidenotes to prevent overlap.
+    // Each sidenote is position:absolute inside .distill-content (position:relative).
+    // We insert invisible anchor spans to find where each note belongs in the text flow,
+    // then assign top values, pushing down any that would collide with the previous note.
+    window.addEventListener("load", function () {
+      if (window.innerWidth <= 1200) return;
+
+      setTimeout(function () {
+        var container = document.querySelector('.distill-content');
+        if (!container) return;
+        var sidenotes = Array.from(container.querySelectorAll('.sidenote'));
+        if (sidenotes.length === 0) return;
+
+        var containerTop = container.getBoundingClientRect().top + window.scrollY;
+        var GAP = 12; // px gap between stacked sidenotes
+        var previousBottom = 0; // tracks the bottom edge (relative to container) of the last placed note
+
+        sidenotes.forEach(function (note) {
+          // 1) Insert an invisible anchor right before the sidenote to mark its text-flow position
+          var anchor = document.createElement('span');
+          anchor.style.cssText = 'display:inline;font-size:0;line-height:0;width:0;height:0;overflow:hidden;';
+          anchor.textContent = '\u200B'; // zero-width space so it participates in layout
+          note.parentNode.insertBefore(anchor, note);
+
+          // 2) Read the anchor's position relative to the container
+          var anchorRect = anchor.getBoundingClientRect();
+          var idealTop = anchorRect.top + window.scrollY - containerTop;
+
+          // 3) Ensure this note doesn't overlap the previous one
+          var finalTop = Math.max(idealTop, previousBottom + GAP);
+
+          // 4) Position the sidenote
+          note.style.top = finalTop + 'px';
+
+          // 5) Measure placed height and update previousBottom
+          //    We need to read the actual rendered height after positioning
+          var noteHeight = note.getBoundingClientRect().height;
+          previousBottom = finalTop + noteHeight;
+        });
+      }, 200);
+    });
+  </script>
+
   {{/* Elegant pagination for series (e.g., Blue Sky Visions) */}}
 
   {{ if in .Params.series "Blue Sky Visions" }}
