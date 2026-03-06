@@ -2,7 +2,7 @@
 title: "The Rating You See Is Pricing Tomorrow"
 slug: "the-rating-you-see-is-pricing-tomorrow"
 aliases: ["/blog/the-third-vision-placeholder/"]
-date: 2026-03-01
+date: 2026-02-26
 layout: distill
 distill: true
 series: ["Blue Sky Visions"]
@@ -13,7 +13,7 @@ image: "/20250801_1510_Chess Pieces Illustration_remix_01k1j7a8kke7wvggmjtgxyhmb
 ---
 
 
-In competitive games like [*League of Legends*](https://en.wikipedia.org/wiki/League_of_Legends) or [*Valorant*](https://en.wikipedia.org/wiki/Valorant), which I am a big fan of, your visible rank updates after every match. The standard story says that number measures skill. But something 'stranger' happens the moment the same number also determines who you face next, which queues you can enter, and whether your friends can still play with you.
+In competitive games like [*League of Legends*](https://en.wikipedia.org/wiki/League_of_Legends) (which I am a big fan of) or [*Valorant*](https://en.wikipedia.org/wiki/Valorant), your visible rank updates after every match. The standard story says that number measures skill. But something 'stranger' happens the moment the same number also determines who you face next, which queues you can enter, and whether your friends can still play with you.
 
 Imagine a new ranked arena with clean outcomes: two players, one match, one rating that rises when you win and falls when you lose. The official explanation sounds familiar. The number tracks your underlying strength. This is the good old [Elo](https://en.wikipedia.org/wiki/Elo_rating_system) dream in modern UI, and recent theory gives that dream real substance by showing that Elo can be understood as a serious online learning rule under a Bradley-Terry-Luce model.<sup>1</sup><span class="sidenote"><sup>1</sup> Olesker-Taylor and Zanetti ([2024](#ref-olesker2024)) analyze Elo through Markov chains and formalize when it tracks latent skill rather than just acting as competitive folklore.</span> Yet the moment the rating also allocates your next opponents and your next set of options, it begins to do more than estimate what you are.
 
