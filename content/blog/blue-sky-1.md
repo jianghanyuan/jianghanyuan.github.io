@@ -8,7 +8,7 @@ series: ["Blue Sky Visions"]
 authors:
   - name: "Hanyuan Jiang"
     url: "/"
-image: "/20250801_2119_Casual Watercolor Lightning_remix_01k1jwdgwsfm3text2tajhxjkf.png"
+image: "/vision-3.png"
 ---
 
 

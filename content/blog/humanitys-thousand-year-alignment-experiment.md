@@ -9,7 +9,7 @@ series: ["Blue Sky Visions"]
 authors:
   - name: "Hanyuan Jiang"
     url: "/"
-image: "/20250801_1510_Chess Pieces Illustration_remix_01k1j7a8kke7wvggmjtgxyhmb5.png"
+image: "/20250801_2119_Casual Watercolor Lightning_remix_01k1jwdgwsfm3text2tajhxjkf.png"
 ---
 
 When we discuss the problem of AI alignment, we tend to view it as an unprecedented technological challenge. However, human society has been conducting an alignment experiment for thousands of years. The object of this experiment is not silicon-based intelligence, but carbon-based intelligence itself. We call it law.
