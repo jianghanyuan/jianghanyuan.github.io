@@ -15,11 +15,100 @@
 <div class="elegant-list">
     {{- range where site.RegularPages "Section" "blog" }}
     {{- if in .Params.series "Blue Sky Visions" }}
-    <a class="elegant-entry" href="{{ .RelPermalink }}">
+    <a class="elegant-entry" href="{{ .RelPermalink }}" {{ if .Params.image }}data-image="{{ .Params.image }}" {{ end
+        }}>
         <div class="elegant-date">{{ .Date.Format "Jan 2, 2006" }}</div>
         <div class="elegant-title">{{ .Title }}</div>
     </a>
     {{- end }}
     {{- end }}
 </div>
+
+{{/* Hover Image Preview Script & Styles */}}
+<div id="hover-preview-container" class="hover-preview-container">
+    <img id="hover-preview-img" src="" alt="Preview">
+</div>
+
+<style>
+    .hover-preview-container {
+        position: fixed;
+        top: 50%;
+        right: 5vw;
+        transform: translateY(-50%);
+        width: 24vw;
+        max-width: 400px;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+    }
+
+    .hover-preview-container.active {
+        display: block;
+        opacity: 1;
+    }
+
+    #hover-preview-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+
+    /* Make list container take only left side on desktop to not overlap image */
+    @media (min-width: 1024px) {
+        .elegant-list {
+            max-width: 50vw;
+        }
+    }
+
+    /* Disable hover preview on small screens */
+    @media (max-width: 1023px) {
+        .hover-preview-container {
+            display: none !important;
+        }
+
+        .elegant-list {
+            max-width: 100%;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const entries = document.querySelectorAll('.elegant-entry[data-image]');
+        const previewContainer = document.getElementById('hover-preview-container');
+        const previewImg = document.getElementById('hover-preview-img');
+
+        if (!previewContainer || !previewImg) return;
+
+        entries.forEach(entry => {
+            entry.addEventListener('mouseenter', function () {
+                const imageUrl = this.getAttribute('data-image');
+                if (imageUrl) {
+                    previewImg.src = imageUrl;
+                    // Use setTimeout to ensure display:block applies before opacity transition
+                    previewContainer.style.display = 'block';
+                    setTimeout(() => {
+                        previewContainer.classList.add('active');
+                    }, 10);
+                }
+            });
+
+            entry.addEventListener('mouseleave', function () {
+                previewContainer.classList.remove('active');
+                // Wait for transition to finish before hiding
+                setTimeout(() => {
+                    if (!previewContainer.classList.contains('active')) {
+                        previewContainer.style.display = 'none';
+                    }
+                }, 300);
+            });
+        });
+    });
+</script>
+
 {{- end -}}

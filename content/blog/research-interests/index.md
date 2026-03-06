@@ -11,6 +11,7 @@ authors:
     url: "https://jianghanyuan.github.io"
     affiliation: ""
 tags: ["research", "systems", "llm"]
+image: "/20250802_2319_Intersecting Squares Design_remix_01k1nnmkwdftnvqeyzwk3970da-modified.png"
 featured: true
 featuredIcon: "research"
 ---

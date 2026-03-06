@@ -8,7 +8,7 @@ series: ["Blue Sky Visions"]
 authors:
   - name: "Hanyuan Jiang"
     url: "/"
-image: "/20250802_2319_Intersecting Squares Design_remix_01k1nnmkwdftnvqeyzwk3970da-modified.png"
+image: "/vision-3.png"
 ---
 
 *(Drafting in progress...)*

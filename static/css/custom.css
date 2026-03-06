@@ -866,8 +866,6 @@ pre code {
 }
 
 .blog-group-header {
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.3rem;
   margin-bottom: 0;
 }
 
