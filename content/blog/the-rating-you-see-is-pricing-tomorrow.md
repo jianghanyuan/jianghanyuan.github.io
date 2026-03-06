@@ -83,6 +83,10 @@ If a platform wants less sandbagging, it can smooth regime discontinuities so th
 
 The practical lesson is surprisingly simple, and this is why I try to maintain an 'informal' narrative throughout. When players throw a game near a threshold, the mystery is not primarily in the player. The mystery is in the Bellman equation the platform has written for them. The ladder is indeed a promise, but what it promises depends on whether climbing makes tomorrow better or worse. Until ranking systems account for how ratings shape futures, how futures shape effort, and how effort reshapes ratings, they should expect players to answer the question the system actually asked, not the one the designer imagined.
 
+However, anyone who has played League of Legends knows that a vast amount of low-effort behavior (like "running it down mid" or rage-quitting) is not a calculated strategic response to promotion thresholds. It is often an immediate, emotional reaction to a frustrating teammate or a single bad play (commonly known as being "tilted"). While we somewhat successfully prove that the system mathematically incentivizes giving up, we, at the same time, gloss over the fact that human psychology and sheer emotional dysregulation likely drive just as much—if not more—of the behavior it is trying to explain.
+
+Maybe, next time your top laner starts soft inting your promo game, you can take comfort in knowing they might just be rationally optimizing their continuation value instead of having a complete mental boom... but we still love League of Legends anyway.
+
 ## References
 
 <ol class="references-list">
