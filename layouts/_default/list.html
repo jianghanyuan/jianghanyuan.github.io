@@ -49,7 +49,6 @@
 
   {{- /* Find the featured post ("On Learning, Longing...") */ -}}
   {{- $featuredPost := index (where $updates "Title" "On Learning, Longing, and All the Ideas We Cannot Name") 0 -}}
-
   {{- /* Get the remaining posts, excluding the featured one */ -}}
   {{- $remainingUpdates := where $updates "Title" "!=" "On Learning, Longing, and All the Ideas We Cannot Name" -}}
 
@@ -60,11 +59,13 @@
       {{- if $featuredPost -}}
       <a href="{{ $featuredPost.RelPermalink }}"
         style="display: block; text-decoration: none; color: inherit; border-bottom: none; display: flex; flex-direction: column;">
+        {{- with $featuredPost.Params.image -}}
         <div class="featured-image-wrapper"
           style="width: 100%; border-radius: 12px; overflow: hidden; background: #1a1a1a; margin-bottom: 1rem; flex-shrink: 0; aspect-ratio: 5 / 3;">
-          <img src="/20250801_2119_Casual Watercolor Lightning_remix_01k1jwdgwsfm3text2tajhxjkf.png"
+          <img src="{{ . }}"
             alt="Featured Image" style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
+        {{- end -}}
         <div style="margin-top: 0.5rem;">
           <div
             style="font-size: 1.5rem; font-weight: 700; font-family: var(--font-heading); color: var(--primary); margin-bottom: 0.5rem; line-height: 1.2;">
@@ -93,7 +94,7 @@
         </div>
         {{- end -}}
         <div class="update-card-meta">
-          {{- if or (eq .Slug "humanitys-thousand-year-alignment-experiment") (eq .Slug "the-third-vision-placeholder") -}}<span
+          {{- if or (eq .Slug "humanitys-thousand-year-alignment-experiment") (eq .Slug "the-third-vision-placeholder") (eq .Slug "the-rating-you-see-is-pricing-tomorrow") -}}<span
             style="font-weight: 600; color: #2563eb;">Featured</span>{{- else -}}{{- if eq .Section "blog" -}}<span
             class="update-card-tag">Blog</span>{{- else -}}<span class="update-card-tag">News</span>{{- end -}}{{- end
           -}}
