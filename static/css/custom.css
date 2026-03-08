@@ -77,6 +77,7 @@
   --border: #eaeaea;
   --link: #333333;
   --link-hover: #000000;
+  --accent-featured: #2563eb;
   --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -109,6 +110,12 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 1000px) {
+  body.home-list-page .main {
+    max-width: 1100px;
+  }
 }
 
 /* ── Consistent BG on ALL containers — force white ── */
@@ -263,12 +270,46 @@ a:hover {
   padding: 1.75rem 0 0 !important;
 }
 
+.home-layout {
+  display: block;
+}
+
+.home-page-content {
+  min-width: 0;
+  width: 100%;
+}
+
+@media (min-width: 1000px) {
+  .home-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .home-page-content {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+}
+
 .home-hero h1 {
   font-family: var(--font-display);
   font-size: 2.8rem;
   font-weight: 400;
   margin-bottom: 0.6rem;
   letter-spacing: -0.02em;
+}
+
+.home-hero-photo {
+  float: right;
+  width: 180px;
+  height: 225px;
+  object-fit: cover;
+  object-position: 38% 18%;
+  border-radius: 18px;
+  display: block;
+  margin: 0.2rem 0 1rem 1.5rem;
 }
 
 .home-hero-copy,
@@ -280,7 +321,7 @@ a:hover {
   font-size: 1.04rem;
   color: var(--primary);
   max-width: 760px;
-  margin-right: 160px;
+  margin-right: 0;
   line-height: 1.75;
 }
 
@@ -289,7 +330,7 @@ a:hover {
 }
 
 .home-hero-copy p:last-child {
-  margin-bottom: 0;
+  margin-bottom: 1rem;
 }
 
 .hero-links {
@@ -318,11 +359,12 @@ a:hover {
 }
 
 .hero-actions {
+  clear: both;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   gap: 1rem 1.25rem;
-  margin-top: 0.5rem;
+  margin-top: 0;
 }
 
 .hero-social {
@@ -349,6 +391,59 @@ a:hover {
 /* ── Home Sections — compact ── */
 .home-section {
   margin: 4rem 0;
+}
+
+.home-toc {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .home-toc {
+    display: block;
+    width: 220px;
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding-right: 1.5rem;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .home-toc::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.home-toc #TableOfContents {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.home-toc #TableOfContents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.home-toc #TableOfContents li {
+  margin-bottom: 0.3rem;
+}
+
+.home-toc #TableOfContents a {
+  font-size: 0.95rem;
+  color: var(--secondary);
+  text-decoration: none;
+  line-height: 1.4;
+  display: block;
+}
+
+.research-page .distill-toc #TableOfContents a {
+  font-size: 0.95rem !important;
+}
+
+.home-toc #TableOfContents a:hover {
+  color: var(--primary);
 }
 
 .home-hero + .home-section {
@@ -806,6 +901,13 @@ pre code {
 
   .home-hero h1 {
     font-size: 2.2rem;
+  }
+
+  .home-hero-photo {
+    float: none;
+    width: 160px;
+    height: 200px;
+    margin: 0 0 1rem;
   }
 
   .home-hero-copy {

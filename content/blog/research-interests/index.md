@@ -12,6 +12,6 @@ featured: true
 featuredIcon: "research"
 ---
 
-My research focuses on machine learning, especially frontier reinforcement learning and deep learning architecture, as well as LLM alignment. I am also interested in game theory and mechanism design.
+My research focuses on machine learning, especially frontier deep learning and reinforcement learning architecture, as well as LLM alignment. I am also interested in game theory and mechanism design.
 
 Drafting in progress...

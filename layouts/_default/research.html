@@ -105,13 +105,16 @@
 
     let manualTopicId = null;
     let scrollTimeout = null;
+    const activeColor = getComputedStyle(document.documentElement)
+      .getPropertyValue("--accent-featured")
+      .trim() || "#2563eb";
 
     function updateHighlight(topicId) {
       navLinks.forEach(link => {
         link.style.color = "var(--secondary)";
         link.style.fontWeight = "normal";
         if (topicId && link.getAttribute("href") === "#" + topicId) {
-          link.style.color = "var(--primary)";
+          link.style.color = activeColor;
           link.style.fontWeight = "700";
         }
       });

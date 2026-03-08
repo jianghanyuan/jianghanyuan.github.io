@@ -1,7 +1,10 @@
 {{- with site.Params.homeInfoParams }}
-<section class="home-hero fade-in">
+<section id="about" class="home-hero fade-in home-nav-section" data-home-toc="about">
   <h1>{{ .Title | markdownify }}</h1>
-  <div class="home-hero-copy">{{ .Content | markdownify }}</div>
+  <div class="home-hero-copy">
+    <img class="home-hero-photo" src="/IMG_9331.jpeg" alt="Hanyuan Jiang portrait" loading="lazy">
+    {{ .Content | markdownify }}
+  </div>
   <div class="hero-actions stagger-1">
     <div class="featured-pills">
       <a href="/blog/research-interests/" class="pill-btn">
