@@ -38,7 +38,16 @@ params:
     - blog
   homeInfoParams:
     Title: "Hanyuan Jiang"
-    Content: "Understand and build general, safe, and emergent intelligence."
+    Content: |
+      I try to understand and contribute to general, safe, and emergent intelligence.
+
+      My research focuses on machine learning, especially frontier reinforcement learning and deep learning architecture, as well as LLM alignment. I am also interested in game theory and mechanism design.
+
+      Until recently, I worked on post-training and red teaming for Anthropic. I previously gained industry experience and worked on various projects at ByteDance Seed, Citadel Securities, and Huawei Research.
+
+      I love Go and Chess. I earned a 7th Dan and Candidate Master (CM). I also love tennis, soccer, and F1.
+
+      You can contact me at hanyuan_jiang at hotmail dot com.
   socialIcons:
     - name: googlescholar
       url: "https://scholar.google.com/citations?user=EBG3nD0AAAAJ&hl=en"

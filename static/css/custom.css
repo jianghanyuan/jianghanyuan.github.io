@@ -260,7 +260,7 @@ a:hover {
 
 /* ── Home Hero ── */
 .home-hero {
-  padding: 3rem 0 0 !important;
+  padding: 1.75rem 0 0 !important;
 }
 
 .home-hero h1 {
@@ -271,11 +271,25 @@ a:hover {
   letter-spacing: -0.02em;
 }
 
-.home-hero p {
-  font-size: 1rem;
-  color: var(--secondary);
-  max-width: 580px;
+.home-hero-copy,
+.home-hero-copy p {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.home-hero-copy {
+  font-size: 1.04rem;
+  color: var(--primary);
+  max-width: 760px;
+  margin-right: 160px;
   line-height: 1.75;
+}
+
+.home-hero-copy p {
+  margin: 0 0 1rem;
+}
+
+.home-hero-copy p:last-child {
+  margin-bottom: 0;
 }
 
 .hero-links {
@@ -299,12 +313,31 @@ a:hover {
   content: ' →';
 }
 
-.hero-social {
-  margin-top: 1rem;
+.home-hero {
+  margin-bottom: 0;
 }
 
-.home-hero {
-  margin-bottom: 6rem;
+.hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1rem 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.hero-social {
+  display: flex;
+  align-items: center;
+}
+
+.hero-social .social-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.hero-social .social-icons a {
+  padding: 6px;
 }
 
 .home-hero h1 {
@@ -316,6 +349,10 @@ a:hover {
 /* ── Home Sections — compact ── */
 .home-section {
   margin: 4rem 0;
+}
+
+.home-hero + .home-section {
+  margin-top: 2.625rem;
 }
 
 .section-header {
@@ -348,9 +385,9 @@ a:hover {
 
 .featured-pills {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1rem;
-  margin: 1.5rem 0 3rem;
+  margin: 0;
 }
 
 .featured-pills .pill-btn {
@@ -769,6 +806,20 @@ pre code {
 
   .home-hero h1 {
     font-size: 2.2rem;
+  }
+
+  .home-hero-copy {
+    margin-right: 0;
+  }
+
+  .hero-actions {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .featured-pills {
+    flex-wrap: wrap;
   }
 
   .post-list li {

@@ -35,7 +35,7 @@
 {{/* ══════════ HOME PAGE CUSTOM SECTIONS ══════════ */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 
-<section class="home-section stagger-2">
+<section class="home-section stagger-2 recent-updates-section">
   <div class="section-header"
     style="position: sticky; top: 0px; z-index: 10; background: var(--theme); padding: 20px 0 10px 0; margin-top: -20px;">
     <h2>Recent Updates</h2>
@@ -49,8 +49,9 @@
 
   {{- /* Find the featured post ("On Learning, Longing...") */ -}}
   {{- $featuredPost := index (where $updates "Title" "On Learning, Longing, and All the Ideas We Cannot Name") 0 -}}
-  {{- /* Get the remaining posts, excluding the featured one */ -}}
+  {{- /* Get the remaining posts, excluding the featured one and the Research Interests card */ -}}
   {{- $remainingUpdates := where $updates "Title" "!=" "On Learning, Longing, and All the Ideas We Cannot Name" -}}
+  {{- $remainingUpdates = where $remainingUpdates "Slug" "!=" "research-interests" -}}
 
   <div class="updates-grid">
 
@@ -108,7 +109,6 @@
 
     <style>
       .updates-grid {
-        --updates-sticky-top: 75px;
         display: grid;
         grid-template-columns: 6fr 4fr;
         gap: 1rem;
@@ -117,7 +117,7 @@
 
       .updates-featured {
         position: sticky;
-        top: var(--updates-sticky-top);
+        top: var(--updates-sticky-top, 96px);
         align-self: start;
       }
 
@@ -223,6 +223,26 @@
         }
       }
     </style>
+
+    <script>
+      (() => {
+        const section = document.querySelector(".recent-updates-section");
+        if (!section) return;
+
+        const syncStickyOffset = () => {
+          const header = section.querySelector(".section-header");
+          const grid = section.querySelector(".updates-grid");
+          if (!header || !grid) return;
+
+          const gridMarginTop = parseFloat(window.getComputedStyle(grid).marginTop) || 0;
+          const stickyTop = Math.ceil(header.getBoundingClientRect().height + gridMarginTop);
+          section.style.setProperty("--updates-sticky-top", `${stickyTop}px`);
+        };
+
+        syncStickyOffset();
+        window.addEventListener("resize", syncStickyOffset, { passive: true });
+      })();
+    </script>
 
   </div>
 </section>
