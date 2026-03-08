@@ -19,6 +19,15 @@
   .research-page .distill-toc #TableOfContents a {
     font-size: 0.95rem !important;
   }
+
+  .research-page .pub-summary p {
+    margin: 0;
+  }
+
+  .research-page .pub-summary a {
+    color: var(--accent-featured);
+    text-decoration: underline;
+  }
 </style>
 
 <article class="distill-page research-page">
@@ -75,7 +84,7 @@
                 {{- if .summary }}
                 <div class="pub-summary"
                   style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem; line-height: 1.5;">
-                  {{ .summary }}
+                  {{ .summary | markdownify }}
                 </div>
                 {{- end }}
                 {{- if .links }}
