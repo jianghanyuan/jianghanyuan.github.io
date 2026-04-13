@@ -12,9 +12,9 @@
     --gap: 24px;
 }
 
-/* White background */
+/* Transparent background to allow body animations */
 .list {
-    background: #ffffff !important;
+    background: transparent !important;
 }
 
 html,

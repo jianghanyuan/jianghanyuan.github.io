@@ -138,7 +138,7 @@ footer,
 
 /* ── PaperMod .list bg override — force white ── */
 .list {
-  background: #ffffff !important;
+  background: transparent !important;
 }
 
 /* ── Typography ── */
@@ -265,7 +265,39 @@ a:hover {
   text-decoration: underline;
 }
 
+body {
+  position: relative;
+  z-index: 0;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: light-ripple 8s ease-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
 /* ── Home Hero ── */
+@keyframes light-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(40);
+    opacity: 0;
+  }
+}
+
 .home-hero {
   padding: 1.75rem 0 0 !important;
 }
@@ -301,17 +333,6 @@ a:hover {
   letter-spacing: -0.02em;
 }
 
-.home-hero-photo {
-  float: right;
-  width: 180px;
-  height: 225px;
-  object-fit: cover;
-  object-position: 38% 18%;
-  border-radius: 18px;
-  display: block;
-  margin: 0.2rem 0 1rem 1.5rem;
-}
-
 .home-hero-copy,
 .home-hero-copy p {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
@@ -331,6 +352,12 @@ a:hover {
 
 .home-hero-copy p:last-child {
   margin-bottom: 1rem;
+}
+
+.home-hero-copy a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--primary);
 }
 
 .hero-links {
@@ -362,7 +389,7 @@ a:hover {
   clear: both;
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 1rem 1.25rem;
   margin-top: 0;
 }
@@ -446,7 +473,7 @@ a:hover {
   color: var(--primary);
 }
 
-.home-hero + .home-section {
+.home-hero+.home-section {
   margin-top: 2.625rem;
 }
 
@@ -503,9 +530,10 @@ a:hover {
 }
 
 .featured-pills .pill-btn:hover {
-  background: #e5e7eb !important;
-  transform: translateY(-2px);
-  color: var(--primary);
+  background: #d1d5db !important;
+  transform: none;
+  color: #000 !important;
+  opacity: 1;
 }
 
 .pill-icon {
@@ -901,13 +929,6 @@ pre code {
 
   .home-hero h1 {
     font-size: 2.2rem;
-  }
-
-  .home-hero-photo {
-    float: none;
-    width: 160px;
-    height: 200px;
-    margin: 0 0 1rem;
   }
 
   .home-hero-copy {
