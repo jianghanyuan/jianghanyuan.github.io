@@ -2,13 +2,7 @@ groups:
   - topic: "Reinforcement Learning"
 
     items:
-      - title: "The Cost of Delegation"
-        authors: "Hanyuan Jiang, Yi Man"
-        venue: "Preprint. 2026"
-        summary: ""
-        links:
-          - label: "Paper"
-            url: "/cost-of-delegation.pdf"
+      
 
       - title: "Learn Fast, Dream Slow: Long-horizon Understanding via Controllable Information Decomposition"
         authors: "Hanyuan Jiang"
@@ -16,7 +10,7 @@ groups:
         summary: "LUCID learns to separate what changes quickly from what persists, then allocates expensive planning only to persistent variables that compound over time."
         links:
           - label: "Idea"
-            url: "https://docs.google.com/document/d/1LPAsy5h4NJp1FC5UUzswi3BeOfXOY1qt3eUwVeFsocY"
+            
 
       - title: "The Shape of Mechanisms to Come"
         authors: "Hanyuan Jiang"
@@ -45,28 +39,3 @@ groups:
         links:
           - label: "Toy model"
             url: "/blog/the-rating-you-see-is-pricing-tomorrow/"
-
-  - topic: "Political Economy & Law"
-    items:
-      - title: "The Resource Curse of Communication: Evidence from Brazilian Municipalities"
-        authors: "Hanyuan Jiang"
-        venue: "Working paper. 2025 (STICERD & CEPR)"
-        links:
-          - label: "Paper"
-            url: "/resource_curse.pdf"
-
-      - title: "Construct to Commitment: The Effect of Narratives on Economic Growth "
-        authors: "Hanyuan Jiang, Yi Man"
-        venue: "Working paper. 2025 (LSE STICERD, PKU NSE)"
-        links:
-          - label: "Paper"
-            url: "https://arxiv.org/abs/2504.21060"
-
-  - topic: "Macroeconomics"
-    items:
-      - title: "The Bones and Shapes of the Phillips Curve"
-        authors: "Hanyuan Jiang"
-        venue: "Thesis. 2025 (Highest Distinction in the cohort)"
-        links:
-          - label: "Paper"
-            url: "https://arxiv.org/abs/2506.14030"
