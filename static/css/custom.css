@@ -141,6 +141,12 @@ footer,
   background: transparent !important;
 }
 
+img {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
 .footer,
 .footer span,
 .footer a {
@@ -432,6 +438,23 @@ body::before {
 
 .home-identity-actions .social-icons a {
   padding: 6px;
+}
+
+.home-identity-art {
+  margin-top: 0.55rem;
+  margin-left: -8px;
+  width: 100%;
+  max-width: 190px;
+}
+
+.home-identity-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 .home-identity-email {
@@ -950,6 +973,10 @@ pre code {
   .home-identity-actions {
     flex-wrap: nowrap;
     gap: 0.45rem;
+  }
+
+  .home-identity-art {
+    max-width: 145px;
   }
 
   .home-identity-email {
