@@ -442,9 +442,9 @@ body::before {
 
 .home-identity-art {
   margin-top: 0.55rem;
-  margin-left: -8px;
+  margin-left: -12px;
   width: 100%;
-  max-width: 190px;
+  max-width: 185px;
 }
 
 .home-identity-art img {
