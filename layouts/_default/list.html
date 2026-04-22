@@ -35,195 +35,73 @@
 {{/* ══════════ HOME PAGE CUSTOM SECTIONS ══════════ */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
 
-<section class="home-section stagger-2">
-  <div class="section-header"
-    style="position: sticky; top: 0px; z-index: 10; background: var(--theme); padding: 20px 0 10px 0; margin-top: -20px;">
+<section class="home-section stagger-2 home-updates-section">
+  <div class="home-updates-heading">
     <h2>Recent Updates</h2>
-    <a class="view-all" href="/blog/">All blogs →</a>
   </div>
 
   {{- $blogs := where site.RegularPages "Section" "blog" -}}
-  {{- $news := where site.RegularPages "Section" "news" -}}
-  {{- $updates := union $blogs $news -}}
-  {{- $updates = sort $updates "Date" "desc" -}}
+  {{- $newsPages := where site.RegularPages "Section" "news" -}}
+  {{- $updates := slice -}}
 
-  {{- /* Find the featured post ("On Learning, Longing...") */ -}}
-  {{- $featuredPost := index (where $updates "Title" "On Learning, Longing, and All the Ideas We Cannot Name") 0 -}}
-  {{- /* Get the remaining posts, excluding the featured one */ -}}
-  {{- $remainingUpdates := where $updates "Title" "!=" "On Learning, Longing, and All the Ideas We Cannot Name" -}}
+  {{- range $blogs -}}
+  {{- $image := .Params.image | default "" -}}
+  {{- $updates = $updates | append (dict
+  "kind" "blog"
+  "title" .Title
+  "dateLabel" (.Date.Format "Jan 2, 2006")
+  "sortUnix" .Date.Unix
+  "url" .RelPermalink
+  "image" $image
+  ) -}}
+  {{- end -}}
 
-  <div class="updates-grid">
+  {{- range $newsPages -}}
+  {{- $updates = $updates | append (dict
+  "kind" "news"
+  "title" .Title
+  "dateLabel" (.Date.Format "Jan 2, 2006")
+  "sortUnix" .Date.Unix
+  ) -}}
+  {{- end -}}
 
-    {{- /* Left Column: Featured Post (60%) */ -}}
-    <div class="updates-featured">
-      {{- if $featuredPost -}}
-      <a href="{{ $featuredPost.RelPermalink }}"
-        style="display: block; text-decoration: none; color: inherit; border-bottom: none; display: flex; flex-direction: column;">
-        {{- with $featuredPost.Params.image -}}
-        <div class="featured-image-wrapper"
-          style="width: 100%; border-radius: 12px; overflow: hidden; background: #1a1a1a; margin-bottom: 1rem; flex-shrink: 0; aspect-ratio: 5 / 3;">
-          <img src="{{ . }}" alt="Featured Image" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </div>
-        {{- end -}}
-        <div style="margin-top: 0.5rem;">
-          <div
-            style="font-size: 1.5rem; font-weight: 700; font-family: var(--font-heading); color: var(--primary); margin-bottom: 0.5rem; line-height: 1.2;">
-            {{ $featuredPost.Title }}
-          </div>
-          <div style="font-size: 0.95rem; color: var(--secondary); margin-bottom: 0.8rem; line-height: 1.5;">
-            I believe learning fundamentally involves discovering invariances preserved under transformation.
-          </div>
-          <div style="font-size: 0.9rem; color: var(--secondary); display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-weight: 600; color: #2563eb;">Featured</span>
-            <span>{{ $featuredPost.Date.Format "Jan 2, 2006" }}</span>
-          </div>
-        </div>
-      </a>
-      {{- end -}}
+  {{- with site.Data.home_news.items -}}
+  {{- range . -}}
+  {{- $newsDate := time.AsTime .date -}}
+  {{- $updates = $updates | append (dict
+  "kind" "news"
+  "title" .title
+  "dateLabel" ($newsDate.Format "Jan 2, 2006")
+  "sortUnix" $newsDate.Unix
+  ) -}}
+  {{- end -}}
+  {{- end -}}
+
+  {{- $updates = sort $updates "sortUnix" "desc" -}}
+
+  <div class="home-updates-filter" aria-label="Recent updates filter">
+    <button type="button" class="home-updates-filter-btn is-active" data-filter="all">All</button>
+    <button type="button" class="home-updates-filter-btn" data-filter="blog">Blog</button>
+    <button type="button" class="home-updates-filter-btn" data-filter="news">News</button>
+  </div>
+
+  <div class="elegant-list hover-preview-enabled home-updates-list">
+    {{- range $updates -}}
+    {{- if eq .kind "blog" -}}
+    <a class="elegant-entry home-update-entry" data-kind="blog" href="{{ .url }}" {{ if .image }}data-image="{{ .image }}"
+      {{ end }}>
+      <span class="elegant-date home-update-date">{{ .dateLabel }}</span>
+      <span class="home-update-category is-blog">Blog</span>
+      <span class="elegant-title home-update-title">{{ .title }}</span>
+    </a>
+    {{- else -}}
+    <div class="elegant-entry home-update-entry is-news" data-kind="news" role="article" aria-label="News update">
+      <span class="elegant-date home-update-date">{{ .dateLabel }}</span>
+      <span class="home-update-category is-news">News</span>
+      <span class="elegant-title home-update-title">{{ .title }}</span>
     </div>
-
-    {{- /* Right Column: Scrollable list of all other updates (40%) */ -}}
-    <div class="updates-list-side">
-      {{- range $remainingUpdates -}}
-      {{- if . -}}
-      <a href="{{ .RelPermalink }}" class="update-card-link">
-        {{- if .Params.image -}}
-        <div class="update-card-img">
-          <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
-        </div>
-        {{- end -}}
-        <div class="update-card-meta">
-          {{- if or (eq .Slug "humanitys-thousand-year-alignment-experiment") (eq .Slug "the-third-vision-placeholder")
-          (eq .Slug "the-rating-you-see-is-pricing-tomorrow") -}}<span
-            style="font-weight: 600; color: #2563eb;">Featured</span>{{- else -}}{{- if eq .Section "blog" -}}<span
-            class="update-card-tag">Blog</span>{{- else -}}<span class="update-card-tag">News</span>{{- end -}}{{- end
-          -}}
-          <span>{{ .Date.Format "Jan 2, 2006" }}</span>
-        </div>
-        <div class="update-card-title">{{ .Title | markdownify }}</div>
-      </a>
-      {{- end -}}
-      {{- end -}}
-    </div>
-
-    <style>
-      .updates-grid {
-        --updates-sticky-top: 75px;
-        display: grid;
-        grid-template-columns: 6fr 4fr;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      .updates-featured {
-        position: sticky;
-        top: var(--updates-sticky-top);
-        align-self: start;
-      }
-
-      .updates-list-side {
-        padding-right: 0.5rem;
-      }
-
-      a.update-card-link {
-        display: block;
-        text-decoration: none !important;
-        border-bottom: none !important;
-        box-shadow: none !important;
-        background: none !important;
-        background-image: none !important;
-        color: inherit;
-        padding: 0.75rem 0;
-        border-bottom: 1px solid var(--border) !important;
-        transition: opacity 0.15s ease;
-      }
-
-      a.update-card-link:first-child {
-        padding-top: 0;
-      }
-
-      a.update-card-link:last-child {
-        border-bottom: none !important;
-      }
-
-      a.update-card-link:hover {
-        opacity: 1;
-      }
-
-      .update-card-img {
-        width: 100%;
-        border-radius: 8px;
-        overflow: hidden;
-        aspect-ratio: 5 / 3;
-        margin-bottom: 0.75rem;
-        transition: box-shadow 0.22s ease;
-      }
-
-      .featured-image-wrapper {
-        transition: box-shadow 0.22s ease;
-      }
-
-      .updates-featured a:hover .featured-image-wrapper,
-      a.update-card-link:hover .update-card-img {
-        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.04);
-      }
-
-      .updates-featured a:hover {
-        opacity: 1;
-      }
-
-      .update-card-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
-      .update-card-meta {
-        font-size: 0.8rem;
-        color: var(--secondary);
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        font-weight: 500;
-        margin-bottom: 0.3rem;
-      }
-
-      .update-card-tag {
-        color: #111;
-      }
-
-      .update-card-title {
-        font-family: var(--font-heading);
-        font-size: 1.05rem;
-        font-weight: 600;
-        color: var(--primary);
-        line-height: 1.3;
-      }
-
-      @media (max-width: 768px) {
-        .updates-grid {
-          grid-template-columns: 1fr;
-          gap: 2rem;
-        }
-
-        .updates-featured {
-          position: static;
-          top: auto;
-        }
-
-        .featured-image-wrapper {
-          min-height: 200px !important;
-        }
-
-        .updates-list-side {
-          max-height: none;
-          overflow-y: visible;
-          padding-right: 0;
-        }
-      }
-    </style>
-
+    {{- end -}}
+    {{- end -}}
   </div>
 </section>
 
@@ -317,7 +195,7 @@
   <div class="blog-group-header">
     <h2>{{ $seriesName }}</h2>
   </div>
-  <div class="elegant-list">
+  <div class="elegant-list hover-preview-enabled">
     {{- range $paginator.Pages }}
     {{- if in .Params.series $seriesName }}
     {{- $seriesPages = $seriesPages | append . }}
@@ -347,7 +225,7 @@
     <h2>Other Posts</h2>
   </div>
   {{- end }}
-  <div class="elegant-list">
+  <div class="elegant-list hover-preview-enabled">
     {{- range $standalone }}
     <a class="elegant-entry" href="{{ .RelPermalink }}" {{ if .Params.image }}data-image="{{ .Params.image }}" {{ end
       }}>
@@ -381,8 +259,8 @@
 {{- end }}{{/* end profileMode */}}
 
 {{/* Hover Image Preview Script & Styles */}}
-{{- if or (eq .Section "blog") (eq .Section "vision") }}
-<div id="hover-preview-container" class="hover-preview-container">
+{{- if or (eq .Section "blog") (eq .Section "vision") .IsHome }}
+<div id="hover-preview-container" class="hover-preview-container {{ if .IsHome }}home-preview-fixed{{ end }}">
   <img id="hover-preview-img" src="" alt="Preview">
 </div>
 
@@ -392,8 +270,8 @@
     top: 50%;
     right: 5vw;
     transform: translateY(-50%);
-    width: 24vw;
-    max-width: 400px;
+    width: clamp(220px, 18vw, 300px);
+    aspect-ratio: 16 / 10;
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -410,16 +288,26 @@
 
   #hover-preview-img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     object-fit: cover;
   }
 
   /* Make list container take only left side on desktop to not overlap image */
   @media (min-width: 1024px) {
-    .elegant-list {
+    .hover-preview-enabled {
       max-width: 50vw;
     }
+
+    .home-updates-list.hover-preview-enabled {
+      max-width: 100%;
+    }
+  }
+
+  .hover-preview-container.home-preview-fixed {
+    right: 2.2vw;
+    width: clamp(300px, 24vw, 390px);
+    transform: none;
   }
 
   /* Disable hover preview on small screens */
@@ -428,7 +316,7 @@
       display: none !important;
     }
 
-    .elegant-list {
+    .hover-preview-enabled {
       max-width: 100%;
     }
   }
@@ -436,11 +324,32 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const entries = document.querySelectorAll('.elegant-entry[data-image]');
+    const entries = document.querySelectorAll('.hover-preview-enabled .elegant-entry[data-image]');
     const previewContainer = document.getElementById('hover-preview-container');
     const previewImg = document.getElementById('hover-preview-img');
+    const filterButtons = document.querySelectorAll('.home-updates-filter-btn');
+    const homeUpdateEntries = document.querySelectorAll('.home-update-entry[data-kind]');
+    const isHomeFixedPreview = previewContainer && previewContainer.classList.contains('home-preview-fixed');
 
     if (!previewContainer || !previewImg) return;
+
+    function hidePreview() {
+      previewContainer.classList.remove('active');
+      setTimeout(() => {
+        if (!previewContainer.classList.contains('active')) {
+          previewContainer.style.display = 'none';
+        }
+      }, 300);
+    }
+
+    function setHomePreviewTop() {
+      if (!isHomeFixedPreview || window.innerWidth < 1024) return;
+      const firstVisibleRow = Array.from(homeUpdateEntries).find(entry => entry.style.display !== 'none');
+      if (!firstVisibleRow) return;
+      const rect = firstVisibleRow.getBoundingClientRect();
+      // Always align preview top with the first visible list row.
+      previewContainer.style.top = `${rect.top}px`;
+    }
 
     entries.forEach(entry => {
       entry.addEventListener('mouseenter', function () {
@@ -449,6 +358,7 @@
           previewImg.src = imageUrl;
           // Use setTimeout to ensure display:block applies before opacity transition
           previewContainer.style.display = 'block';
+          setHomePreviewTop();
           setTimeout(() => {
             previewContainer.classList.add('active');
           }, 10);
@@ -456,15 +366,35 @@
       });
 
       entry.addEventListener('mouseleave', function () {
-        previewContainer.classList.remove('active');
-        // Wait for transition to finish before hiding
-        setTimeout(() => {
-          if (!previewContainer.classList.contains('active')) {
-            previewContainer.style.display = 'none';
-          }
-        }, 300);
+        hidePreview();
       });
     });
+
+    if (filterButtons.length > 0 && homeUpdateEntries.length > 0) {
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          const filter = this.getAttribute('data-filter');
+          filterButtons.forEach(btn => btn.classList.remove('is-active'));
+          this.classList.add('is-active');
+          homeUpdateEntries.forEach(entry => {
+            const kind = entry.getAttribute('data-kind');
+            const visible = filter === 'all' || kind === filter;
+            entry.style.display = visible ? '' : 'none';
+          });
+          setHomePreviewTop();
+          hidePreview();
+        });
+      });
+    }
+
+    setHomePreviewTop();
+    window.addEventListener('resize', setHomePreviewTop);
+    window.addEventListener('scroll', function () {
+      if (!isHomeFixedPreview) return;
+      if (previewContainer.classList.contains('active')) {
+        setHomePreviewTop();
+      }
+    }, { passive: true });
   });
 </script>
 {{- end }}

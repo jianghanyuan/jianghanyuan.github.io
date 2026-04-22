@@ -1,11 +1,15 @@
 {{- with site.Params.homeInfoParams }}
 <section id="about" class="home-hero fade-in home-nav-section" data-home-toc="about">
-  <div class="home-hero-copy">
-    {{ .Content | markdownify }}
-  </div>
-  <div class="hero-actions stagger-1">
-    <div class="hero-social">
-      {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+  <div class="home-hero-grid">
+    <aside class="home-identity-rail">
+      <h1 class="home-identity-name">{{ .Title }}</h1>
+      <div class="home-identity-actions">
+        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+      </div>
+    </aside>
+
+    <div class="home-hero-copy">
+      {{ .Content | markdownify }}
     </div>
   </div>
 </section>

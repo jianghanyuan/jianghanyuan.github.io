@@ -41,13 +41,12 @@ params:
     Content: |
       I try to understand and harness general, robust, and emergent intelligence.
 
-      My research focuses on machine learning, especially frontier deep learning and reinforcement learning architecture, as well as LLM alignment. Recently, I am working on meta RL (learning to learn), LLM reasoning, and efficient training & inference (e.g., TTT). I am also interested in game theory and mechanism design.
+      My research focuses on machine learning, especially frontier deep learning and reinforcement learning architecture, as well as LLM alignment. Recently, I am working on meta RL (learning to learn), multi-step reasoning, and efficient training & inference (e.g., TTT). I am also interested in game theory and mechanism design.
 
-      Until recently, I researched post-training and stress-testing with Anthropic. I also contributed to various in-house projects and collaborated with ByteDance, Qwen, and Citadel Securities.
+      Until recently, I researched stress-testing and red-teaming with Anthropic. I also contributed to various in-house projects and collaborated with ByteDance, Qwen, and Citadel Securities.
 
       I love Go and Chess. I earned a 7th Dan and Candidate Master (CM). Some of my informal thoughts can be found [here](/vision/), which represent my thinking at some particular stage (though I am constantly learning, and my perspectives evolve).
-
-      You can contact me at hanyuan_jiang at hotmail dot com.
+    Email: "hanyuan_jiang at hotmail dot com"
   socialIcons:
     - name: googlescholar
       url: "https://scholar.google.com/citations?user=EBG3nD0AAAAJ&hl=en"

@@ -7,7 +7,7 @@ groups:
       - title: "Learn Fast, Dream Slow: Long-horizon Understanding via Controllable Information Decomposition"
         authors: "Hanyuan Jiang"
         venue: "WIP. 2026"
-        summary: "LUCID learns to separate what changes quickly from what persists, then allocates expensive planning only to persistent variables that compound over time."
+        
         links:
           - label: "Idea"
             
@@ -15,12 +15,10 @@ groups:
       - title: "The Shape of Mechanisms to Come"
         authors: "Hanyuan Jiang"
         venue: "WIP. 2026"
-        summary: "SOMA (Sparse Overlay Mechanism Architecture) learns to separate persistent dynamics from sparse mutable mechanisms, then performs expensive planning over the stable backbone while editing only the local modules needed to transport behavior under structural change."
 
       - title: "Learning Trajectory Design in Multi-Agent Reinforcement Learning"
         authors: "Hanyuan Jiang"
         venue: "WIP. 2026"
-        summary: "A novel framework for multi-agent reinforcement learning that optimizes probability distributions over learning trajectories rather than equilibrium outcomes."
 
   - topic: "Deep Learning"
 
@@ -28,14 +26,12 @@ groups:
       - title: "Hidden Experiments: Learning Stable Reasoning Skeletons In Transformer Routing"
         authors: "Hanyuan Jiang"
         venue: "WIP. 2026"
-        summary: "We want an architecture that separates structure from content, then forces the structural part to stay stable across paraphrases and other task-preserving edits. A model should reuse the same reasoning skeleton, the pattern of who depends on whom, and which interactions matter, while allowing the carried information to change. (motivated by: [1](https://proceedings.mlr.press/v70/dinh17b), [2](https://arxiv.org/abs/2505.06708), [3](https://www.nature.com/articles/s41586-024-07487-w))"
 
   - topic: "Game Theory & Mechanism Design"
     items:
       - title: "Not Every Comparison Should Be Equally Consequential"
         authors: "Hanyuan Jiang"
         venue: "WIP. 2026"
-        summary: "We propose a theory of pairwise learning under strategic response. The goal is to learn reliable rankings when the compared entities react to the stakes of comparison. The comparisons that are best for learning can also be the ones most easily distorted. This creates a new tradeoff between information and manipulability."
         links:
           - label: "Toy model"
             url: "/blog/the-rating-you-see-is-pricing-tomorrow/"
