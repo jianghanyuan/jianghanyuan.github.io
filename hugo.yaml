@@ -41,7 +41,7 @@ params:
     Content: |
       I try to understand and harness general, robust, and emergent intelligence.
 
-      My research focuses on frontier deep learning and reinforcement learning architecture, as well as their application in LLM. Recently, I am working on meta RL (learning to learn), multi-step reasoning, and efficient training & inference (e.g., TTT). I am also interested in game theory and mechanism design.
+      My research focuses on frontier deep learning and reinforcement learning architecture, as well as their application in LLM. Recently, I am working on multi-agent RL, meta RL (learning to learn), multi-step reasoning, and efficient training & inference (e.g., TTT). I am also interested in game theory and mechanism design.
 
       Until recently, I researched stress-testing and red-teaming with Anthropic. I also contributed to various in-house projects and collaborated with ByteDance, Qwen, and Citadel Securities.
 
