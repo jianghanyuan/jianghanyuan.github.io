@@ -2,7 +2,7 @@
 <section id="about" class="home-hero fade-in home-nav-section" data-home-toc="about">
   <div class="home-hero-grid">
     <aside class="home-identity-rail">
-      <h1 class="home-identity-name">{{ .Title }}</h1>
+      <h1 class="home-identity-name" data-name="{{ .Title }}" style="opacity:0;">{{ .Title }}</h1>
       <div class="home-identity-actions">
         {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
       </div>
@@ -16,4 +16,233 @@
     </div>
   </div>
 </section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const nameEl = document.querySelector(".home-identity-name");
+    if (!nameEl) return;
+    nameEl.classList.add("font-floating");
+
+    const ALLOWED_FONTS = [
+      "Megrim", "Bitcount Grid", "Gugi", "Tektur", "Silkscreen", "Nabla", "Rampart One", "Ribeye Marrow",
+      "Sixtyfour", "Bungee Hairline", "Bungee Spice", "Foldit", "Bungee Shade", "Micro 5 Charted", "Pixelify Sans",
+      "Zen Tokyo Zoo", "Rubik 80s Fade", "Faster One", "Vampiro One", "Jersey 10", "Rubik Iso",
+      "Libertinus Serif", "Libertinus Sans", "Major Mono Display"
+    ];
+
+    const FONT_CATALOG_CACHE_KEY = "home_name_font_catalog_v7";
+    const LAST_FONT_KEY = "home_name_last_font_v3";
+    const FONT_CATALOG_CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+    const FONT_LINK_ID = "home-name-dynamic-font";
+    const FALLBACK_POOL = ALLOWED_FONTS.slice();
+    const COLOR_POOL = [
+      "#161616", "#161616", "#161616", "#161616", "#161616", "#161616",
+      "#1f2937", "#0f172a", "#111827", "#0b1220",
+      "#1d4ed8", "#1e40af", "#2563eb", "#0ea5e9", "#0369a1"
+    ];
+
+    let fontPool = [];
+    let weightedPool = [];
+    let currentIndex = -1;
+    let readyMarked = false;
+    let letters = [];
+
+    function fontWeight(name) {
+      if (name === "Libertinus Serif" || name === "Libertinus Sans") return 10;
+      if (name === "Major Mono Display") return 7;
+      return 4;
+    }
+
+    function buildWeightedPool(pool) {
+      const out = [];
+      pool.forEach(name => {
+        const w = fontWeight(name);
+        for (let i = 0; i < w; i++) out.push(name);
+      });
+      return out;
+    }
+
+    function markReady() {
+      if (readyMarked) return;
+      readyMarked = true;
+      nameEl.style.opacity = "1";
+      document.documentElement.classList.add("home-name-ready");
+    }
+
+    function wrapNameLetters() {
+      const text = (nameEl.dataset.name || nameEl.textContent || "").trim();
+      if (!text) return;
+      const words = text.split(/\s+/);
+      const line1 = words[0] || "";
+      const line2 = words.slice(1).join(" ");
+      nameEl.textContent = "";
+      letters = [];
+
+      let idx = 0;
+      function appendLine(lineText) {
+        if (!lineText) return;
+        const line = document.createElement("span");
+        line.className = "name-line";
+        Array.from(lineText).forEach((ch) => {
+          const span = document.createElement("span");
+          span.className = "float-letter";
+          span.style.setProperty("--i", String(idx++));
+          if (ch === " ") {
+            span.classList.add("is-space");
+            span.innerHTML = "&nbsp;";
+          } else {
+            span.textContent = ch;
+            letters.push(span);
+          }
+          line.appendChild(span);
+        });
+        nameEl.appendChild(line);
+      }
+
+      appendLine(line1);
+      appendLine(line2);
+    }
+
+    function readCachedCatalog() {
+      try {
+        const raw = localStorage.getItem(FONT_CATALOG_CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !Array.isArray(parsed.pool) || typeof parsed.ts !== "number") return null;
+        if (Date.now() - parsed.ts > FONT_CATALOG_CACHE_TTL_MS) return null;
+        return parsed.pool;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function writeCachedCatalog(pool) {
+      try {
+        localStorage.setItem(FONT_CATALOG_CACHE_KEY, JSON.stringify({ ts: Date.now(), pool }));
+      } catch (_) { }
+    }
+
+    function normalizePool(pool) {
+      const seen = new Set();
+      const filtered = [];
+      (pool || []).forEach(name => {
+        if (!ALLOWED_FONTS.includes(name)) return;
+        if (seen.has(name)) return;
+        seen.add(name);
+        filtered.push(name);
+      });
+      return filtered;
+    }
+
+    async function fetchCatalog() {
+      const cached = normalizePool(readCachedCatalog());
+      if (cached && cached.length > 0) return cached;
+
+      let curated = [];
+      try {
+        const localResp = await fetch("/data/futuristic-fonts.json", { cache: "force-cache" });
+        if (localResp.ok) {
+          const localData = await localResp.json();
+          if (Array.isArray(localData.families)) curated = normalizePool(localData.families);
+        }
+      } catch (_) { }
+
+      if (!curated.length) curated = FALLBACK_POOL;
+      writeCachedCatalog(curated);
+      return curated;
+    }
+
+    function ensureFontLink(familyName) {
+      if (familyName === "Libertinus Serif" || familyName === "Libertinus Sans") return;
+      const href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(familyName).replace(/%20/g, "+")}&display=swap`;
+      let link = document.getElementById(FONT_LINK_ID);
+      if (!link) {
+        link = document.createElement("link");
+        link.id = FONT_LINK_ID;
+        link.rel = "stylesheet";
+        document.head.appendChild(link);
+      }
+      if (link.href !== href) link.href = href;
+    }
+
+    function applyRandomColor() {
+      const color = COLOR_POOL[Math.floor(Math.random() * COLOR_POOL.length)];
+      document.documentElement.style.setProperty("--home-name-color", color);
+    }
+
+    function waitForFont(family, strict) {
+      if (!("fonts" in document) || !document.fonts || !document.fonts.load) {
+        return new Promise(resolve => setTimeout(resolve, strict ? 250 : 120));
+      }
+      const timeoutMs = strict ? 4500 : 1500;
+      const timeout = new Promise(resolve => setTimeout(resolve, timeoutMs));
+      const probe = document.fonts.load(`700 1em "${family}"`).then(() => null).catch(() => null);
+      return Promise.race([probe, timeout]);
+    }
+
+    async function applyFont(family, morph, strictLoad) {
+      if (!family || !ALLOWED_FONTS.includes(family)) return;
+      ensureFontLink(family);
+      document.documentElement.style.setProperty("--home-name-font", `'${family}', var(--font-heading)`);
+      try {
+        localStorage.setItem(LAST_FONT_KEY, family);
+      } catch (_) { }
+
+      await waitForFont(family, !!strictLoad);
+
+      if (morph) {
+        nameEl.classList.add("font-morphing");
+        letters.forEach((el, i) => {
+          el.style.animationDelay = `${i * 22}ms`;
+          el.classList.remove("font-morph-letter");
+          void el.offsetWidth;
+          el.classList.add("font-morph-letter");
+        });
+        setTimeout(() => {
+          nameEl.classList.remove("font-morphing");
+          letters.forEach(el => el.classList.remove("font-morph-letter"));
+        }, 520);
+      }
+      applyRandomColor();
+      markReady();
+    }
+
+    async function applyRandomFont(opts) {
+      if (!weightedPool.length) return;
+      let family = weightedPool[Math.floor(Math.random() * weightedPool.length)];
+      if (fontPool.length > 1) {
+        let guard = 0;
+        while (family === fontPool[currentIndex] && guard < 20) {
+          family = weightedPool[Math.floor(Math.random() * weightedPool.length)];
+          guard += 1;
+        }
+      }
+      currentIndex = Math.max(0, fontPool.indexOf(family));
+      await applyFont(family, true, !!(opts && opts.strictLoad));
+    }
+
+    wrapNameLetters();
+
+    fetchCatalog()
+      .then(async pool => {
+        fontPool = normalizePool(pool || []);
+        if (!fontPool.length) fontPool = FALLBACK_POOL.slice();
+        weightedPool = buildWeightedPool(fontPool);
+
+        const persisted = localStorage.getItem(LAST_FONT_KEY);
+        if (persisted && fontPool.includes(persisted)) {
+          currentIndex = fontPool.indexOf(persisted);
+          await applyFont(persisted, false, true);
+        } else {
+          try { localStorage.removeItem(LAST_FONT_KEY); } catch (_) { }
+        }
+
+        await applyRandomFont({ strictLoad: true });
+        setInterval(() => { applyRandomFont({ strictLoad: false }); }, 60000);
+      })
+      .catch(() => {
+        document.documentElement.style.setProperty("--home-name-font", "'Libertinus Serif', var(--font-heading)");
+        markReady();
+      });
+  });
+</script>
 {{- end -}}

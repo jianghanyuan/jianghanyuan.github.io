@@ -3,7 +3,46 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/custom.css?v=20260423a" />
+<link href="https://fonts.googleapis.com/css2?family=Libertinus+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script>
+  (function () {
+    const key = "home_name_last_font_v3";
+    const linkId = "home-name-dynamic-font";
+    const allowed = [
+      "Megrim", "Bitcount Grid", "Gugi", "Tektur", "Silkscreen", "Nabla", "Rampart One", "Ribeye Marrow",
+      "Sixtyfour", "Bungee Hairline", "Bungee Spice", "Foldit", "Bungee Shade", "Micro 5 Charted", "Pixelify Sans",
+      "Zen Tokyo Zoo", "Rubik 80s Fade", "Faster One", "Vampiro One", "Jersey 10", "Rubik Iso",
+      "Libertinus Serif", "Libertinus Sans", "Major Mono Display"
+    ];
+    const preloaded = new Set(["Libertinus Serif", "Libertinus Sans"]);
+    let family = localStorage.getItem(key);
+    document.documentElement.classList.add("home-name-js");
+    const hideStyle = document.createElement("style");
+    hideStyle.textContent = ".home-name-js .home-identity-name{opacity:0!important}.home-name-js.home-name-ready .home-identity-name{opacity:1!important}";
+    document.head.appendChild(hideStyle);
+
+    if (!family || !allowed.includes(family)) {
+      try { localStorage.removeItem(key); } catch (_) { }
+      family = "Libertinus Serif";
+    }
+
+    const safeFamily = family.replace(/['"\\]/g, "");
+    document.documentElement.style.setProperty("--home-name-font", "'" + safeFamily + "', var(--font-heading)");
+
+    if (preloaded.has(safeFamily)) return;
+
+    const href = "https://fonts.googleapis.com/css2?family=" + encodeURIComponent(safeFamily).replace(/%20/g, "+") + "&display=swap";
+    let link = document.getElementById(linkId);
+    if (!link) {
+      link = document.createElement("link");
+      link.id = linkId;
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+    }
+    if (link.href !== href) link.href = href;
+  })();
+</script>
+<link rel="stylesheet" href="/css/custom.css?v=20260423l" />
 
 {{ if .Params.distill }}
 <script>
