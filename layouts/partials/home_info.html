@@ -19,13 +19,13 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const nameEl = document.querySelector(".home-identity-name");
+    const cubeImg = document.querySelector(".home-identity-art img");
     if (!nameEl) return;
-    nameEl.classList.add("font-floating");
 
     const ALLOWED_FONTS = [
       "Megrim", "Bitcount Grid", "Gugi", "Tektur", "Silkscreen", "Nabla", "Rampart One", "Ribeye Marrow",
       "Sixtyfour", "Bungee Hairline", "Bungee Spice", "Foldit", "Bungee Shade", "Micro 5 Charted", "Pixelify Sans",
-      "Zen Tokyo Zoo", "Rubik 80s Fade", "Faster One", "Vampiro One", "Jersey 10", "Rubik Iso",
+      "Zen Tokyo Zoo", "Rubik 80s Fade", "Vampiro One", "Jersey 10", "Rubik Iso",
       "Libertinus Serif", "Libertinus Sans", "Major Mono Display"
     ];
 
@@ -34,17 +34,18 @@
     const FONT_CATALOG_CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
     const FONT_LINK_ID = "home-name-dynamic-font";
     const FALLBACK_POOL = ALLOWED_FONTS.slice();
-    const COLOR_POOL = [
-      "#161616", "#161616", "#161616", "#161616", "#161616", "#161616",
-      "#1f2937", "#0f172a", "#111827", "#0b1220",
-      "#1d4ed8", "#1e40af", "#2563eb", "#0ea5e9", "#0369a1"
-    ];
+    const COLOR_POOL = {
+      black: ["#161616", "#111827", "#0f172a", "#1f2937"],
+      blue: ["#1d4ed8", "#2563eb", "#1e40af", "#0ea5e9"],
+      orange: ["#ea580c", "#f97316", "#fb923c", "#c2410c"]
+    };
 
     let fontPool = [];
     let weightedPool = [];
     let currentIndex = -1;
     let readyMarked = false;
     let letters = [];
+    let cubeRotation = 0;
 
     function fontWeight(name) {
       if (name === "Libertinus Serif" || name === "Libertinus Sans") return 10;
@@ -66,6 +67,15 @@
       readyMarked = true;
       nameEl.style.opacity = "1";
       document.documentElement.classList.add("home-name-ready");
+    }
+
+    function startCubeRotation() {
+      if (!cubeImg) return;
+      cubeImg.style.setProperty("--cube-rot", "0deg");
+      setInterval(() => {
+        cubeRotation = (cubeRotation + 180) % 360;
+        cubeImg.style.setProperty("--cube-rot", `${cubeRotation}deg`);
+      }, 60000);
     }
 
     function wrapNameLetters() {
@@ -165,7 +175,10 @@
     }
 
     function applyRandomColor() {
-      const color = COLOR_POOL[Math.floor(Math.random() * COLOR_POOL.length)];
+      const groups = ["black", "blue", "orange"];
+      const group = groups[Math.floor(Math.random() * groups.length)];
+      const shades = COLOR_POOL[group];
+      const color = shades[Math.floor(Math.random() * shades.length)];
       document.documentElement.style.setProperty("--home-name-color", color);
     }
 
@@ -221,6 +234,7 @@
     }
 
     wrapNameLetters();
+    startCubeRotation();
 
     fetchCatalog()
       .then(async pool => {
