@@ -119,8 +119,9 @@
                     }}</h3>
                 </div>
                 <footer class="entry-footer" style="margin-bottom: 0.3rem;">
-                  <span class="entry-meta" style="font-size: 0.9rem; color: var(--secondary);">{{ .authors }}. {{ .venue
-                    }}.</span>
+                  {{- $venue := .venue -}}
+                  {{- $year := .year -}}
+                  <span class="entry-meta" style="font-size: 0.9rem; color: var(--secondary);">{{ with .authors }}{{ . }}. {{ end }}{{ $venue }}{{ if and $venue $year }} {{ end }}{{ $year }}.</span>
                 </footer>
                 {{- if .summary }}
                 <div class="pub-summary"

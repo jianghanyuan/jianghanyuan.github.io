@@ -3,43 +3,55 @@ groups:
 
     items:
       - title: "Practice Makes Operators"
-        venue: "2026"
+        venue: "Under review"
+        year: 2026
 
       - title: "Residual Jumping Enables Structural Generalization"
-        venue: "2026"
+        venue: "WIP"
+        year: 2026
 
       - title: "Mind the Mediation Gap."
-        venue: "2026"
+        venue: "Under review"
+        year: 2026
 
       - title: "Long-horizon Understanding via Controllable Information Decomposition"
-        venue: "2026"
+        venue: "WIP"
+        year: 2026
             
 
       - title: "The Shape of Mechanisms to Come"
-        venue: "2026"
+        venue: "WIP"
+        year: 2026
 
   - topic: "Deep Learning"
     items:
       - title: "Gyre: Test-Time Routing for Long-Context Sequence Models"
-        venue: "2026"
+        venue: "Under review"
+        year: 2026
+
       - title: "Hidden Experiments: Learning Stable Reasoning Skeletons In Transformer Routing"
-        venue: "2026"
+        venue: "WIP"
+        year: 2026
 
 
   - topic: "LLMs & Alignment"
     items:
       - title: "PRAXIS: Evaluating Socially Situated Action in Large Language Models"
-        venue: "2026"
+        venue: "Under review"
+        year: 2026
         
       - title: "Acting Past the Boundary"
-        venue: "2026"
+        venue: "Under review"
+        year: 2026
 
   - topic: "Theory of Computation"
     items:
       - title: "Dynamic Maintenance of Global Structure with Polylogarithmic Update Time"
-        venue: "2026"
+        venue: "To be submitted to SODA"
+        year: 2026
 
   - topic: "Game Theory & Mechanism Design"
     items:
       - title: "Not Every Comparison Should Be Equally Consequential"
-        venue: "2026"
+        venue: "WIP"
+        year: 2026
