@@ -2,36 +2,44 @@ groups:
   - topic: "Reinforcement Learning"
 
     items:
-      
+      - title: "Practice Makes Operators"
+        venue: "2026"
 
-      - title: "Learn Fast, Dream Slow: Long-horizon Understanding via Controllable Information Decomposition"
-        authors: "Hanyuan Jiang"
-        venue: "WIP. 2026"
-        
-        links:
-          - label: "Idea"
+      - title: "Residual Jumping Enables Structural Generalization"
+        venue: "2026"
+
+      - title: "Mind the Mediation Gap."
+        venue: "2026"
+
+      - title: "Long-horizon Understanding via Controllable Information Decomposition"
+        venue: "2026"
             
 
       - title: "The Shape of Mechanisms to Come"
-        authors: "Hanyuan Jiang"
-        venue: "WIP. 2026"
-
-      - title: "Learning Trajectory Design in Multi-Agent Reinforcement Learning"
-        authors: "Hanyuan Jiang"
-        venue: "WIP. 2026"
+        venue: "2026"
 
   - topic: "Deep Learning"
-
     items:
+      - title: "Gyre: Test-Time Routing for Long-Context Sequence Models"
+        venue: "2026"
       - title: "Hidden Experiments: Learning Stable Reasoning Skeletons In Transformer Routing"
-        authors: "Hanyuan Jiang"
-        venue: "WIP. 2026"
+        venue: "2026"
+
+
+  - topic: "LLMs & Alignment"
+    items:
+      - title: "PRAXIS: Evaluating Socially Situated Action in Large Language Models"
+        venue: "2026"
+        
+      - title: "Acting Past the Boundary"
+        venue: "2026"
+
+  - topic: "Theory of Computation"
+    items:
+      - title: "Dynamic Maintenance of Global Structure with Polylogarithmic Update Time"
+        venue: "2026"
 
   - topic: "Game Theory & Mechanism Design"
     items:
       - title: "Not Every Comparison Should Be Equally Consequential"
-        authors: "Hanyuan Jiang"
-        venue: "WIP. 2026"
-        links:
-          - label: "Toy model"
-            url: "/blog/the-rating-you-see-is-pricing-tomorrow/"
+        venue: "2026"

@@ -39,13 +39,13 @@ params:
   homeInfoParams:
     Title: "Hanyuan Jiang"
     Content: |
-      I try to understand and harness general, robust, and emergent intelligence.
+      My goal is to understand and harness general, emergent, and self-improving foundation models, so my research focuses on frontier deep learning and reinforcement learning architectures and their application in LLMs.
 
-      My research focuses on frontier deep learning and reinforcement learning architecture, as well as their application in LLM. Recently, I am working on multi-agent RL, meta RL (learning to learn), multi-step reasoning, and efficient training & inference (e.g., TTT). I am also interested in game theory and mechanism design.
+      I am fortunate to be advised by [Prof. Zhijing Jin](https://zhijing-jin.com/), hosted by UC Berkeley [CHAI](https://humancompatible.ai/) and co-affiliated with the University of Toronto.
 
-      Until recently, I researched stress-testing and red-teaming with Anthropic. I also contributed to various in-house projects and collaborated with ByteDance, Qwen, and Citadel Securities.
+      I currently collaborate with OpenAI on biosecurity stress-testing and previously worked on related projects with Anthropic. Before that, I spent time at ByteDance, Qwen, Huawei, and Citadel Securities.
 
-      I love Go and Chess. I earned a 7th Dan and Candidate Master (CM). Some of my informal thoughts can be found [here](/vision/), which represent my thinking at some particular stage (though I am constantly learning, and my perspectives evolve).
+      Outside of research, I hold a 7-dan rank in Go and the Candidate Master (CM) title in Chess. I occasionally share informal thoughts [here](https://jianghanyuan.github.io/vision/), which capture my thinking at a particular point in time. As always, I continue to learn and discover.
     Email: "hanyuan_jiang at hotmail dot com"
   socialIcons:
     - name: googlescholar
@@ -69,10 +69,12 @@ menu:
       name: Blog
       url: /blog/
       weight: 20
-    - identifier: misc
-      name: Misc
-      url: /misc/
-      weight: 30
+    # Misc page is hidden from the nav menu but the page (content/misc.md) is
+    # kept so /misc/ continues to render. Re-add this entry to surface it again.
+    # - identifier: misc
+    #   name: Misc
+    #   url: /misc/
+    #   weight: 30
 
 permalinks:
   blog: /blog/:slug/

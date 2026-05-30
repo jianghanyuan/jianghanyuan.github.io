@@ -211,7 +211,8 @@ a:hover {
 .entry-content a,
 .distill-article a {
   text-decoration: underline !important;
-  text-decoration-color: var(--tertiary) !important;
+  text-decoration-color: var(--secondary) !important;
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   color: var(--primary);
   font-weight: 500;
@@ -235,7 +236,9 @@ a:hover {
 #menu a {
   font-family: var(--font-body);
   font-size: 1rem;
-  font-weight: 400;
+  /* Slightly heavier than medium — system-ui is a variable font on modern
+     macOS/Windows, so 550 renders distinctly between 500 and 600. */
+  font-weight: 550;
   color: var(--secondary);
   padding: 0.3rem 0;
   margin: 0 0.8rem;
@@ -246,11 +249,22 @@ a:hover {
   text-decoration: none !important;
 }
 
-#menu a:hover,
 #menu .active {
+  /* Active tab steps up one notch so the current section reads via weight + color. */
+  font-weight: 650;
   color: var(--primary);
   background: none !important;
   text-decoration: none !important;
+  border-bottom: none !important;
+  opacity: 1;
+}
+
+/* Hover: underline only, no weight, color, or opacity shift. */
+#menu a:hover {
+  background: none !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
   border-bottom: none !important;
   opacity: 1;
 }
@@ -351,10 +365,11 @@ body::before {
 }
 
 .home-hero-copy {
-  font-size: 1.03rem;
+  /* Match the Recent Updates list (date / News / title all at 1rem). */
+  font-size: 1rem;
   font-weight: 500;
   color: var(--primary);
-  max-width: 760px;
+  max-width: 860px;
   margin-right: 0;
   line-height: 1.45;
 }
@@ -573,7 +588,7 @@ body::before {
   }
 
   .home-hero-copy {
-    max-width: 760px;
+    max-width: 860px;
   }
 }
 
@@ -863,12 +878,19 @@ body::before {
   font-variant-numeric: tabular-nums;
 }
 
+/* Blog body text matches the homepage intro paragraph (.home-hero-copy):
+   system-ui stack inherited from body, 1rem / weight 500 / line-height 1.45,
+   color var(--primary). Headers (h1–h6) keep their own weights from the
+   global typography block. */
 .post-content,
 .entry-content,
-.post-single .post-content {
+.post-single .post-content,
+.distill-article {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 1rem;
-  line-height: 1.75;
-  color: var(--content);
+  font-weight: 450;
+  line-height: 1.45;
+  color: var(--primary);
 }
 
 /* ── Research / Publication page ── */
@@ -1286,7 +1308,11 @@ pre code {
 
 .home-update-entry {
   grid-template-columns: 160px 120px minmax(0, 1fr);
-  align-items: start;
+  /* Baseline alignment so date / category / title sit on the same text line
+     despite their different inherited line-heights (~1.7 vs title's 1.35).
+     Safer than `end` because multi-line titles still anchor cleanly on their
+     first-line baseline. */
+  align-items: baseline;
   gap: 1.2rem;
   padding: 0.9rem 0;
   border-bottom: 1px solid var(--border) !important;
@@ -1296,15 +1322,26 @@ pre code {
   border-bottom: none !important;
 }
 
-.home-update-date {
-  font-size: 0.92rem;
+/* Unify date / category / title at 1rem (kept in sync with .home-hero-copy).
+   Selector boosted to .home-update-entry .home-update-* so it wins
+   specificity over .elegant-date / .elegant-title, which are defined later
+   in this file and would otherwise force date to 0.95rem and title to
+   1.05rem. */
+.home-update-entry .home-update-date {
+  font-size: 1rem;
+  /* Same weight as .home-update-category so date + tag read as a matched pair.
+     550 is a touch lighter than semi-bold; system-ui renders it distinctly on
+     modern macOS/Windows (variable font) and snaps to 500 elsewhere. */
+  font-weight: 550;
   color: var(--secondary);
 }
 
-.home-update-category {
-  font-size: 0.92rem;
+.home-update-entry .home-update-category {
+  /* Matches the filter button ("All / Blog / News") font-size so the two
+     "News" labels (filter pill + entry tag) read at the same size. */
+  font-size: 1.04rem;
   color: var(--secondary);
-  font-weight: 600;
+  font-weight: 550;
 }
 
 .home-update-category.is-blog {
@@ -1315,8 +1352,8 @@ pre code {
   color: #f97316;
 }
 
-.home-update-title {
-  font-size: 0.92rem;
+.home-update-entry .home-update-title {
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.35;
   min-width: 0;
@@ -1327,7 +1364,11 @@ pre code {
 
 @media (min-width: 601px) {
   .home-update-title {
-    margin-left: -29px;
+    /* Align title's left edge with .home-hero-copy at >=1000px viewports.
+       Bio starts at: rail 250px + grid gap 2.2rem = 285.2px from main left.
+       Title natural offset: date 160 + cat 120 + 2*1.2rem gaps = 318.4px.
+       Delta = 285.2 - 318.4 = -33.2px. */
+    margin-left: -33.2px;
   }
 }
 
