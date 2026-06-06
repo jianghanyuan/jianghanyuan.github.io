@@ -1,0 +1,233 @@
+{{- define "main" -}}
+<style>
+  .pixel-gallery {
+    max-width: 880px;
+    margin: 2rem auto 4rem auto;
+    padding: 0 1.2rem;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  .pixel-gallery > header { margin-bottom: 2.5rem; }
+  .pixel-gallery h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem 0;
+  }
+  .pixel-gallery > header p {
+    color: var(--secondary);
+    font-size: 1rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .pixel-gallery section {
+    margin-bottom: 3.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.6rem;
+  }
+  .pixel-gallery section h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem 0;
+    letter-spacing: -0.01em;
+  }
+  .pixel-gallery .meta {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-featured);
+    margin-bottom: 0.4rem;
+  }
+  .pixel-gallery .caption {
+    color: var(--secondary);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin: 0 0 1.2rem 0;
+    max-width: 720px;
+  }
+  .pixel-gallery .anim-frame {
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 1.2rem;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+  .pixel-gallery code {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.85rem;
+    background: #f5f5f5;
+    padding: 0.1rem 0.35rem;
+    border-radius: 2px;
+  }
+</style>
+<article class="pixel-gallery">
+  <header>
+    <h1>Pixel animation gallery</h1>
+    <p>Four prototypes of the recursive-self-improvement / superlearner banner animation. Each is a distinct variant of the same partial (<code>layouts/partials/pixel_animation.html</code>); switch by passing <code>(dict "variant" "&lt;name&gt;")</code>. All render in black via alpha tiers and respect <code>prefers-reduced-motion</code>.</p>
+  </header>
+
+  <section>
+    <div class="meta">variant: random-sentence · research-page default</div>
+    <h2>0 · Random sentence (lottery)</h2>
+    <p class="caption">The research page picks one of six sentence-display styles below at random on every page load, and each style picks one of its own creative / witty / punny sentences. Refresh the page to roll another. This section embeds the lottery dispatcher itself — you'll see a different style each time you reload the gallery.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "random-sentence") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: sentence-typewriter</div>
+    <h2>1 · Typewriter</h2>
+    <p class="caption">Characters appear one at a time, left-to-right, at ~85ms per keystroke with per-char jitter. A thin blue cursor blinks at 2 Hz and advances as it goes. ~55% of sentences get one mid-word "typo" — a wrong glyph appears in clay, gets backspaced, the right one takes its place. Holds, then deletes uniformly at 40ms/char, picks a new sentence.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "sentence-typewriter") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: sentence-glitch-materialize</div>
+    <h2>2 · Glitch materialize</h2>
+    <p class="caption">Each character spends ~300ms cycling through random glyphs (hacker-movie scramble) then snaps into its final value with a brief blue lock-flash. Left-to-right resolution. After full reveal it holds a beat, then dissolves back into scramble and fades.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "sentence-glitch-materialize") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: sentence-falling</div>
+    <h2>3 · Falling letters</h2>
+    <p class="caption">Each character starts above the canvas and falls down with gravity easing + a tiny bounce on landing. Letters arrive in a staggered sequence. After the sentence is complete and holds, letters fly off (random directions or "evaporate" upward as pixel dust).</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "sentence-falling") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: sentence-marquee</div>
+    <h2>4 · Marquee scroll</h2>
+    <p class="caption">The full sentence pre-rendered as pixel text scrolls horizontally at ~30–50 CSS px/s, entering from the right, exiting to the left. Brief blank pause, then the next random sentence enters.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "sentence-marquee") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: sentence-burn-in</div>
+    <h2>5 · Burn-in scanline</h2>
+    <p class="caption">A thin scanline sweeps left-to-right; as it passes each character column, that column of the pixel text is revealed. After full reveal and hold, the scanline sweeps back right-to-left, erasing the text column by column.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "sentence-burn-in") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: sentence-stamp</div>
+    <h2>6 · Letterpress stamp</h2>
+    <p class="caption">Words punch into place one at a time (~320ms apart) with an overshoot bounce (scale 1.32 → 1.0 over 160ms). On each impact, 7–11 ink-splash particles (mostly black, occasionally clay) radiate from the word's center, fly outward with gravity, and fade. After the full sentence holds, words lift off in <strong>reverse order</strong> — last word first — each floating upward + fading over 540ms. Mechanical, weighty, and punctuated.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "sentence-stamp") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: sentence-loadbar</div>
+    <h2>7 · Loading screen</h2>
+    <p class="caption">A game-style loading bar (30 chunky blue cells) fills left-to-right; sentence characters unlock in lockstep with bar progress and pop in with 3–5 upward sparkle particles each. A "LOADING…" label (animated dots) above the bar and a "000% → 100%" counter to its right complete the HUD. At 100%, "READY!" flashes blue for 700ms, then settles to a quiet "OK" while the sentence sits. The bar then drains right-to-left, characters disappear in reverse, brief pause, next quest loads. Sentences are game-flavored to match.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "sentence-loadbar") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: sigil · previous research-page default</div>
+    <h2>8 · Pixel-text sigil + greedy snake</h2>
+    <p class="caption">An ouroboros ring of <code>LEARN → TRAIN → EVAL → DISTILL</code> in 3×5 pixel font scrolls clockwise around the perimeter; <code>LEARN</code> and <code>EVAL</code> render in blue as beat words. Inside the ring, a greedy snake hunts clay apples; the snake shifts palette (blue → black → slate → indigo → teal) every 5 apples eaten. Apples are always clay.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "sigil") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: colony</div>
+    <h2>9 · Pixel colony</h2>
+    <p class="caption">Terracotta pixel-coral creatures drift in from the edges and migrate toward the existing tile structure. When one reaches an empty slot adjacent to a tile, it commits — disappearing as a new tile fades in. Tiles age through four texture stages (solid → sparse mesh → dense mesh → fine grid) so the colony always shows a generational mix. Old tiles occasionally decay back into wandering creatures, keeping the ecosystem in dynamic equilibrium.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "colony") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: lissajous-orrery · recursive (exact 24s loop)</div>
+    <h2>10 · Lissajous orrery</h2>
+    <p class="caption">Five terracotta starburst creatures glide along interlocking Lissajous orbits with rationally-related frequency pairs — (1,2), (2,3), (3,4), (3,5), (4,5) — sharing a 24-second master period. Each carries a 28-segment fading trail computed as a pure function of phase, so the dust behind every agent is just as periodic as the agent itself. A slow ternary compass turns three times per period in the middle. After exactly 24.000s every pixel returns to its t=0 value, ready to loop without a seam.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "lissajous-orrery") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: pendulum-choir · recursive (exact 24s loop)</div>
+    <h2>11 · Pendulum choir</h2>
+    <p class="caption">A choir of five pixel pendulums hangs from a terracotta beam, each a swinging chain of cells with a heavier bob at the tip. They start in perfect rest, vertical. An amplitude envelope <code>sin(πt/T)</code> swells their swings to a midpoint peak, then returns them to stillness. Integer-ratio frequencies (k = 2, 3, 4, 5, 6 half-swings per cycle) keep the choreography mathematically closed — at <em>t = T</em> every pendulum is exactly vertical with zero velocity.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "pendulum-choir") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: murmur-flock · creative (emergent)</div>
+    <h2>12 · Murmur flock</h2>
+    <p class="caption">28 terracotta pixel-fish swarming inside a cream square. Each agent obeys Reynolds' three rules — separation, alignment, cohesion — plus a soft return-to-center force and edge bumpers. Every 6–18 seconds a single darker predator slides in from one edge, briefly chases the flock's centroid, then exits; the flock parts and reforms. Every 70–90s the entire flock fades, re-seeds with fresh random positions and jittered force weights, and fades back in. Each refresh produces a genuinely different murmuration.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "murmur-flock") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: coral-dla · creative (emergent)</div>
+    <h2>13 · Coral DLA</h2>
+    <p class="caption">Diffusion-limited aggregation, rendered as a growing pixel coral. A single seed pixel sits at center; small wanderer motes drift in from the edges via biased random walks. When a mote touches the existing cluster, it sticks — becoming a new coral cell — and the active tip flashes briefly. Cells age through four color stages (tip → outer → mid → core). When the coral reaches max size or 24s elapses, it <strong>ungrows</strong>: leaf cells unbind back into motes and drift away. After it returns to a single seed, a new coral starts — never the same shape twice.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "coral-dla") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: snake · creative (greedy AI)</div>
+    <h2>14 · Greedy snake (standalone)</h2>
+    <p class="caption">A greedy snake eats clay apples on a 24×18 grid. Each tick the snake picks the direction that minimizes Manhattan distance to the nearest apple, avoiding immediate self-collision and reversal. Apples are always clay; the snake's body cycles through 5 color palettes (<strong>blue → black → indigo → slate → teal</strong>) — one shift per <strong>epoch</strong> = every 5 apples eaten. The head has eyes that face its travel direction. When the AI traps itself, the snake resets (epoch is preserved). Top-left dots track the epoch counter in the current snake color; top-right clay dots show apples-eaten in the current epoch.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "snake") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: tower-defense · creative</div>
+    <h2>15 · Tower defense</h2>
+    <p class="caption">Clay enemies spawn at the left edge in periodic waves and trace an S-curve path across the grid. Five blue towers stand at fixed positions near the path corners; each tower scans for the nearest live enemy in range and fires a black projectile that homes on the target's current position. Enemy HP grows with the wave number; killed enemies fade out, escaped enemies despawn at the right edge. Top-left blue dots = wave number; top-right clay dots = recent kill count. Each refresh produces a different sequence of encounters as enemy speeds and wobble phases are randomized.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "tower-defense") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: nested</div>
+    <h2>16 · Nested cellular automata</h2>
+    <p class="caption">Conway's Life inside Conway's Life. The outer grid is a 50×10 Life simulation seeded with a Gosper glider gun; every live outer cell hosts its own toroidal 5×5 inner Life world. The viewer watches a Turing-complete system whose substrate cells are themselves Turing-complete systems — same rule at every scale. A population watchdog re-seeds the gun if the outer population dies down. Outer ticks at 6 Hz, inner at 10 Hz.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "nested") }}
+    </div>
+  </section>
+
+  <section>
+    <div class="meta">variant: learn</div>
+    <h2>17 · Loss landscape SGD</h2>
+    <p class="caption">A pixelated 1D loss landscape with a black optimizer ball doing momentum SGD. After each epoch, terrain is <strong>smoothed weighted by where the ball spent time</strong> — knowledge distillation into the substrate — and the optimizer's own <code>lr</code> and <code>momentum</code> increase, because the world is friendlier now. Two coupled feedback loops: the agent improves the environment; the environment improves the agent. A faint ghost trail persists across epochs; the loss bar shrinks at the top; epoch ticks accumulate at top-right; terrain reseeds every 6 epochs.</p>
+    <div class="anim-frame">
+      {{ partial "pixel_animation.html" (dict "variant" "learn") }}
+    </div>
+  </section>
+
+
+</article>
+{{- end -}}

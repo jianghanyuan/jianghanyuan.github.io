@@ -35,35 +35,47 @@
   }
 
   .research-banner {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3.2rem auto 2.4rem auto;
+    padding: 0 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: var(--primary);
+    letter-spacing: 0.005em;
+    text-align: center;
+  }
+
+  .research-banner-text {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 0.55rem;
-    margin: 0 0 0.6rem 0;
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 0.9rem;
+  }
+
+  .research-banner-primary {
+    font-size: 1.35rem;
     font-weight: 700;
-    color: var(--accent-featured);
-    letter-spacing: 0.005em;
+    line-height: 1.25;
+    color: var(--primary);
   }
 
-  .research-banner .live-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent-featured);
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-featured) 60%, transparent);
-    animation: research-banner-pulse 2s ease-out infinite;
-    flex-shrink: 0;
+  .research-banner-note {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--secondary);
+    line-height: 1.5;
   }
 
-  @keyframes research-banner-pulse {
-    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-featured) 55%, transparent); }
-    70%  { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent-featured) 0%, transparent); }
-    100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-featured) 0%, transparent); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .research-banner .live-dot { animation: none; }
+  .research-banner-date {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--secondary);
+    opacity: 0.6;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    margin-top: 0.25rem;
   }
 </style>
 
@@ -71,12 +83,16 @@
   <div class="distill-body research-grid" style="margin-top: 0;">
     <div class="research-header-row">
       <h1 class="distill-title"
-        style="font-family: system-ui, -apple-system, sans-serif !important; font-weight: 700 !important; font-size: 2.8rem; margin: 0 0 0.6rem 0; text-align: left; letter-spacing: -0.02em;">
+        style="font-family: system-ui, -apple-system, sans-serif !important; font-weight: 700 !important; font-size: 2.8rem; margin: 0 0 3rem 0; text-align: left; letter-spacing: -0.02em;">
         {{ .Title }}
       </h1>
+      {{ partial "pixel_animation.html" (dict "variant" "random-sentence") }}
       <div class="research-banner" role="status" aria-live="polite">
-        <span class="live-dot" aria-hidden="true"></span>
-        <span>This page is actively being updated - 2026.05</span>
+        <div class="research-banner-text">
+          <span class="research-banner-primary">This page is actively being updated, stay tuned</span>
+          <span class="research-banner-note">A small reorganization is in progress. New entries arriving soon.</span>
+          <span class="research-banner-date">2026.06</span>
+        </div>
       </div>
       {{- if .Description }}
       <p class="distill-subtitle" style="text-align: left;">{{ .Description }}</p>
@@ -84,6 +100,8 @@
     </div>
 
     {{/* --- TOC Sidebar (Distill style) --- */}}
+    {{/* Publications hidden — flip the `if` below back to true to restore. */}}
+    {{- if false }}
     <nav class="distill-toc" aria-label="Table of Contents">
       <nav id="TableOfContents">
         <ul>
@@ -95,6 +113,7 @@
         </ul>
       </nav>
     </nav>
+    {{- end }}
 
     {{/* --- Main Content --- */}}
     <div class="distill-content" style="margin-right: 0;">
@@ -104,6 +123,8 @@
         <div class="post-content" style="margin: 0; padding: 0;">{{ .Content }}</div>
         {{- end }}
 
+        {{/* Publications hidden — flip the `if` below back to true to restore. */}}
+        {{- if false }}
         {{- range $index, $group := site.Data.publications.groups }}
         <section class="pub-year-group" data-topic="{{ .topic | urlize }}" aria-label="{{ .topic }}">
           <h2 id="{{ .topic | urlize }}" class="pub-year-title"
@@ -143,6 +164,7 @@
             {{- end }}
           </div>
         </section>
+        {{- end }}
         {{- end }}
       </div>
     </div>

@@ -6,8 +6,8 @@
       <div class="home-identity-actions">
         {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
       </div>
-      <div class="home-identity-art" aria-hidden="true">
-        <img src="/images/cube.png" alt="" draggable="false" ondragstart="return false;" oncontextmenu="return false;">
+      <div class="home-identity-avatar" aria-hidden="true">
+        {{ partial "pixel_animation.html" (dict "variant" "random-avatar") }}
       </div>
     </aside>
 
@@ -19,12 +19,12 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const nameEl = document.querySelector(".home-identity-name");
-    const cubeImg = document.querySelector(".home-identity-art img");
     if (!nameEl) return;
 
     const ALLOWED_FONTS = [
       "Megrim", "Bitcount Grid", "Gugi", "Tektur", "Silkscreen", "Nabla", "Rampart One", "Ribeye Marrow",
-      "Sixtyfour", "Bungee Hairline", "Bungee Spice", "Foldit", "Bungee Shade", "Micro 5 Charted", "Pixelify Sans",
+      // Disabled: "Micro 5 Charted", "Sixtyfour" (kept here for easy restoration — re-add to the array to re-enable).
+      "Bungee Hairline", "Bungee Spice", "Foldit", "Bungee Shade", "Pixelify Sans",
       "Zen Tokyo Zoo", "Rubik 80s Fade", "Vampiro One", "Jersey 10", "Rubik Iso",
       "Libertinus Serif", "Libertinus Sans", "Major Mono Display"
     ];
@@ -45,8 +45,6 @@
     let currentIndex = -1;
     let readyMarked = false;
     let letters = [];
-    let cubeRotation = 0;
-
     function fontWeight(name) {
       if (name === "Libertinus Serif" || name === "Libertinus Sans") return 10;
       if (name === "Major Mono Display") return 7;
@@ -69,15 +67,11 @@
       document.documentElement.classList.add("home-name-ready");
     }
 
-    function startCubeRotation() {
-      if (!cubeImg) return;
-      cubeImg.style.setProperty("--cube-rot", "0deg");
-      setInterval(() => {
-        cubeRotation = (cubeRotation + 180) % 360;
-        cubeImg.style.setProperty("--cube-rot", `${cubeRotation}deg`);
-      }, 60000);
-    }
-
+    // Hover-driven horizontal rotation for the hand-drawn cube image.
+    // The image sits flat by default; on hover it spins continuously around
+    // its vertical axis (rotateY) at ~90°/s. When the mouse leaves it eases
+    // back to 0° via the shortest angular path. Reduced-motion users get
+    // a still image — no rAF loop.
     function wrapNameLetters() {
       const text = (nameEl.dataset.name || nameEl.textContent || "").trim();
       if (!text) return;
@@ -234,7 +228,6 @@
     }
 
     wrapNameLetters();
-    startCubeRotation();
 
     fetchCatalog()
       .then(async pool => {

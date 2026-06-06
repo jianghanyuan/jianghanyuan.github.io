@@ -1,0 +1,255 @@
+{{- define "main" -}}
+<style>
+  .avatar-gallery {
+    max-width: 1080px;
+    margin: 2rem auto 4rem auto;
+    padding: 0 1.2rem;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  .avatar-gallery > header { margin-bottom: 2.5rem; }
+  .avatar-gallery h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem 0;
+  }
+  .avatar-gallery > header p {
+    color: var(--secondary);
+    font-size: 1rem;
+    line-height: 1.55;
+    margin: 0;
+    max-width: 760px;
+  }
+  .avatar-gallery > section {
+    margin-bottom: 3rem;
+  }
+  .avatar-gallery > section > h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem 0;
+    letter-spacing: -0.01em;
+  }
+  .avatar-gallery > section > .section-blurb {
+    color: var(--secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 1.2rem 0;
+  }
+  .avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+  .avatar-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    background: #fff;
+  }
+  .avatar-card .frame {
+    background:
+      linear-gradient(45deg, #f6f4ee 25%, transparent 25%),
+      linear-gradient(-45deg, #f6f4ee 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #f6f4ee 75%),
+      linear-gradient(-45deg, transparent 75%, #f6f4ee 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+    background-color: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 0.7rem;
+    padding: 0.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+  .avatar-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.15rem 0;
+    letter-spacing: -0.005em;
+  }
+  .avatar-card .meta {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-featured);
+    margin-bottom: 0.3rem;
+  }
+  .avatar-card p.desc {
+    color: var(--secondary);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .avatar-card code {
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.75rem;
+    background: #f4f4f0;
+    padding: 0.05rem 0.3rem;
+    border-radius: 2px;
+  }
+</style>
+<article class="avatar-gallery">
+  <header>
+    <h1>Pixel avatar gallery</h1>
+    <p>21 pixel-art ICON avatars — single central figures on transparent backgrounds (checkerboard shown behind each card to confirm transparency). Each has a continuous idle loop and a hover reaction. Built as variants of <code>layouts/partials/pixel_animation.html</code>; switch by passing <code>(dict "variant" "&lt;name&gt;")</code>. All canvases respect <code>prefers-reduced-motion</code> (frozen on a representative still frame).</p>
+  </header>
+
+  <section>
+    <h2>👤 Humans</h2>
+    <p class="section-blurb">Single human figures — bust or full-body — with quiet personality.</p>
+    <div class="avatar-grid">
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-go-sage") }}</div>
+        <div class="meta">avatar-go-sage</div>
+        <h3>Go Sage</h3>
+        <p class="desc">Robed elder pinching a Go stone — slow breathing, stone glints. Hover: places the stone, ripple pulse.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-hooded-analyst") }}</div>
+        <div class="meta">avatar-hooded-analyst</div>
+        <h3>Hooded Analyst</h3>
+        <p class="desc">Hooded bust, glowing cyan eyes peek from shadow. Hover: eyes flash brighter, smirk pixel, LED pulse.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-astronaut-cadet") }}</div>
+        <div class="meta">avatar-astronaut-cadet</div>
+        <h3>Astronaut Cadet</h3>
+        <p class="desc">Helmeted bust, visor reflects scrolling code. Hover: visor flips up revealing a grin, then snaps shut.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-knight-duelist") }}</div>
+        <div class="meta">avatar-knight-duelist</div>
+        <h3>Chess Knight Duelist</h3>
+        <p class="desc">Tournament-black duelist holding a giant knight piece. Hover: sharp salute, knight raised vertical.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-lab-tinkerer") }}</div>
+        <div class="meta">avatar-lab-tinkerer</div>
+        <h3>Lab-Coat Tinkerer</h3>
+        <p class="desc">Scientist cradling a floating robot-head module. Hover: goggles down, module spins 360 + yellow spark.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🦎 Creatures</h2>
+    <p class="section-blurb">Pixel pets, mythological beings, sci-fi creatures.</p>
+    <div class="avatar-grid">
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-strategist-raven") }}</div>
+        <div class="meta">avatar-strategist-raven</div>
+        <h3>Strategist Raven</h3>
+        <p class="desc">Glossy black raven, amber eye, slow blink. Hover: ruffles feathers, cocks head, silent caw.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-go-stone-slime") }}</div>
+        <div class="meta">avatar-go-stone-slime</div>
+        <h3>Go-Stone Slime</h3>
+        <p class="desc">Discus-shaped slime, squash-stretch breath, shimmer. Hover: bounces, yin/yang split flash, re-merges.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-hex-axolotl") }}</div>
+        <div class="meta">avatar-hex-axolotl</div>
+        <h3>Hex-Scale Axolotl</h3>
+        <p class="desc">Salmon-pink axolotl with feathery gill crown. Hover: 360 spin, gill flare, bubble pixels rise.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-pocket-phoenix") }}</div>
+        <div class="meta">avatar-pocket-phoenix</div>
+        <h3>Pocket Phoenix</h3>
+        <p class="desc">Ember-bird with flickering crest flames. Hover: wings flare wide-open, body whites-out, smoke puff.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-knight-helm-ghost") }}</div>
+        <div class="meta">avatar-knight-helm-ghost</div>
+        <h3>Knight-Helm Ghost</h3>
+        <p class="desc">Ghost wearing an oversized knight helmet. Hover: tiny knight's L-hop (forward 1, up 2), happy crescents.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🤖 Bots</h2>
+    <p class="section-blurb">Pixel robots — single character on transparent bg, accent LEDs/eyes.</p>
+    <div class="avatar-grid">
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-helm") }}</div>
+        <div class="meta">avatar-helm</div>
+        <h3>Helm</h3>
+        <p class="desc">Mega-Man-style helmeted bot bust, cyan visor slit. Hover: helmet tilts, visor sweeps L→R wink.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-mote") }}</div>
+        <div class="meta">avatar-mote</div>
+        <h3>Mote</h3>
+        <p class="desc">Spherical hover-drone, single amber lens-eye, soft shadow. Hover: 360 spin, iris snaps wide.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-tabbi") }}</div>
+        <div class="meta">avatar-tabbi</div>
+        <h3>Tabbi</h3>
+        <p class="desc">Sleek cat-dog robot in profile, tail antenna. Hover: play-bow, sits up, tail-tip flashes.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-tubey") }}</div>
+        <div class="meta">avatar-tubey</div>
+        <h3>Tubey</h3>
+        <p class="desc">CRT-TV-headed bot bust. Screen-eyes blink + scanline drift. Hover: smile-arc, phosphor heart flashes.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-cubit") }}</div>
+        <div class="meta">avatar-cubit</div>
+        <h3>Cubit</h3>
+        <p class="desc">Floating assistant cube, one LED-panel face. Hover: happy 90° flip, LED morphs into a smile.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-crt-chatbot") }}</div>
+        <div class="meta">avatar-crt-chatbot</div>
+        <h3>CRT Chatbot Face <span style="font-weight:400;color:var(--secondary);font-size:0.7em;">· the keeper</span></h3>
+        <p class="desc">The one survivor from the first batch. Vintage CRT face. Hover: head tilts, &gt;&gt;&gt; types out.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🪬 Hybrid / objects-with-personality</h2>
+    <p class="section-blurb">Anthropomorphic objects, mythic relics, signal-from-the-other-side avatars.</p>
+    <div class="avatar-grid">
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-oracle-tome") }}</div>
+        <div class="meta">avatar-oracle-tome</div>
+        <h3>Oracle Tome</h3>
+        <p class="desc">Floating spellbook, single luminous eye on open pages. Hover: eye tracks cursor, pages flip rapidly.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-black-stone") }}</div>
+        <div class="meta">avatar-black-stone</div>
+        <h3>The Black Stone</h3>
+        <p class="desc">Polished Go stone with serene face, meditation blinks. Hover: eyes snap open, white stone orbits.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-curio-lantern") }}</div>
+        <div class="meta">avatar-curio-lantern</div>
+        <h3>Curio Lantern</h3>
+        <p class="desc">Brass lantern, captive blue-flame face. Hover: flame flares bright, casts halo, smiles wide.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-reliquary-d20") }}</div>
+        <div class="meta">avatar-reliquary-d20</div>
+        <h3>Reliquary d20</h3>
+        <p class="desc">Weathered metal icosahedron, sleepy eye-face. Hover: spins fast, lands on a 20-face that flashes gold.</p>
+      </div>
+      <div class="avatar-card">
+        <div class="frame">{{ partial "pixel_animation.html" (dict "variant" "avatar-signal-egg") }}</div>
+        <div class="meta">avatar-signal-egg</div>
+        <h3>Signal Egg</h3>
+        <p class="desc">Tamagotchi-style egg-bot with CRT-slit face. Hover: screen blooms to ":)", happy hop with soft squash.</p>
+      </div>
+    </div>
+  </section>
+</article>
+{{- end -}}

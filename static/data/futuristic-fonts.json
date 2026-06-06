@@ -8,12 +8,10 @@
     "Nabla",
     "Rampart One",
     "Ribeye Marrow",
-    "Sixtyfour",
     "Bungee Hairline",
     "Bungee Spice",
     "Foldit",
     "Bungee Shade",
-    "Micro 5 Charted",
     "Pixelify Sans",
     "Zen Tokyo Zoo",
     "Rubik 80s Fade",
@@ -23,5 +21,9 @@
     "Libertinus Serif",
     "Libertinus Sans",
     "Major Mono Display"
+  ],
+  "disabled": [
+    "Micro 5 Charted",
+    "Sixtyfour"
   ]
 }

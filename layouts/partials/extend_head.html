@@ -10,7 +10,8 @@
     const linkId = "home-name-dynamic-font";
     const allowed = [
       "Megrim", "Bitcount Grid", "Gugi", "Tektur", "Silkscreen", "Nabla", "Rampart One", "Ribeye Marrow",
-      "Sixtyfour", "Bungee Hairline", "Bungee Spice", "Foldit", "Bungee Shade", "Micro 5 Charted", "Pixelify Sans",
+      // Disabled: "Micro 5 Charted", "Sixtyfour" (kept here for easy restoration — re-add to the array to re-enable).
+      "Bungee Hairline", "Bungee Spice", "Foldit", "Bungee Shade", "Pixelify Sans",
       "Zen Tokyo Zoo", "Rubik 80s Fade", "Faster One", "Vampiro One", "Jersey 10", "Rubik Iso",
       "Libertinus Serif", "Libertinus Sans", "Major Mono Display"
     ];
@@ -42,7 +43,7 @@
     if (link.href !== href) link.href = href;
   })();
 </script>
-<link rel="stylesheet" href="/css/custom.css?v=20260531b" />
+<link rel="stylesheet" href="/css/custom.css?v=20260607f" />
 
 {{ if .Params.distill }}
 <script>

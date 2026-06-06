@@ -524,43 +524,36 @@ body::before {
   padding: 6px;
 }
 
-.home-identity-art {
-  margin-top: 0.55rem;
-  margin-left: -12px;
+/* Pixel-icon avatar slot — replaces the old cube. Sits below the social
+   icons in the left identity rail. On every page load the partial's
+   `random-avatar` dispatcher picks one of the approved avatars at random.
+   Centered in the rail column; sized slightly larger than the cube was. */
+.home-identity-avatar {
+  /* Left-aligned with the rail edge, plus a small positive offset so the
+     avatar sits a touch right of the name's starting line. */
+  margin: 1rem 0 0 6px;
   width: 100%;
-  max-width: 185px;
+  max-width: 130px;
+  display: flex;
+  justify-content: flex-start;
 }
-
-@keyframes cube-hover-float {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(var(--cube-rot, 0deg));
-  }
-
-  50% {
-    transform: translate3d(0, -10px, 0) rotate(calc(var(--cube-rot, 0deg) - 1.2deg));
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0) rotate(var(--cube-rot, 0deg));
-  }
-}
-
-.home-identity-art img {
+.home-identity-avatar .pixel-anim-wrap {
   display: block;
-  width: 100%;
-  height: auto;
-  transform: rotate(var(--cube-rot, 0deg));
-  transform-origin: 50% 50%;
-  transition: filter 0.25s ease, transform 0.25s ease;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
+  line-height: 0;
 }
-
-.home-identity-art:hover img {
-  animation: cube-hover-float 1.8s ease-in-out infinite;
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
+/* Each avatar's canvas was built at its native size (150-200 CSS px).
+   Render at ~115 px wide — slightly smaller than the cube was, just a
+   small signature mark. */
+.home-identity-avatar canvas.pixel-anim {
+  width: 115px !important;
+  height: auto !important;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+@media (max-width: 720px) {
+  .home-identity-avatar { max-width: 110px; margin-left: 4px; }
+  .home-identity-avatar canvas.pixel-anim { width: 100px !important; }
 }
 
 .home-identity-email {
