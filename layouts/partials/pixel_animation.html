@@ -180,7 +180,7 @@
   const RANDOM_AVATAR_POOL = [
     'avatar-hooded-analyst',
     'avatar-astronaut-cadet',
-    'avatar-knight-duelist',
+    'avatar-knight-tour',
     'avatar-lab-tinkerer',
     'avatar-knight-helm-ghost',
     'avatar-helm',
@@ -5262,256 +5262,304 @@ if(reduced){
   });
 })();
 </script>
-{{- /* --- variant: avatar-knight-duelist (Chess Knight Duelist) --- */ -}}
+{{- /* --- variant: avatar-knight-tour (pure chess: 5x5 knight's tour via Warnsdorff with arc-jump animation, progressive trail, celebration on completion) --- */ -}}
 <script>
 (function () {
-  window.__pixelAnimRegister('avatar-knight-duelist', function (canvas) {
-const dpr = Math.max(1, window.devicePixelRatio || 1);
-const W = parseInt(canvas.dataset.cols, 10) || 160;
-const H = parseInt(canvas.dataset.rows, 10) || 180;
-canvas.width = Math.round(W * dpr);
-canvas.height = Math.round(H * dpr);
-canvas.style.width = W + 'px';
-canvas.style.height = H + 'px';
-const ctx = canvas.getContext('2d');
-ctx.scale(dpr, dpr);
-ctx.imageSmoothingEnabled = false;
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.__pixelAnimRegister('avatar-knight-tour', function (canvas) {
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    const W = parseInt(canvas.dataset.cols, 10) || 180;
+    const H = parseInt(canvas.dataset.rows, 10) || 180;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.imageSmoothingEnabled = false;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const SKIN  = '#e8c4a6';
-const SKIN2 = '#c89678';
-const HAIR  = '#2a2520';
-const TUN   = '#14141a';
-const TUN2  = '#05050a';
-const SASH  = '#a02838';
-const SASH2 = '#d24056';
-const IVORY = '#ece4d0';
-const IVORY2= '#b8ad95';
-const SILVR = '#ffffff';
-const SHADOW = 'rgba(0,0,0,0.18)';
+    // ---- Layout ----
+    const N = 5;
+    const SQ = 28;
+    const BOARD_PX = N * SQ;
+    const BX = Math.floor((W - BOARD_PX) / 2);
+    const BY = Math.floor((H - BOARD_PX) / 2);
 
-const PX = 5;
+    // ---- Palette ----
+    const LIGHT       = '#ead7b0';   // light walnut
+    const DARK        = '#7a5a36';   // dark walnut
+    const BORDER      = '#3a2614';   // frame
+    const TRAIL_BLUE  = [40, 70, 130];
+    const LINE_DOT    = '#3a5a8a';
+    const KNIGHT_COL  = '#171717';
+    const KNIGHT_HI   = '#f6ebd2';
+    const SHADOW      = 'rgba(0,0,0,0.22)';
+    const CELEBRATE   = [246, 213, 107];
+    const RIPPLE_COL  = 'rgba(40, 70, 130, 0.45)';
 
-const FIG_PAL = {
-  '.': null,
-  's': SKIN,  'k': SKIN2,
-  'h': HAIR,
-  't': TUN,   'T': TUN2,
-  'r': SASH,  'R': SASH2,
-  'a': TUN,   'A': TUN2,
-};
-const FIG = [
-  '........hhhh......',
-  '......hhhhhhhh....',
-  '.....hhhhhhhhhh...',
-  '....hhssssssshh...',
-  '....hssssssssh....',
-  '....hssksssksh....',
-  '....hsssssssshh...',
-  '....hsskssskssh...',
-  '....hssssssssshh..',
-  '.....hsssssssh....',
-  '......hssssssh....',
-  '.......sssssh.....',
-  '....TTttttttTTT...',
-  '...TttttttttttTT..',
-  '..TttttttttttttTT.',
-  '..tttttttttttttTT.',
-  '..ttttrrrrrrtttTT.',
-  '..tttRrrrrrRtttTT.',
-  '..tttrrrrrrrrttTT.',
-  '..tttttttttttttTT.',
-  '..tttaaaaaattttTT.',
-  '..ttaaaaaaaaattTT.',
-  '..ttaaaaAAAAatttT.',
-  '..tttaaaaAAAAttTT.',
-  '..ttttttttttttTT..',
-  '..TTTTTTTTTTTTTT..',
-];
-const FIG_W = 18, FIG_H = 26;
+    // ---- Knight pixel sprite (profile, facing right) ----
+    const KS = [
+      '...XX...',
+      '..XXXXX.',
+      '.XXXXXX.',
+      'XXX.XXX.',
+      'X..XXX..',
+      '...XXXX.',
+      '..XXXXX.',
+      '..XXXXXX',
+      '.XXXXXXX',
+      'XXXXXXXX',
+    ];
+    const KS_W = KS[0].length;
+    const KS_H = KS.length;
+    const KS_PX = 2;
+    // Eye sits in row 3, col 4 of the sprite — highlight pixel
+    const EYE_ROW = 3, EYE_COL = 5;
 
-const KN_PAL = {
-  '.': null,
-  'i': IVORY, 'I': IVORY2, 'w': SILVR,
-};
-const KN = [
-  '...iii..',
-  '..iiiii.',
-  '.iiiwii.',
-  'iiiiiiii',
-  'iiiiiIIi',
-  'iiiiIIIi',
-  'iiI.IIIi',
-  '.iiiiIIi',
-  '..iiiIIi',
-  '..iiiIIi',
-  '...iIIi.',
-  '..iiiii.',
-  '..iiIIIi',
-  '.iiiIIIi',
-  '.iiiiIIi',
-  'iiiiiIIi',
-  'iiiiIIIi',
-  'wiiiiIIw',
-];
-const KN_W = 8, KN_H = 18;
+    // ---- 8 knight moves ----
+    const MOVES = [
+      [-2,-1], [-2, 1], [-1,-2], [-1, 2],
+      [ 1,-2], [ 1, 2], [ 2,-1], [ 2, 1]
+    ];
 
-const FIG_PX_W = FIG_W * PX;
-const FIG_PX_H = FIG_H * PX;
-const FIG_OX = Math.floor((W - FIG_PX_W) / 2);
-const FIG_OY = 18;
-
-const KN_BASE_X = FIG_OX + 11 * PX;
-const KN_BASE_Y = FIG_OY + 24 * PX;
-
-function drawKnightTilted(angle, baseX, baseY, scale) {
-  const sinA = Math.sin(angle);
-  const cosA = Math.cos(angle);
-  const halfW = (KN_W * scale) / 2;
-  for (let r = 0; r < KN_H; r++) {
-    const row = KN[r];
-    const dFromBase = (KN_H - 1 - r);
-    const yArt = baseY - dFromBase * scale * cosA - scale;
-    const xShear = dFromBase * scale * sinA;
-    for (let c = 0; c < row.length; c++) {
-      const col = KN_PAL[row.charAt(c)];
-      if (!col) continue;
-      const xArt = baseX - halfW + c * scale + xShear;
-      ctx.fillStyle = col;
-      ctx.fillRect(Math.round(xArt), Math.round(yArt), scale, scale);
+    // ---- Warnsdorff's rule with random tie-break ----
+    function findTour(startR, startC) {
+      const visited = Array.from({length: N}, () => Array(N).fill(false));
+      visited[startR][startC] = true;
+      const path = [[startR, startC]];
+      let cur = [startR, startC];
+      for (let step = 1; step < N * N; step++) {
+        const cands = [];
+        for (const m of MOVES) {
+          const nr = cur[0] + m[0], nc = cur[1] + m[1];
+          if (nr < 0 || nr >= N || nc < 0 || nc >= N || visited[nr][nc]) continue;
+          let onward = 0;
+          for (const m2 of MOVES) {
+            const nr2 = nr + m2[0], nc2 = nc + m2[1];
+            if (nr2 >= 0 && nr2 < N && nc2 >= 0 && nc2 < N && !visited[nr2][nc2]) onward++;
+          }
+          cands.push([nr, nc, onward, Math.random()]);
+        }
+        if (cands.length === 0) return null;
+        // Sort by onward count (Warnsdorff), random tie-break
+        cands.sort((a, b) => a[2] - b[2] || a[3] - b[3]);
+        const pick = cands[0];
+        visited[pick[0]][pick[1]] = true;
+        path.push([pick[0], pick[1]]);
+        cur = [pick[0], pick[1]];
+      }
+      return path;
     }
-  }
-}
 
-function drawGrip(baseX, baseY, scale) {
-  ctx.fillStyle = SKIN;
-  ctx.fillRect(baseX - scale * 2, baseY - scale, scale * 4, scale);
-  ctx.fillStyle = SKIN2;
-  ctx.fillRect(baseX - scale * 2, baseY, scale * 4, scale);
-  ctx.fillStyle = SKIN2;
-  ctx.fillRect(baseX - scale, baseY - scale, scale, scale);
-  ctx.fillRect(baseX + scale, baseY - scale, scale, scale);
-}
+    function generateTour() {
+      // 5x5 has open tours from many squares; try a few random starts before falling back.
+      for (let attempt = 0; attempt < 40; attempt++) {
+        const sr = Math.floor(Math.random() * N);
+        const sc = Math.floor(Math.random() * N);
+        const t = findTour(sr, sc);
+        if (t && t.length === N * N) return t;
+      }
+      // Fallback chain through known-good starts
+      for (const s of [[0,0],[0,4],[4,0],[4,4],[2,2],[0,2],[2,0]]) {
+        for (let a = 0; a < 20; a++) {
+          const t = findTour(s[0], s[1]);
+          if (t && t.length === N * N) return t;
+        }
+      }
+      return null;
+    }
 
-function drawShadow() {
-  ctx.fillStyle = SHADOW;
-  const cx = FIG_OX + Math.floor(FIG_PX_W / 2);
-  const sy = FIG_OY + FIG_PX_H + PX;
-  ctx.fillRect(cx - PX * 7, sy,            PX * 14, PX);
-  ctx.fillRect(cx - PX * 9, sy + PX,       PX * 18, PX);
-  ctx.fillRect(cx - PX * 8, sy + PX * 2,   PX * 16, PX);
-  ctx.fillRect(cx - PX * 6, sy + PX * 3,   PX * 12, PX);
-}
+    let tour = generateTour();
+    let stepIdx = 0;             // currently AT tour[stepIdx]; animating toward tour[stepIdx+1]
+    let stepStart = performance.now();
+    let hovered = false;
+    let celebrating = false;
+    let celebrateStart = 0;
 
-function drawSparkle(angle, baseX, baseY, scale, intensity) {
-  const sinA = Math.sin(angle), cosA = Math.cos(angle);
-  const dFromBase = (KN_H - 1);
-  const tipY = baseY - dFromBase * scale * cosA - scale;
-  const tipX = baseX + dFromBase * scale * sinA;
-  ctx.fillStyle = `rgba(255,255,255,${(0.75 * intensity).toFixed(3)})`;
-  ctx.fillRect(Math.round(tipX) - 1, Math.round(tipY) - 2, 3, 1);
-  ctx.fillRect(Math.round(tipX), Math.round(tipY) - 4, 1, 5);
-  ctx.fillRect(Math.round(tipX) - 2, Math.round(tipY), 5, 1);
-}
+    // Ripple at most recent placement
+    let ripples = [];
 
-const HOVER_MS = 1300;
-let hoverStart = -1;
+    canvas.addEventListener('mouseenter', () => { hovered = true; });
+    canvas.addEventListener('mouseleave', () => { hovered = false; });
 
-canvas.addEventListener('mouseenter', function () {
-  if (hoverStart < 0 || (performance.now() - hoverStart) > HOVER_MS) {
-    hoverStart = performance.now();
-  }
-});
+    const NORMAL_STEP_MS = 720;
+    const HOVER_STEP_MS = 360;
+    const CELEBRATE_MS = 1500;
+    const RESET_PAUSE_MS = 450;
 
-function idleParams(now) {
-  const breathe = (Math.sin(now * 0.0014) + 1) * 0.5;
-  const yOff = Math.round(breathe * 2);
-  const tilt = Math.sin(now * 0.00125) * 0.14;
-  return { yOff, tilt, headNod: 0, sparkle: 0, salute: 0 };
-}
+    function easeInOutQuad(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
 
-function hoverParams(elapsed) {
-  let salute = 1;
-  let headNod = 0;
-  let sparkle = 0;
-  if (elapsed < 220) {
-    salute = elapsed / 220;
-  } else if (elapsed < 650) {
-    salute = 1;
-    const k = (elapsed - 220) / 430;
-    headNod = Math.round(Math.sin(k * Math.PI) * 2);
-  } else if (elapsed < 1100) {
-    salute = 1;
-    const k = (elapsed - 650) / 450;
-    sparkle = Math.sin(k * Math.PI);
-  } else {
-    salute = 1 - (elapsed - 1100) / 200;
-    if (salute < 0) salute = 0;
-  }
-  return { yOff: 1, tilt: 0, salute, headNod, sparkle };
-}
+    function drawBoard() {
+      // Border
+      ctx.fillStyle = BORDER;
+      ctx.fillRect(BX - 3, BY - 3, BOARD_PX + 6, BOARD_PX + 6);
+      ctx.fillStyle = '#1f1108';
+      ctx.fillRect(BX - 1, BY - 1, BOARD_PX + 2, BOARD_PX + 2);
+      // Squares
+      for (let r = 0; r < N; r++) {
+        for (let c = 0; c < N; c++) {
+          ctx.fillStyle = (r + c) % 2 === 0 ? LIGHT : DARK;
+          ctx.fillRect(BX + c * SQ, BY + r * SQ, SQ, SQ);
+        }
+      }
+    }
 
-function render(now) {
-  ctx.clearRect(0, 0, W, H);
+    function drawTrail(now) {
+      if (!tour) return;
+      // Tint visited squares — older = fainter, newer = stronger
+      // Visited count = stepIdx + 1 (knight currently AT tour[stepIdx])
+      const maxVisited = celebrating ? tour.length : stepIdx + 1;
+      for (let i = 0; i < maxVisited; i++) {
+        const [r, c] = tour[i];
+        const ageFrac = i / Math.max(1, maxVisited - 1 || 1);  // 0 = oldest, 1 = newest
+        const alpha = 0.10 + 0.32 * ageFrac;
+        ctx.fillStyle = 'rgba(' + TRAIL_BLUE[0] + ',' + TRAIL_BLUE[1] + ',' + TRAIL_BLUE[2] + ',' + alpha.toFixed(3) + ')';
+        ctx.fillRect(BX + c * SQ, BY + r * SQ, SQ, SQ);
+      }
+      // Polyline dots through square centers (visited path)
+      ctx.fillStyle = LINE_DOT;
+      for (let i = 0; i < maxVisited; i++) {
+        const [r, c] = tour[i];
+        const cx = BX + (c + 0.5) * SQ;
+        const cy = BY + (r + 0.5) * SQ;
+        ctx.fillRect(Math.round(cx) - 1, Math.round(cy) - 1, 2, 2);
+      }
+      // Celebration flash overlay
+      if (celebrating) {
+        const ce = now - celebrateStart;
+        const t = Math.min(1, ce / CELEBRATE_MS);
+        // Two-pulse flash: bright at start + softer at midpoint
+        const pulse = Math.max(0, Math.sin(t * Math.PI * 2.4)) * (1 - t);
+        const alpha = pulse * 0.55;
+        ctx.fillStyle = 'rgba(' + CELEBRATE[0] + ',' + CELEBRATE[1] + ',' + CELEBRATE[2] + ',' + alpha.toFixed(3) + ')';
+        for (let i = 0; i < tour.length; i++) {
+          const [r, c] = tour[i];
+          ctx.fillRect(BX + c * SQ, BY + r * SQ, SQ, SQ);
+        }
+      }
+      // Landing-ripple animation
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const rp = ripples[i];
+        const age = now - rp.born;
+        const RIPPLE_MS = 360;
+        if (age > RIPPLE_MS) { ripples.splice(i, 1); continue; }
+        const t = age / RIPPLE_MS;
+        const radius = Math.round(2 + t * 12);
+        const alpha = (1 - t) * 0.55;
+        ctx.strokeStyle = 'rgba(40, 70, 130, ' + alpha.toFixed(3) + ')';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(
+          Math.round(rp.x - radius) + 0.5,
+          Math.round(rp.y - radius) + 0.5,
+          radius * 2, radius * 2
+        );
+      }
+    }
 
-  let p;
-  const idleTilt = Math.sin(now * 0.00125) * 0.14;
-  if (hoverStart >= 0) {
-    const e = now - hoverStart;
-    if (e >= HOVER_MS) {
-      hoverStart = -1;
-      p = idleParams(now);
+    function drawKnight(x, y, jumpHeight, faceLeft) {
+      // Soft contact shadow under landing position
+      ctx.fillStyle = SHADOW;
+      const shW = KS_W * KS_PX - 4;
+      ctx.fillRect(
+        Math.round(x) - shW / 2,
+        Math.round(y) + (KS_H * KS_PX) / 2 - 1,
+        shW, 2
+      );
+      // Knight sprite, flipped horizontally if faceLeft
+      const ox = Math.round(x - KS_W * KS_PX / 2);
+      const oy = Math.round(y - KS_H * KS_PX / 2 - jumpHeight);
+      for (let r = 0; r < KS_H; r++) {
+        const row = KS[r];
+        for (let c = 0; c < KS_W; c++) {
+          const ch = faceLeft ? row.charAt(KS_W - 1 - c) : row.charAt(c);
+          if (ch === 'X') {
+            ctx.fillStyle = KNIGHT_COL;
+            ctx.fillRect(ox + c * KS_PX, oy + r * KS_PX, KS_PX, KS_PX);
+          }
+        }
+      }
+      // Eye highlight pixel
+      const eyeC = faceLeft ? (KS_W - 1 - EYE_COL) : EYE_COL;
+      ctx.fillStyle = KNIGHT_HI;
+      ctx.fillRect(ox + eyeC * KS_PX, oy + EYE_ROW * KS_PX, KS_PX, KS_PX);
+    }
+
+    function loop(now) {
+      const stepMs = hovered ? HOVER_STEP_MS : NORMAL_STEP_MS;
+
+      if (celebrating) {
+        if (now - celebrateStart > CELEBRATE_MS + RESET_PAUSE_MS) {
+          tour = generateTour() || tour;
+          stepIdx = 0;
+          ripples = [];
+          celebrating = false;
+          stepStart = now;
+        }
+      } else if (tour) {
+        const elapsed = now - stepStart;
+        if (elapsed >= stepMs) {
+          // Knight arrives at tour[stepIdx+1]; spawn ripple, advance
+          if (stepIdx < tour.length - 1) {
+            stepIdx++;
+            const [r, c] = tour[stepIdx];
+            ripples.push({
+              x: BX + (c + 0.5) * SQ,
+              y: BY + (r + 0.5) * SQ,
+              born: now,
+            });
+            stepStart = now;
+          } else {
+            // Tour complete — celebrate
+            celebrating = true;
+            celebrateStart = now;
+          }
+        }
+      }
+
+      ctx.clearRect(0, 0, W, H);
+      drawBoard();
+      drawTrail(now);
+
+      // Knight render — interpolate between current and next square
+      if (!tour) return;
+      if (celebrating || stepIdx >= tour.length - 1) {
+        const [r, c] = tour[Math.min(stepIdx, tour.length - 1)];
+        drawKnight(BX + (c + 0.5) * SQ, BY + (r + 0.5) * SQ, 0, false);
+      } else {
+        const [fromR, fromC] = tour[stepIdx];
+        const [toR, toC] = tour[stepIdx + 1];
+        const elapsed = now - stepStart;
+        const t = Math.min(1, elapsed / stepMs);
+        const eased = easeInOutQuad(t);
+        const fx = BX + (fromC + 0.5) * SQ;
+        const fy = BY + (fromR + 0.5) * SQ;
+        const tx = BX + (toC + 0.5) * SQ;
+        const ty = BY + (toR + 0.5) * SQ;
+        const x = fx + (tx - fx) * eased;
+        const y = fy + (ty - fy) * eased;
+        // Arc height — jump higher for longer-distance moves
+        const dist = Math.hypot(toC - fromC, toR - fromR);
+        const arc = Math.sin(t * Math.PI) * (5 + dist * 2);
+        const faceLeft = toC < fromC;
+        drawKnight(x, y, arc, faceLeft);
+      }
+
+      if (!reduced) requestAnimationFrame(loop);
+    }
+
+    if (reduced) {
+      // Static representative frame — knight ~half-way through tour
+      if (tour) {
+        stepIdx = Math.floor(tour.length * 0.6);
+        ctx.clearRect(0, 0, W, H);
+        drawBoard();
+        drawTrail(0);
+        const [r, c] = tour[stepIdx];
+        drawKnight(BX + (c + 0.5) * SQ, BY + (r + 0.5) * SQ, 0, false);
+      }
     } else {
-      p = hoverParams(e);
-      p.tilt = idleTilt * (1 - p.salute);
+      requestAnimationFrame(loop);
     }
-  } else {
-    p = idleParams(now);
-  }
-
-  drawShadow();
-
-  const figOY = FIG_OY + p.yOff;
-
-  // torso first
-  for (let r = 12; r < FIG_H; r++) {
-    const row = FIG[r];
-    for (let c = 0; c < row.length; c++) {
-      const col = FIG_PAL[row.charAt(c)];
-      if (!col) continue;
-      ctx.fillStyle = col;
-      ctx.fillRect(FIG_OX + c * PX, figOY + r * PX, PX, PX);
-    }
-  }
-  // head (with optional nod offset)
-  for (let r = 0; r < 12; r++) {
-    const row = FIG[r];
-    for (let c = 0; c < row.length; c++) {
-      const col = FIG_PAL[row.charAt(c)];
-      if (!col) continue;
-      ctx.fillStyle = col;
-      ctx.fillRect(FIG_OX + c * PX, figOY + r * PX + p.headNod * PX, PX, PX);
-    }
-  }
-
-  const baseY = KN_BASE_Y + p.yOff;
-  drawKnightTilted(p.tilt, KN_BASE_X, baseY, PX);
-  drawGrip(KN_BASE_X, baseY, PX);
-
-  if (p.sparkle > 0) {
-    drawSparkle(p.tilt, KN_BASE_X, baseY, PX, p.sparkle);
-  }
-}
-
-if (reduced) {
-  render(0);
-} else {
-  function loop(now) {
-    render(now);
-    requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
-}
   });
 })();
 </script>
