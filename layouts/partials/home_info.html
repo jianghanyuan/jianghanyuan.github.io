@@ -9,6 +9,7 @@
       <div class="home-identity-avatar" aria-hidden="true">
         {{ partial "pixel_animation.html" (dict "variant" "random-avatar") }}
       </div>
+      <div class="home-identity-fortune" aria-hidden="true"></div>
     </aside>
 
     <div class="home-hero-copy">
@@ -20,6 +21,62 @@
   document.addEventListener("DOMContentLoaded", function () {
     const nameEl = document.querySelector(".home-identity-name");
     if (!nameEl) return;
+
+    // ---- Easter egg: a pixel-text sentence (random sentence-* variant)
+    // appears below the avatar 30s after page load, plays through a full
+    // reveal cycle (~12s), disappears, then reappears 30s later with a
+    // fresh lottery roll. Repeats indefinitely.
+    (function startFortuneCycle() {
+      const container = document.querySelector(".home-identity-fortune");
+      if (!container) return;
+      const INITIAL_DELAY = 30000;   // 30s before first appearance
+      const VISIBLE_MS    = 12000;   // long enough for one reveal→hold cycle on every variant
+      const HIDDEN_MS     = 30000;   // gap between appearances
+      const FADE_MS       = 600;     // matches CSS transition
+
+      let lastPick = null;
+
+      function spawnSentence() {
+        // Pick a random sentence-* variant from the live registry
+        const registry = window.__pixelAnimVariants;
+        if (!registry) return;
+        const pool = Object.keys(registry).filter(function (k) {
+          return k.indexOf("sentence-") === 0;
+        });
+        if (pool.length === 0) return;
+        let pick;
+        do { pick = pool[(Math.random() * pool.length) | 0]; }
+        while (pick === lastPick && pool.length > 1);
+        lastPick = pick;
+
+        // Create the canvas, set the variant, init the registered function
+        const canvas = document.createElement("canvas");
+        canvas.className = "pixel-anim";
+        canvas.dataset.variant = pick;
+        container.appendChild(canvas);
+        try { registry[pick](canvas); } catch (e) { /* swallow */ }
+      }
+
+      function clearSentence() {
+        container.classList.remove("is-visible");
+        setTimeout(function () { container.innerHTML = ""; }, FADE_MS);
+      }
+
+      function cycle() {
+        spawnSentence();
+        // Fade in next frame so CSS transition fires
+        requestAnimationFrame(function () {
+          container.classList.add("is-visible");
+        });
+        setTimeout(function () {
+          clearSentence();
+          setTimeout(cycle, HIDDEN_MS);
+        }, VISIBLE_MS);
+      }
+
+      setTimeout(cycle, INITIAL_DELAY);
+    })();
+
 
     const ALLOWED_FONTS = [
       "Megrim", "Bitcount Grid", "Gugi", "Tektur", "Silkscreen", "Nabla", "Rampart One", "Ribeye Marrow",

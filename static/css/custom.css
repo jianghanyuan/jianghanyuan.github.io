@@ -524,6 +524,10 @@ body::before {
   padding: 6px;
 }
 
+/* Social icons (Google Scholar / X / GitHub) hidden for now — remove this
+   rule to restore. The markup is still rendered; only display is suppressed. */
+.home-identity-actions { display: none !important; }
+
 /* Pixel-icon avatar slot — replaces the old cube. Sits below the social
    icons in the left identity rail. On every page load the partial's
    `random-avatar` dispatcher picks one of the approved avatars at random.
@@ -554,6 +558,37 @@ body::before {
 @media (max-width: 720px) {
   .home-identity-avatar { max-width: 110px; margin-left: 4px; }
   .home-identity-avatar canvas.pixel-anim { width: 100px !important; }
+}
+
+/* Easter-egg pixel-text sentence below the avatar — appears 30 s after
+   page load, plays one reveal cycle (~12 s), fades, waits 30 s, repeats.
+   Hidden by default (opacity 0); JS toggles .is-visible to fade in.
+   Canvas overflows horizontally past the rail's natural column width;
+   `overflow: visible` lets the pixel-text canvas extend rightward into
+   the bio column for one beat before disappearing. */
+.home-identity-fortune {
+  position: relative;
+  margin: 0.9rem 0 0 6px;
+  width: 100%;
+  min-height: 50px;                    /* reserves vertical space */
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  overflow: visible;
+}
+.home-identity-fortune.is-visible { opacity: 1; }
+/* Constrain the inline pixel-anim canvas — let it occupy a small horizontal
+   strip that overhangs into the right column slightly when visible. */
+.home-identity-fortune canvas.pixel-anim {
+  display: block;
+  width: 320px !important;
+  height: auto !important;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+@media (max-width: 720px) {
+  .home-identity-fortune { margin-left: 4px; min-height: 38px; }
+  .home-identity-fortune canvas.pixel-anim { width: 240px !important; }
 }
 
 .home-identity-email {
