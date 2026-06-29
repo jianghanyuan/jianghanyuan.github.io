@@ -39,9 +39,9 @@ params:
   homeInfoParams:
     Title: "Hanyuan Jiang"
     Content: |
-      My goal is to understand and harness general, emergent, and self-improving [foundation models](https://jianghanyuan.github.io/blog/research-interests/), so my [research](https://jianghanyuan.github.io/research/) focuses on developing and improving frontier reinforcement learning, deep learning, and robotic architectures. 
+      My goal is to understand and harness general, emergent, and self-improving [foundation models](https://jianghanyuan.github.io/blog/research-interests/), so my [research](https://jianghanyuan.github.io/research/) focuses on developing and improving frontier reinforcement learning, LLMs, and robotic architectures. 
 
-      I am fortunate to be advised by [Prof. Zhijing Jin](https://zhijing-jin.com/), hosted by UC Berkeley [CHAI](https://humancompatible.ai/) and co-affiliated with the University of Toronto.
+      I am now working with [Prof. Zhijing Jin](https://zhijing-jin.com/), hosted by UC Berkeley [CHAI](https://humancompatible.ai/) and co-affiliated with the University of Toronto.
 
       I currently collaborate with OpenAI on bio capability (genomics, etc) and model alignment, and previously worked on related projects with Anthropic.
 
