@@ -41,9 +41,9 @@ params:
     Content: |
       My goal is to understand and harness general, emergent, and self-improving [foundation models](https://jianghanyuan.github.io/blog/research-interests/), so my [research](https://jianghanyuan.github.io/research/) focuses on developing and improving frontier reinforcement learning, LLMs, and robotic architectures. 
 
-      I am now working with [Prof. Zhijing Jin](https://zhijing-jin.com/), hosted by UC Berkeley [CHAI](https://humancompatible.ai/) and co-affiliated with the University of Toronto.
+      I am currently working with [Prof. Zhijing Jin](https://zhijing-jin.com/) on scaling LLMs' capability, hosted by UC Berkeley [CHAI](https://humancompatible.ai/) and, by courtesy, the University of Toronto.
 
-      I currently collaborate with OpenAI on bio capability (genomics, etc) and model alignment, and previously worked on related projects with Anthropic.
+      I also collaborate with OpenAI on bio capability (genomics, etc) and safety, and previously worked on automated alignment/red-teaming research with Anthropic.
 
       Outside of research, I hold a 7-dan rank in Go and the Candidate Master (CM) title in Chess. I occasionally share informal thoughts [here](https://jianghanyuan.github.io/vision/), which capture my thinking at a particular point in time. As always, I continue to learn and discover.
     Email: "hanyuan_jiang at hotmail dot com"
